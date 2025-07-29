@@ -11,6 +11,7 @@ const Footer: React.FC = () => {
     'Paving',
     'Parking Lot Sweeping',
     'Crack Sealing',
+    'Pressure Washing',
   ];
 
   const quickLinks = [

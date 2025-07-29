@@ -64,8 +64,9 @@ const ContractorDirectory: React.FC = () => {
     'Window Cleaning',
     'Seal Coating',
     'Paving', 
-    'Parking Lot Sweeping',
-    'Crack Sealing'
+    'Parking Lot Sweeping', // Keep this as it's a distinct service
+    'Crack Sealing',
+    'Pressure Washing' // Add the new service here
   ];
 
   const locations = [

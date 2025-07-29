@@ -112,7 +112,7 @@ const WhyChooseUs: React.FC = () => {
             Why Choose <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-400 to-amber-600">Service Pro Network</span>
           </h2>
           <p className="text-xl text-slate-300 max-w-3xl mx-auto leading-relaxed">
-            Unlike generic service directories, we're built specifically for professional line striping, power washing, window cleaning, seal coating, paving, crack sealing, and parking lot sweeping services.
+            Unlike generic service directories, we're built specifically for professional line striping, power washing, pressure washing, window cleaning, seal coating, paving, crack sealing, and parking lot sweeping services.
           </p>
         </div>
 

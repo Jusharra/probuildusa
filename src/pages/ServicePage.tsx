@@ -284,6 +284,44 @@ const ServicePage: React.FC = () => {
         'https://images.pexels.com/photos/1463917/pexels-photo-1463917.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop',
         'https://images.pexels.com/photos/1396122/pexels-photo-1396122.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop'
       ]
+    },
+    'pressure-washing': {
+      title: 'Pressure Washing Services',
+      subtitle: 'Deep Cleaning for Tough Stains and Grime',
+      priceRange: '$200 - $3K+',
+      timeline: '1-2 days',
+      description: 'Our pressure washing services utilize high-powered water jets to effectively remove stubborn dirt, mold, mildew, oil stains, and graffiti from various hard surfaces. Ideal for concrete, brick, stone, and other durable materials, we restore the cleanliness and appearance of your property with precision and efficiency.',
+      heroImage: 'https://images.pexels.com/photos/5691622/pexels-photo-5691622.jpeg?auto=compress&cs=tinysrgb&w=1920&h=800&fit=crop',
+      included: [
+        'Concrete driveways and sidewalks',
+        'Brick and stone exteriors',
+        'Parking garages and commercial lots',
+        'Graffiti and rust stain removal',
+        'Heavy equipment cleaning',
+        'Pre-treatment for deep stains',
+        'Post-cleaning rinse and inspection',
+        'Eco-friendly cleaning agents (upon request)'
+      ],
+      idealFor: [
+        'Commercial properties with high traffic areas',
+        'Industrial facilities with heavy machinery',
+        'Residential properties with stained concrete or brick',
+        'Property managers seeking exterior revitalization',
+        'Businesses needing graffiti removal'
+      ],
+      process: [
+        'Surface assessment and preparation',
+        'Application of appropriate cleaning solutions',
+        'High-pressure washing application',
+        'Detailed rinsing to remove all residue',
+        'Final inspection for quality assurance'
+      ],
+      gallery: [
+        'https://images.pexels.com/photos/5691622/pexels-photo-5691622.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop',
+        'https://images.pexels.com/photos/5025639/pexels-photo-5025639.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop',
+        'https://images.pexels.com/photos/4254165/pexels-photo-4254165.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop',
+        'https://images.pexels.com/photos/1463917/pexels-photo-1463917.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop'
+      ]
     }
   };
 

@@ -74,6 +74,16 @@ const Services: React.FC = () => {
       image: 'https://images.pexels.com/photos/3806238/pexels-photo-3806238.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop', // Placeholder image
       features: ['Debris Removal', 'Litter Pickup', 'Dust Control', 'Scheduled Maintenance'],
       idealFor: 'Commercial properties, Retail centers, Industrial parks'
+    },
+    {
+      id: 'pressure-washing',
+      title: 'Pressure Washing Services',
+      description: 'High-pressure cleaning for tough stains on concrete, brick, and other hard surfaces.',
+      priceRange: '$200 - $3K+',
+      icon: Zap,
+      image: 'https://images.pexels.com/photos/5691622/pexels-photo-5691622.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop',
+      features: ['Deep Stain Removal', 'Concrete Cleaning', 'Brick Restoration', 'Graffiti Removal', 'Commercial & Residential'],
+      idealFor: 'Driveways, Sidewalks, Building exteriors, Parking garages'
     }
   ];
 

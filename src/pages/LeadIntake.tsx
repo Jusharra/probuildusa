@@ -128,10 +128,11 @@ const LeadIntake: React.FC = () => {
     { id: 'paving', name: 'Paving', icon: '🛣️' },
     { id: 'parking-lot-sweeping', name: 'Parking Lot Sweeping', icon: '🧹' },
     { id: 'crack-sealing', name: 'Crack Sealing', icon: '🩹' },
+    { id: 'pressure-washing', name: 'Pressure Washing', icon: '💦' },
   ];
 
   // Filter projectTypes to only include the desired services
-  const desiredServiceIds = ['line-striping', 'power-washing', 'window-cleaning', 'seal-coating', 'paving', 'crack-sealing'];
+  const desiredServiceIds = ['line-striping', 'power-washing', 'window-cleaning', 'seal-coating', 'paving', 'crack-sealing', 'pressure-washing'];
   const filteredProjectTypes = projectTypes.filter(type => desiredServiceIds.includes(type.id));
 
 
