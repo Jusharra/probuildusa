@@ -7,395 +7,121 @@ const ServicePage: React.FC = () => {
 
   // Complete service data for all 10 high-ticket construction services
   const serviceData = {
-    'luxury-home-remodeling': {
-      title: 'Luxury Home Remodeling',
-      subtitle: 'Transform Your Home Into a Masterpiece',
-      priceRange: '$50K - $500K+',
-      timeline: '3-8 months',
-      description: 'Elevate your living space with premium materials, expert craftsmanship, and personalized design. Our luxury remodeling specialists create stunning transformations that increase both comfort and property value.',
-      heroImage: 'https://images.pexels.com/photos/1643383/pexels-photo-1643383.jpeg?auto=compress&cs=tinysrgb&w=1920&h=800&fit=crop',
+    'line-striping': {
+      title: 'Professional Line Striping',
+      subtitle: 'Precision Line Striping for Safety and Compliance',
+      priceRange: '$500 - $5K+',
+      timeline: '1-3 days',
+      description: 'Ensure clear, compliant, and durable markings for your property with our professional line striping services. We specialize in creating highly visible and long-lasting lines for parking lots, roadways, sports courts, warehouses, and more, enhancing safety and optimizing traffic flow.',
+      heroImage: 'https://images.pexels.com/photos/753876/pexels-photo-753876.jpeg?auto=compress&cs=tinysrgb&w=1920&h=800&fit=crop',
       included: [
-        'Custom design consultation',
-        'Premium material selection',
-        'Licensed contractor network',
-        'Project management',
-        'Permit handling',
-        'Quality inspections',
-        'Warranty coverage',
-        'Financing options'
+        'Parking lot layout & re-striping',
+        'ADA compliance markings',
+        'Fire lane striping',
+        'Directional arrows & stenciling',
+        'Sports court markings',
+        'Warehouse floor markings',
+        'Curb painting',
+        'Reflective paint options'
       ],
       idealFor: [
-        'Luxury homeowners seeking premium finishes',
-        'Properties valued $500K+',
-        'Whole-house renovations',
-        'Kitchen and bathroom remodels',
-        'Home additions and extensions'
+        'Commercial properties needing compliance',
+        'Retail shopping centers and malls',
+        'Office buildings and medical facilities',
+        'Schools and recreational facilities',
+        'Warehouses and industrial properties'
       ],
       process: [
-        'Initial consultation and vision assessment',
-        'Custom design development',
-        'Contractor matching and selection',
-        'Project planning and permits',
-        'Construction and regular updates',
-        'Final inspection and warranty activation'
+        'Site assessment and measurement',
+        'Layout planning and design approval',
+        'Surface preparation and cleaning',
+        'Precision application of markings',
+        'Quality inspection and touch-ups',
+        'Final walkthrough and documentation'
       ],
       gallery: [
-        'https://images.pexels.com/photos/1643383/pexels-photo-1643383.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop',
-        'https://images.pexels.com/photos/2724748/pexels-photo-2724748.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop',
-        'https://images.pexels.com/photos/1571460/pexels-photo-1571460.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop',
-        'https://images.pexels.com/photos/1571457/pexels-photo-1571457.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop'
+        'https://images.pexels.com/photos/753876/pexels-photo-753876.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop',
+        'https://images.pexels.com/photos/164634/pexels-photo-164634.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop',
+        'https://images.pexels.com/photos/260024/pexels-photo-260024.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop',
+        'https://images.pexels.com/photos/210182/pexels-photo-210182.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop'
       ]
     },
-    'accessory-dwelling-units': {
-      title: 'Accessory Dwelling Units (ADUs)',
-      subtitle: 'Add Value with Custom ADUs & Rental Units',
-      priceRange: '$75K - $300K',
-      timeline: '4-8 months',
-      description: 'Maximize your property potential with custom ADUs, granny flats, and rental units. Our ADU specialists handle everything from design and permits to construction, creating additional income streams and housing solutions.',
-      heroImage: 'https://images.pexels.com/photos/323780/pexels-photo-323780.jpeg?auto=compress&cs=tinysrgb&w=1920&h=800&fit=crop',
+    'power-washing': {
+      title: 'Power Washing Services',
+      subtitle: 'Restore and Protect Your Property\'s Exterior',
+      priceRange: '$150 - $2K+',
+      timeline: '1-2 days',
+      description: 'Our expert power washing services effectively remove dirt, grime, mold, mildew, and other unsightly buildup from various surfaces. We use state-of-the-art equipment and eco-friendly solutions to safely clean buildings, driveways, sidewalks, decks, fences, and more, restoring their original appearance and extending their lifespan.',
+      heroImage: 'https://images.pexels.com/photos/5025639/pexels-photo-5025639.jpeg?auto=compress&cs=tinysrgb&w=1920&h=800&fit=crop',
       included: [
-        'ADU design and planning',
-        'Permit acquisition and approvals',
-        'Utility connections and hookups',
-        'Full construction management',
-        'Rental-ready finishing',
-        'Code compliance assurance',
-        'ROI analysis and projections',
-        'Financing assistance'
+        'Building exterior cleaning (siding, brick, stucco)',
+        'Concrete driveway & sidewalk cleaning',
+        'Deck & patio washing',
+        'Fence cleaning',
+        'Graffiti removal',
+        'Soft washing for delicate surfaces',
+        'Commercial & residential properties',
+        'Eco-friendly cleaning solutions'
       ],
       idealFor: [
-        'Property investors seeking rental income',
-        'Multi-generational families',
-        'Homeowners maximizing property value',
-        'Urban infill development projects',
-        'Aging-in-place solutions'
+        'Property managers maintaining curb appeal',
+        'Homeowners preparing for sale',
+        'Commercial buildings needing maintenance',
+        'Restaurants and retail establishments',
+        'Properties with mold, mildew, or staining'
       ],
       process: [
-        'Site assessment and feasibility study',
-        'Custom ADU design development',
-        'Permit application and approval',
-        'Utility planning and connections',
-        'Construction and quality control',
-        'Final inspections and rental preparation'
+        'Property assessment and surface evaluation',
+        'Equipment setup and safety preparation',
+        'Pre-treatment of stubborn stains',
+        'Professional power washing application',
+        'Post-cleaning inspection and touch-ups',
+        'Property restoration and cleanup'
       ],
       gallery: [
-        'https://images.pexels.com/photos/323780/pexels-photo-323780.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop',
-        'https://images.pexels.com/photos/323772/pexels-photo-323772.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop',
-        'https://images.pexels.com/photos/1396122/pexels-photo-1396122.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop',
-        'https://images.pexels.com/photos/1396132/pexels-photo-1396132.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop'
-      ]
-    },
-    'commercial-build-outs': {
-      title: 'Commercial Build-Outs & Tenant Improvements',
-      subtitle: 'Professional Spaces That Drive Business Success',
-      priceRange: '$25K - $1M+',
-      timeline: '2-6 months',
-      description: 'Transform commercial spaces with professional build-outs and tenant improvements. Our commercial specialists deliver functional, code-compliant spaces that enhance productivity and customer experience while minimizing business downtime.',
-      heroImage: 'https://images.pexels.com/photos/3184291/pexels-photo-3184291.jpeg?auto=compress&cs=tinysrgb&w=1920&h=800&fit=crop',
-      included: [
-        'Space planning and design',
-        'ADA compliance assurance',
-        'MEP coordination and installation',
-        'Fast-track construction scheduling',
-        'Minimal business disruption',
-        'Code compliance and inspections',
-        'Technology infrastructure setup',
-        'Move-in coordination'
-      ],
-      idealFor: [
-        'Business owners expanding operations',
-        'Commercial property investors',
-        'Retail and restaurant operators',
-        'Professional service firms',
-        'Medical and dental practices'
-      ],
-      process: [
-        'Business needs assessment and planning',
-        'Commercial space design development',
-        'Permit acquisition and approvals',
-        'Fast-track construction execution',
-        'Systems integration and testing',
-        'Final walkthrough and business handover'
-      ],
-      gallery: [
-        'https://images.pexels.com/photos/3184291/pexels-photo-3184291.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop',
-        'https://images.pexels.com/photos/3182812/pexels-photo-3182812.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop',
-        'https://images.pexels.com/photos/3182773/pexels-photo-3182773.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop',
-        'https://images.pexels.com/photos/3182834/pexels-photo-3182834.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop'
-      ]
-    },
-    'luxury-outdoor-living': {
-      title: 'Luxury Outdoor Living',
-      subtitle: 'Create Your Personal Resort Experience',
-      priceRange: '$40K - $400K',
-      timeline: '2-6 months',
-      description: 'Design and build stunning outdoor living spaces including pools, outdoor kitchens, patios, and complete entertainment areas. Our outdoor living specialists create resort-quality experiences in your own backyard.',
-      heroImage: 'https://images.pexels.com/photos/1029599/pexels-photo-1029599.jpeg?auto=compress&cs=tinysrgb&w=1920&h=800&fit=crop',
-      included: [
-        'Custom pool design and installation',
-        'Outdoor kitchen construction',
-        'Patio and hardscaping',
-        'Landscape integration',
-        'Lighting and electrical systems',
-        'Fire features and water elements',
-        'Entertainment area setup',
-        'Seasonal maintenance planning'
-      ],
-      idealFor: [
-        'Luxury homeowners seeking entertainment spaces',
-        'Properties with large outdoor areas',
-        'Pool and spa enthusiasts',
-        'Outdoor cooking and dining lovers',
-        'Resort-style living seekers'
-      ],
-      process: [
-        'Outdoor space assessment and vision planning',
-        'Custom design and 3D visualization',
-        'Permit acquisition and utility planning',
-        'Excavation and infrastructure installation',
-        'Construction and feature integration',
-        'Landscaping and final styling'
-      ],
-      gallery: [
-        'https://images.pexels.com/photos/1029599/pexels-photo-1029599.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop',
-        'https://images.pexels.com/photos/1438832/pexels-photo-1438832.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop',
-        'https://images.pexels.com/photos/1571453/pexels-photo-1571453.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop',
-        'https://images.pexels.com/photos/2102587/pexels-photo-2102587.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop'
-      ]
-    },
-    'custom-home-building': {
-      title: 'Custom Home Building',
-      subtitle: 'Build Your Dream Home From the Ground Up',
-      priceRange: '$200K - $2M+',
-      timeline: '8-18 months',
-      description: 'Create your perfect home with ground-up custom construction built to your exact specifications. Our custom home builders deliver personalized living spaces that reflect your lifestyle, preferences, and long-term vision.',
-      heroImage: 'https://images.pexels.com/photos/323772/pexels-photo-323772.jpeg?auto=compress&cs=tinysrgb&w=1920&h=800&fit=crop',
-      included: [
-        'Architectural design services',
-        'Custom floor plan development',
-        'Premium material selection',
-        'Full construction management',
-        'Quality control inspections',
-        'Energy efficiency optimization',
-        'Smart home integration',
-        'Comprehensive warranty coverage'
-      ],
-      idealFor: [
-        'Custom home buyers with specific visions',
-        'Land owners ready to build',
-        'Families seeking personalized spaces',
-        'Luxury home market participants',
-        'Energy-conscious builders'
-      ],
-      process: [
-        'Vision consultation and site analysis',
-        'Architectural design and planning',
-        'Permit acquisition and approvals',
-        'Foundation and framing construction',
-        'Systems installation and finishing',
-        'Final walkthrough and warranty activation'
-      ],
-      gallery: [
-        'https://images.pexels.com/photos/323772/pexels-photo-323772.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop',
-        'https://images.pexels.com/photos/323705/pexels-photo-323705.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop',
-        'https://images.pexels.com/photos/323775/pexels-photo-323775.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop',
-        'https://images.pexels.com/photos/1396132/pexels-photo-1396132.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop'
-      ]
-    },
-    'disaster-restoration': {
-      title: 'Disaster Restoration & Insurance Rebuilds',
-      subtitle: 'Restore Your Property Better Than Before',
-      priceRange: '$15K - $500K',
-      timeline: '1-8 months',
-      description: 'Professional disaster restoration and insurance rebuild services for fire, water, storm, and other damage. Our restoration specialists work directly with insurance companies to restore your property efficiently and comprehensively.',
-      heroImage: 'https://images.pexels.com/photos/5691622/pexels-photo-5691622.jpeg?auto=compress&cs=tinysrgb&w=1920&h=800&fit=crop',
-      included: [
-        'Emergency response and stabilization',
-        'Insurance claim assistance',
-        'Damage assessment and documentation',
-        'Full restoration construction',
-        'Code upgrade compliance',
-        'Content restoration services',
-        '24/7 emergency availability',
-        'Direct insurance billing'
-      ],
-      idealFor: [
-        'Property owners with insurance claims',
-        'Emergency restoration situations',
-        'Fire and water damage recovery',
-        'Storm and natural disaster victims',
-        'Commercial property restoration'
-      ],
-      process: [
-        'Emergency response and damage assessment',
-        'Insurance claim documentation and filing',
-        'Restoration planning and approvals',
-        'Demolition and cleanup services',
-        'Reconstruction and restoration work',
-        'Final inspection and claim closure'
-      ],
-      gallery: [
-        'https://images.pexels.com/photos/5691622/pexels-photo-5691622.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop',
-        'https://images.pexels.com/photos/5691479/pexels-photo-5691479.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop',
-        'https://images.pexels.com/photos/5691484/pexels-photo-5691484.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop',
-        'https://images.pexels.com/photos/5691486/pexels-photo-5691486.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop'
-      ]
-    },
-    'solar-smart-home': {
-      title: 'Solar + Smart Home Retrofits',
-      subtitle: 'Upgrade to Intelligent, Sustainable Living',
-      priceRange: '$20K - $150K',
-      timeline: '1-4 months',
-      description: 'Transform your home with solar energy systems and smart home technology retrofits. Our specialists integrate renewable energy solutions with intelligent automation for maximum efficiency, comfort, and long-term savings.',
-      heroImage: 'https://images.pexels.com/photos/4254165/pexels-photo-4254165.jpeg?auto=compress&cs=tinysrgb&w=1920&h=800&fit=crop',
-      included: [
-        'Solar system design and installation',
-        'Smart home automation setup',
-        'Energy efficiency audits',
-        'Battery storage integration',
-        'Smart thermostat and lighting',
-        'Security system integration',
-        'Financing and incentive assistance',
-        'Monitoring and maintenance plans'
-      ],
-      idealFor: [
-        'Eco-conscious homeowners',
-        'Technology enthusiasts',
-        'Energy cost reduction seekers',
-        'Home automation adopters',
-        'Sustainable living advocates'
-      ],
-      process: [
-        'Energy audit and system assessment',
-        'Custom solar and smart home design',
-        'Permit acquisition and utility coordination',
-        'Solar installation and electrical work',
-        'Smart system integration and programming',
-        'System testing and homeowner training'
-      ],
-      gallery: [
+        'https://images.pexels.com/photos/5025639/pexels-photo-5025639.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop',
         'https://images.pexels.com/photos/4254165/pexels-photo-4254165.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop',
-        'https://images.pexels.com/photos/4254151/pexels-photo-4254151.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop',
-        'https://images.pexels.com/photos/4254167/pexels-photo-4254167.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop',
-        'https://images.pexels.com/photos/4254169/pexels-photo-4254169.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop'
+        'https://images.pexels.com/photos/1463917/pexels-photo-1463917.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop',
+        'https://images.pexels.com/photos/1396122/pexels-photo-1396122.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop'
       ]
     },
-    'multifamily-conversions': {
-      title: 'Multifamily Conversions',
-      subtitle: 'Convert Properties Into Profitable Rental Units',
-      priceRange: '$50K - $800K',
-      timeline: '3-10 months',
-      description: 'Transform single-family homes and commercial properties into profitable multifamily rental units. Our conversion specialists maximize rental income potential while ensuring code compliance and tenant satisfaction.',
-      heroImage: 'https://images.pexels.com/photos/323775/pexels-photo-323775.jpeg?auto=compress&cs=tinysrgb&w=1920&h=800&fit=crop',
+    'window-cleaning': {
+      title: 'Window Cleaning Services',
+      subtitle: 'Crystal Clear Views, Every Time',
+      priceRange: '$100 - $1K+',
+      timeline: '1 day',
+      description: 'Experience streak-free, sparkling windows with our professional window cleaning services. Whether it\'s a commercial high-rise or a residential home, our skilled technicians use advanced techniques and purified water systems to deliver impeccable results, enhancing curb appeal and maximizing natural light.',
+      heroImage: 'https://images.pexels.com/photos/355164/pexels-photo-355164.jpeg?auto=compress&cs=tinysrgb&w=1920&h=800&fit=crop',
       included: [
-        'Feasibility analysis and ROI projections',
-        'Zoning compliance and permits',
-        'Unit conversion and separation',
-        'Individual utility metering',
-        'Rental-optimized floor plans',
-        'Code compliance assurance',
-        'Property management preparation',
-        'Financing and investment guidance'
+        'Commercial window cleaning (low-rise to high-rise)',
+        'Residential window cleaning (interior & exterior)',
+        'Post-construction window cleaning',
+        'Screen cleaning',
+        'Hard water stain removal',
+        'Skylight cleaning',
+        'Regular maintenance programs',
+        'Purified water systems for streak-free results'
       ],
       idealFor: [
-        'Real estate investors',
-        'Property developers',
-        'Rental income seekers',
-        'Urban infill projects',
-        'Portfolio diversification strategies'
+        'Office buildings and commercial properties',
+        'Retail stores and restaurants',
+        'Residential homes and condominiums',
+        'Medical facilities requiring spotless windows',
+        'Properties with hard-to-reach windows'
       ],
       process: [
-        'Property assessment and conversion planning',
-        'Zoning research and permit acquisition',
-        'Architectural design for unit separation',
-        'Construction and utility installation',
-        'Individual unit finishing and preparation',
-        'Final inspections and rental readiness'
+        'Window assessment and access planning',
+        'Setup of safety equipment and tools',
+        'Pre-cleaning of frames and sills',
+        'Professional window cleaning application',
+        'Quality inspection for streak-free finish',
+        'Final cleanup and customer walkthrough'
       ],
       gallery: [
-        'https://images.pexels.com/photos/323775/pexels-photo-323775.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop',
-        'https://images.pexels.com/photos/323780/pexels-photo-323780.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop',
-        'https://images.pexels.com/photos/1396122/pexels-photo-1396122.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop',
-        'https://images.pexels.com/photos/1396132/pexels-photo-1396132.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop'
-      ]
-    },
-    'foundation-repairs': {
-      title: 'Foundation & Structural Repairs',
-      subtitle: 'Expert Solutions for Structural Integrity',
-      priceRange: '$10K - $200K',
-      timeline: '1-6 months',
-      description: 'Professional foundation and structural repair services using advanced engineering solutions. Our structural specialists diagnose and resolve foundation issues, ensuring long-term stability and property value protection.',
-      heroImage: 'https://images.pexels.com/photos/5691479/pexels-photo-5691479.jpeg?auto=compress&cs=tinysrgb&w=1920&h=800&fit=crop',
-      included: [
-        'Structural engineering assessments',
-        'Foundation repair and stabilization',
-        'Waterproofing and drainage solutions',
-        'Concrete and masonry restoration',
-        'Soil stabilization treatments',
-        'Structural reinforcement systems',
-        'Warranty coverage on repairs',
-        'Ongoing monitoring services'
-      ],
-      idealFor: [
-        'Properties with foundation issues',
-        'Structural damage situations',
-        'Basement waterproofing needs',
-        'Settlement and shifting problems',
-        'Pre-purchase inspection failures'
-      ],
-      process: [
-        'Comprehensive structural assessment',
-        'Engineering analysis and solution design',
-        'Permit acquisition and planning',
-        'Foundation repair and reinforcement',
-        'Waterproofing and drainage installation',
-        'Final inspection and warranty activation'
-      ],
-      gallery: [
-        'https://images.pexels.com/photos/5691479/pexels-photo-5691479.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop',
-        'https://images.pexels.com/photos/5691484/pexels-photo-5691484.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop',
-        'https://images.pexels.com/photos/5691486/pexels-photo-5691486.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop',
-        'https://images.pexels.com/photos/5691622/pexels-photo-5691622.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop'
-      ]
-    },
-    'healthcare-facilities': {
-      title: 'Healthcare & Senior Living Facilities',
-      subtitle: 'Specialized Construction for Care & Wellness',
-      priceRange: '$50K - $2M+',
-      timeline: '3-12 months',
-      description: 'Expert construction and renovation services for outpatient care centers, behavioral health clinics, and senior living facilities. Our healthcare construction specialists ensure regulatory compliance, patient safety, and operational efficiency.',
-      heroImage: 'https://images.pexels.com/photos/305568/pexels-photo-305568.jpeg?auto=compress&cs=tinysrgb&w=1920&h=800&fit=crop',
-      included: [
-        'Healthcare code compliance assurance',
-        'Specialized HVAC and air filtration',
-        'Infection control systems',
-        'ADA accessibility compliance',
-        'Medical gas and electrical systems',
-        'Behavioral health safety features',
-        'Senior-friendly design elements',
-        'Fast-track construction scheduling'
-      ],
-      idealFor: [
-        'Outpatient care centers',
-        'Behavioral health clinics',
-        'Senior living facilities',
-        'Memory care units',
-        'Rehabilitation centers',
-        'Urgent care facilities'
-      ],
-      process: [
-        'Healthcare facility needs assessment',
-        'Regulatory compliance planning',
-        'Permit acquisition and approvals',
-        'Specialized construction and installation',
-        'Medical equipment integration',
-        'Final inspections and facility handover'
-      ],
-      gallery: [
+        'https://images.pexels.com/photos/355164/pexels-photo-355164.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop',
+        'https://images.pexels.com/photos/273209/pexels-photo-273209.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop',
         'https://images.pexels.com/photos/305568/pexels-photo-305568.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop',
-        'https://images.pexels.com/photos/3184291/pexels-photo-3184291.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop',
-        'https://images.pexels.com/photos/3182812/pexels-photo-3182812.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop',
-        'https://images.pexels.com/photos/3182773/pexels-photo-3182773.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop'
+        'https://images.pexels.com/photos/2102587/pexels-photo-2102587.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop'
       ]
     }
   };
