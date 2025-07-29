@@ -9,6 +9,7 @@ const Footer: React.FC = () => {
     'Window Cleaning',
     'Seal Coating',
     'Paving',
+    'Parking Lot Sweeping',
     'Crack Sealing',
   ];
 

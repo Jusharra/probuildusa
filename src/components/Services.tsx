@@ -10,8 +10,8 @@ const Services: React.FC = () => {
       description: 'Professional parking lot striping, roadway markings, and ADA compliance',
       priceRange: '$500 - $5K+',
       icon: Home,
-      image: 'https://images.pexels.com/photos/2199293/pexels-photo-2199293.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop',
-      features: ['ADA Compliance', 'Durable Paint', 'Precise Layout', 'Fast Service'],
+      image: 'https://images.pexels.com/photos/753876/pexels-photo-753876.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop',
+      features: ['ADA Compliance', 'Durable Paint', 'Precise Layout', 'Fast Service', 'Custom Stenciling', 'Durable Thermoplastic', 'Parking Lot Signs & Bollard Covers'],
       idealFor: 'Commercial properties, Shopping centers, Schools'
     },
     {
@@ -51,7 +51,7 @@ const Services: React.FC = () => {
       priceRange: '$2 - $7/sq ft',
       icon: Hammer,
       image: 'https://images.pexels.com/photos/3806242/pexels-photo-3806242.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop',
-      features: ['New Construction', 'Resurfacing', 'Patching', 'Drainage Solutions'],
+      features: ['New Construction', 'Resurfacing', 'Patching', 'Drainage Solutions', 'Pothole Repair', 'Parking Blocks & Speed Bumps'],
       idealFor: 'Roadways, Parking lots, Industrial sites'
     },
     {
@@ -63,6 +63,17 @@ const Services: React.FC = () => {
       image: 'https://images.pexels.com/photos/3806245/pexels-photo-3806245.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop',
       features: ['Waterproofs Pavement', 'Prevents Potholes', 'Cost-Effective', 'Extends Pavement Life'],
       idealFor: 'Parking lots, Driveways, Roads with minor cracks'
+    }
+    ,
+    {
+      id: 'parking-lot-sweeping',
+      title: 'Parking Lot Sweeping',
+      description: 'Keep your parking areas clean and safe with our comprehensive sweeping services.',
+      priceRange: '$100 - $1K+',
+      icon: Users, // Using Users icon as a placeholder for now
+      image: 'https://images.pexels.com/photos/3806238/pexels-photo-3806238.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop', // Placeholder image
+      features: ['Debris Removal', 'Litter Pickup', 'Dust Control', 'Scheduled Maintenance'],
+      idealFor: 'Commercial properties, Retail centers, Industrial parks'
     }
   ];
 

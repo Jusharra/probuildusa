@@ -63,7 +63,8 @@ const ContractorDirectory: React.FC = () => {
     'Power Washing',
     'Window Cleaning',
     'Seal Coating',
-    'Paving',
+    'Paving', 
+    'Parking Lot Sweeping',
     'Crack Sealing'
   ];
 

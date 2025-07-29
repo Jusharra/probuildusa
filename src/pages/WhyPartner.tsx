@@ -202,6 +202,7 @@ const WhyPartner: React.FC = () => {
                   <option value="window-cleaning">Window Cleaning</option>
                   <option value="seal-coating">Seal Coating</option>
                   <option value="paving">Paving</option>
+                  <option value="parking-lot-sweeping">Parking Lot Sweeping</option>
                   <option value="crack-sealing">Crack Sealing</option>
                   <option value="seal-coating">Seal Coating</option>
                   <option value="paving">Paving</option>

@@ -126,6 +126,7 @@ const LeadIntake: React.FC = () => {
     { id: 'window-cleaning', name: 'Window Cleaning', icon: '🪟' },
     { id: 'seal-coating', name: 'Seal Coating', icon: '🛡️' },
     { id: 'paving', name: 'Paving', icon: '🛣️' },
+    { id: 'parking-lot-sweeping', name: 'Parking Lot Sweeping', icon: '🧹' },
     { id: 'crack-sealing', name: 'Crack Sealing', icon: '🩹' },
   ];
 

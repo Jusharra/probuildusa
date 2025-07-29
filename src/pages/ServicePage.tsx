@@ -20,7 +20,9 @@ const ServicePage: React.FC = () => {
         'Fire lane striping',
         'Directional arrows & stenciling',
         'Sports court markings',
+        'Custom stenciling and logos',
         'Warehouse floor markings',
+        'Thermoplastic and durable paint options',
         'Curb painting',
         'Reflective paint options'
       ],
@@ -35,7 +37,9 @@ const ServicePage: React.FC = () => {
         'Site assessment and measurement',
         'Layout planning and design approval',
         'Surface preparation and cleaning',
+        'Parking lot signs & bollard covers installation',
         'Precision application of markings',
+        'TBL Durables application',
         'Quality inspection and touch-ups',
         'Final walkthrough and documentation'
       ],
@@ -173,6 +177,8 @@ const ServicePage: React.FC = () => {
         'New asphalt construction',
         'Asphalt overlays and resurfacing',
         'Pothole repair and patching',
+        'Parking blocks and speed bump installation',
+        'Parking lot signs and bollard covers',
         'Asphalt removal and replacement',
         'Drainage correction and grading',
         'Speed bump and bollard installation',
@@ -237,6 +243,46 @@ const ServicePage: React.FC = () => {
         'https://images.pexels.com/photos/3806244/pexels-photo-3806244.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop',
         'https://images.pexels.com/photos/3806243/pexels-photo-3806243.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop',
         'https://images.pexels.com/photos/3806238/pexels-photo-3806238.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop'
+      ]
+    },
+    'parking-lot-sweeping': {
+      title: 'Parking Lot Sweeping',
+      subtitle: 'Maintain a Clean and Safe Environment for Your Property',
+      priceRange: '$100 - $1K+',
+      timeline: 'Daily, Weekly, or Monthly',
+      description: 'Our professional parking lot sweeping services ensure your commercial or residential properties remain clean, safe, and inviting. We remove debris, litter, dust, and other unwanted materials, preventing potential hazards, extending pavement life, and enhancing your property\'s curb appeal. Regular sweeping is essential for maintaining a positive image and complying with environmental regulations.',
+      heroImage: 'https://images.pexels.com/photos/5025639/pexels-photo-5025639.jpeg?auto=compress&cs=tinysrgb&w=1920&h=800&fit=crop', // Placeholder image
+      included: [
+        'Comprehensive debris removal (leaves, dirt, trash)',
+        'Litter and trash pickup',
+        'Dust control and prevention',
+        'Power blowing of sidewalks and corners',
+        'Emptying trash receptacles',
+        'Scheduled daily, weekly, or monthly services',
+        'Emergency sweeping services',
+        'Environmentally friendly disposal of waste'
+      ],
+      idealFor: [
+        'Retail shopping centers and plazas',
+        'Commercial office parks',
+        'Industrial facilities and warehouses',
+        'Apartment complexes and HOAs',
+        'Hospitals and medical centers',
+        'Event venues and parking garages'
+      ],
+      process: [
+        'Initial site assessment and cleaning plan',
+        'Pre-sweeping litter and large debris removal',
+        'Mechanical sweeping of main parking areas',
+        'Power blowing of hard-to-reach areas and corners',
+        'Manual detailing and trash receptacle emptying',
+        'Post-service inspection and reporting'
+      ],
+      gallery: [
+        'https://images.pexels.com/photos/5025639/pexels-photo-5025639.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop',
+        'https://images.pexels.com/photos/4254165/pexels-photo-4254165.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop',
+        'https://images.pexels.com/photos/1463917/pexels-photo-1463917.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop',
+        'https://images.pexels.com/photos/1396122/pexels-photo-1396122.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop'
       ]
     }
   };
