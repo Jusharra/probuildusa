@@ -111,7 +111,7 @@ const FAQs: React.FC = () => {
                     <IconComponent className="w-6 h-6 text-amber-400" />
                     <h2 className="text-2xl font-bold">{category.name}</h2>
                   </div>
-                  <ChevronDown className={`w-6 h-6 transition-transform ${openCategory === category.name ? 'rotate-180' : ''}`} />
+                  <ChevronDown className={\`w-6 h-6 transition-transform ${openCategory === category.name ? 'rotate-180' : ''}`} />
                 </button>
 
                 {openCategory === category.name && (
@@ -123,7 +123,7 @@ const FAQs: React.FC = () => {
                           className="w-full flex items-center justify-between text-left py-3 px-4 rounded-lg transition-colors hover:bg-slate-700/50"
                         >
                           <h3 className="font-semibold text-white">{faq.question}</h3>
-                          <ChevronDown className={`w-5 h-5 transition-transform ${openFAQ === faqIndex ? 'rotate-180' : ''}`} />
+                          <ChevronDown className={\`w-5 h-5 transition-transform ${openFAQ === faqIndex ? 'rotate-180' : ''}`} />
                         </button>
                         {openFAQ === faqIndex && (
                           <p className="text-slate-300 mt-2 px-4 py-2 bg-slate-700/30 rounded-lg leading-relaxed">
