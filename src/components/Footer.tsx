@@ -18,6 +18,9 @@ const Footer: React.FC = () => {
     { name: 'Find Contractors', href: '/contractors' },
     { name: 'Partner With Us', href: '/why-partner' },
     { name: 'Get Started', href: '/get-started' },
+    { name: 'Pavement Maintenance Guidance', href: '/pavement-maintenance-guidance' },
+    { name: 'FAQs', href: '/faqs' },
+    { name: 'Parking Lot Striping Guide', href: '/parking-lot-striping-guide' },
   ];
 
   return (

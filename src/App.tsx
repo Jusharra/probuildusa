@@ -17,6 +17,9 @@ import PasswordResetPage from './pages/PasswordResetPage';
 import PricingPage from './pages/PricingPage';
 import ProfileSettingsPage from './pages/ProfileSettingsPage';
 import SuccessPage from './pages/SuccessPage';
+import PavementMaintenanceGuidance from './pages/PavementMaintenanceGuidance';
+import FAQs from './pages/FAQs';
+import ParkingLotStripingGuide from './pages/ParkingLotStripingGuide';
 import CancelPage from './pages/CancelPage';
 
 // Protected Route Component
@@ -96,6 +99,9 @@ function AppContent() {
         <Route path="/contractors" element={<PublicRoute><ContractorDirectory /></PublicRoute>} />
         <Route path="/contractors/:slug" element={<PublicRoute><ContractorProfilePage /></PublicRoute>} />
         <Route path="/financing" element={<PublicRoute><FinancingPage /></PublicRoute>} />
+        <Route path="/pavement-maintenance-guidance" element={<PublicRoute><PavementMaintenanceGuidance /></PublicRoute>} />
+        <Route path="/faqs" element={<PublicRoute><FAQs /></PublicRoute>} />
+        <Route path="/parking-lot-striping-guide" element={<PublicRoute><ParkingLotStripingGuide /></PublicRoute>} />
         <Route path="/pricing" element={<PublicRoute><PricingPage /></PublicRoute>} />
         
         {/* Payment Routes */}
