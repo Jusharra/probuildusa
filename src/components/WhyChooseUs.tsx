@@ -109,10 +109,10 @@ const WhyChooseUs: React.FC = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl font-bold mb-6">
-            Why Choose <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-400 to-amber-600">ProBuild Concierge</span>
+            Why Choose <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-400 to-amber-600">Service Pro Network</span>
           </h2>
           <p className="text-xl text-slate-300 max-w-3xl mx-auto leading-relaxed">
-            Unlike generic contractor directories, we're built specifically for high-ticket construction projects.
+            Unlike generic service directories, we're built specifically for professional line striping, power washing, and window cleaning services.
           </p>
         </div>
 

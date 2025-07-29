@@ -174,10 +174,10 @@ const Testimonials: React.FC = () => {
               Ready to Join Our Success Stories?
             </h3>
             <p className="text-slate-300 mb-6">
-              Let us connect you with the perfect contractor for your high-ticket project.
+              Let us connect you with the perfect service provider for your needs.
             </p>
             <button className="bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-600 hover:to-amber-700 text-slate-900 px-8 py-4 rounded-xl font-bold text-lg transition-all duration-300 transform hover:scale-105">
-              Start Your Project Today
+              Get Your Service Quote Today
             </button>
           </div>
         </div>

@@ -197,11 +197,9 @@ const WhyPartner: React.FC = () => {
                 />
                 <select className="w-full bg-slate-700 border border-slate-600 rounded-lg px-4 py-3 text-white focus:ring-2 focus:ring-amber-400 focus:border-transparent transition-all">
                   <option value="">Select Your Specialty</option>
-                  <option value="luxury-remodel">Luxury Remodeling</option>
-                  <option value="custom-homes">Custom Homes</option>
-                  <option value="commercial">Commercial</option>
-                  <option value="outdoor-living">Outdoor Living</option>
-                  <option value="restoration">Restoration</option>
+                  <option value="line-striping">Line Striping</option>
+                  <option value="power-washing">Power Washing</option>
+                  <option value="window-cleaning">Window Cleaning</option>
                 </select>
                 <button
                   type="submit"

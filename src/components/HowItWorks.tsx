@@ -105,11 +105,11 @@ const HowItWorks: React.FC = () => {
               Ready to Get Started?
             </h3>
             <p className="text-slate-300 mb-6">
-              Join hundreds of property owners who've trusted us with their high-ticket construction projects.
+              Join hundreds of property owners who've trusted us with their essential service needs.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <button className="bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-600 hover:to-amber-700 text-slate-900 px-8 py-3 rounded-lg font-semibold transition-all duration-300 transform hover:scale-105">
-                Start Project Intake
+                Start Service Request
               </button>
               <button className="border-2 border-slate-600 hover:border-amber-400 text-white px-8 py-3 rounded-lg font-semibold transition-all duration-300">
                 Schedule Consultation

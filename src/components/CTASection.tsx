@@ -84,7 +84,7 @@ const CTASection: React.FC = () => {
             <div className="text-center md:text-left">
               <div className="flex items-center justify-center md:justify-start space-x-2 mb-2">
                 <Shield className="w-6 h-6 text-amber-400" />
-                <span className="font-bold text-lg">Guaranteed Results</span>
+               <span>200+ Service Pros</span>
               </div>
               <p className="text-slate-400 text-sm">
                 100% satisfaction guarantee on all matched projects
