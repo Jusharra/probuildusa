@@ -20,6 +20,7 @@ const Header: React.FC = () => {
   const handleSignOut = async () => {
     try {
       await signOut();
+      setIsMenuOpen(false); // Ensure menu closes on sign out
     } catch (error) {
       console.error('Error signing out:', error);
     }
@@ -219,6 +220,7 @@ const Header: React.FC = () => {
                         to={serviceItem.href}
                         className="block text-sm text-slate-300 hover:text-amber-400 transition-colors"
                         onClick={() => {
+                          // Close both the services dropdown and the main mobile menu
                           setIsServicesDropdownOpen(false);
                           setIsMenuOpen(false);
                         }}
@@ -235,7 +237,7 @@ const Header: React.FC = () => {
                 <Link
                   key={item.name}
                   to={item.href}
-                  className="block text-slate-300 hover:text-amber-400 transition-colors"
+                  className="block text-slate-300 hover:text-amber-400 transition-colors" // Close main mobile menu
                   onClick={() => setIsMenuOpen(false)} // Close mobile menu on click
                 >
                   {item.name}
@@ -253,14 +255,14 @@ const Header: React.FC = () => {
                     <Link
                       to={getDashboardLink()}
                       className="flex items-center space-x-2 text-slate-300 hover:text-amber-400 transition-colors"
-                      onClick={() => setIsMenuOpen(false)}
+                      onClick={() => setIsMenuOpen(false)} // Close main mobile menu
                     >
                       <BarChart3 className="w-4 h-4" />
                       <span>{getDashboardLabel()}</span>
                     </Link>
                     <Link
                       to="/profile-settings"
-                      className="flex items-center space-x-2 text-slate-300 hover:text-amber-400 transition-colors"
+                      className="flex items-center space-x-2 text-slate-300 hover:text-amber-400 transition-colors" // Close main mobile menu
                       onClick={() => setIsMenuOpen(false)}
                     >
                       <User className="w-4 h-4" />
@@ -268,7 +270,7 @@ const Header: React.FC = () => {
                     </Link>
                     <Link
                       to="/pricing"
-                      className="flex items-center space-x-2 text-slate-300 hover:text-amber-400 transition-colors"
+                      className="flex items-center space-x-2 text-slate-300 hover:text-amber-400 transition-colors" // Close main mobile menu
                       onClick={() => setIsMenuOpen(false)}
                     >
                       <CreditCard className="w-4 h-4" />
@@ -276,6 +278,9 @@ const Header: React.FC = () => {
                     </Link>
                     <button
                       onClick={() => {
+                        // Call handleSignOut which already closes the menu
+                        // and ensure the menu is closed directly here as well
+                        // for robustness.
                         handleSignOut();
                         setIsMenuOpen(false);
                       }}
@@ -290,7 +295,7 @@ const Header: React.FC = () => {
                     <Link
                       to="/login"
                       className="flex items-center space-x-2 text-slate-300 hover:text-amber-400 transition-colors"
-                      onClick={() => setIsMenuOpen(false)}
+                      onClick={() => setIsMenuOpen(false)} // Close main mobile menu
                     >
                       <LogIn className="w-4 h-4" />
                       <span>Sign In</span>
