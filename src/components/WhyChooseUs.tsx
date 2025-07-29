@@ -68,7 +68,7 @@ const WhyChooseUs: React.FC = () => {
   const benefits = [
     {
       icon: Shield,
-      title: 'Premium Contractor Network',
+      title: 'Specialized Service Network',
       description: 'Every contractor is licensed, insured, and background-checked with proven high-ticket experience.',
       stat: '100% Vetted'
     },
@@ -79,7 +79,7 @@ const WhyChooseUs: React.FC = () => {
       stat: '48hr Response'
     },
     {
-      icon: Users,
+      icon: Phone,
       title: 'Dedicated Concierge',
       description: 'Personal project coordinator guides you from initial consultation through completion.',
       stat: '1-on-1 Support'
@@ -88,7 +88,7 @@ const WhyChooseUs: React.FC = () => {
       icon: Award,
       title: 'High-Ticket Specialists',
       description: 'We focus exclusively on premium projects $25K+ with contractors who understand luxury standards.',
-      stat: '$25K+ Focus'
+      stat: 'Quality Focus'
     },
     {
       icon: Clock,
@@ -99,7 +99,7 @@ const WhyChooseUs: React.FC = () => {
     {
       icon: DollarSign,
       title: 'Financing Available',
-      description: 'Access pre-approved financing options to fund your project without cash flow constraints.',
+      description: 'Access pre-approved financing options to fund your service project without cash flow constraints.',
       stat: 'Up to $1M'
     }
   ];
@@ -112,7 +112,7 @@ const WhyChooseUs: React.FC = () => {
             Why Choose <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-400 to-amber-600">Service Pro Network</span>
           </h2>
           <p className="text-xl text-slate-300 max-w-3xl mx-auto leading-relaxed">
-            Unlike generic service directories, we're built specifically for professional line striping, power washing, and window cleaning services.
+            Unlike generic service directories, we're built specifically for professional line striping, power washing, window cleaning, seal coating, paving, and crack sealing services.
           </p>
         </div>
 

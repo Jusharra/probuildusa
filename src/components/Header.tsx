@@ -39,6 +39,9 @@ const Header: React.FC = () => {
     { name: 'Line Striping', href: '/services/line-striping' },
     { name: 'Power Washing', href: '/services/power-washing' },
     { name: 'Window Cleaning', href: '/services/window-cleaning' },
+    { name: 'Seal Coating', href: '/services/seal-coating' },
+    { name: 'Paving', href: '/services/paving' },
+    { name: 'Crack Sealing', href: '/services/crack-sealing' },
   ];
 
   useEffect(() => {

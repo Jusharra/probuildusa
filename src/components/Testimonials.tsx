@@ -5,50 +5,50 @@ const Testimonials: React.FC = () => {
   const testimonials = [
     {
       id: 1,
-      name: 'Sarah Mitchell',
-      role: 'Luxury Homeowner',
-      location: 'Beverly Hills, CA',
-      project: 'Kitchen & Master Suite Remodel',
-      amount: '$180,000',
-      image: 'https://images.pexels.com/photos/1239291/pexels-photo-1239291.jpeg?auto=compress&cs=tinysrgb&w=150&h=150&fit=crop',
+      name: 'John D.',
+      role: 'Property Manager',
+      location: 'Los Angeles, CA',
+      project: 'Parking Lot Striping',
+      amount: '$3,500',
+      image: 'https://images.pexels.com/photos/753876/pexels-photo-753876.jpeg?auto=compress&cs=tinysrgb&w=150&h=150&fit=crop',
       rating: 5,
-      quote: 'ProBuild Concierge connected us with an incredible contractor who transformed our home beyond our wildest dreams. The concierge service made everything seamless.',
+      quote: 'The line striping service was incredibly efficient and professional. Our parking lot looks brand new and is much safer now. Highly recommend!',
       icon: Home,
       beforeAfter: {
-        before: 'https://images.pexels.com/photos/2724748/pexels-photo-2724748.jpeg?auto=compress&cs=tinysrgb&w=300&h=200&fit=crop',
-        after: 'https://images.pexels.com/photos/1643383/pexels-photo-1643383.jpeg?auto=compress&cs=tinysrgb&w=300&h=200&fit=crop'
+        before: 'https://images.pexels.com/photos/753876/pexels-photo-753876.jpeg?auto=compress&cs=tinysrgb&w=300&h=200&fit=crop',
+        after: 'https://images.pexels.com/photos/164634/pexels-photo-164634.jpeg?auto=compress&cs=tinysrgb&w=300&h=200&fit=crop'
       }
     },
     {
       id: 2,
-      name: 'Marcus Rodriguez',
-      role: 'Commercial Investor',
-      location: 'Austin, TX',
-      project: 'Medical Office Build-Out',
-      amount: '$320,000',
-      image: 'https://images.pexels.com/photos/1043471/pexels-photo-1043471.jpeg?auto=compress&cs=tinysrgb&w=150&h=150&fit=crop',
+      name: 'Sarah K.',
+      role: 'Homeowner',
+      location: 'Miami, FL',
+      project: 'Driveway Power Washing',
+      amount: '$450',
+      image: 'https://images.pexels.com/photos/5691622/pexels-photo-5691622.jpeg?auto=compress&cs=tinysrgb&w=150&h=150&fit=crop',
       rating: 5,
-      quote: 'As an investor, time is money. ProBuild delivered a qualified contractor within 24 hours and handled all the complexities of medical facility requirements.',
+      quote: 'My driveway was covered in mildew and dirt. After the power washing, it looks brand new! The team was quick and thorough.',
       icon: Building2,
       beforeAfter: {
-        before: 'https://images.pexels.com/photos/305568/pexels-photo-305568.jpeg?auto=compress&cs=tinysrgb&w=300&h=200&fit=crop',
-        after: 'https://images.pexels.com/photos/3184291/pexels-photo-3184291.jpeg?auto=compress&cs=tinysrgb&w=300&h=200&fit=crop'
+        before: 'https://images.pexels.com/photos/5025639/pexels-photo-5025639.jpeg?auto=compress&cs=tinysrgb&w=300&h=200&fit=crop',
+        after: 'https://images.pexels.com/photos/4254165/pexels-photo-4254165.jpeg?auto=compress&cs=tinysrgb&w=300&h=200&fit=crop'
       }
     },
     {
       id: 3,
-      name: 'Jennifer Chen',
-      role: 'Property Developer',
-      location: 'Seattle, WA',
-      project: 'ADU Construction',
-      amount: '$285,000',
-      image: 'https://images.pexels.com/photos/1130626/pexels-photo-1130626.jpeg?auto=compress&cs=tinysrgb&w=150&h=150&fit=crop',
+      name: 'Michael B.',
+      role: 'Business Owner',
+      location: 'Chicago, IL',
+      project: 'Commercial Window Cleaning',
+      amount: '$1,200',
+      image: 'https://images.pexels.com/photos/355164/pexels-photo-355164.jpeg?auto=compress&cs=tinysrgb&w=150&h=150&fit=crop',
       rating: 5,
-      quote: 'The financing options ProBuild provided allowed us to move forward immediately. Our ADU is now generating $3,500/month in rental income.',
+      quote: 'Our office building windows have never been cleaner. The service was efficient, non-disruptive, and the results are fantastic.',
       icon: TreePine,
       beforeAfter: {
-        before: 'https://images.pexels.com/photos/323780/pexels-photo-323780.jpeg?auto=compress&cs=tinysrgb&w=300&h=200&fit=crop',
-        after: 'https://images.pexels.com/photos/323772/pexels-photo-323772.jpeg?auto=compress&cs=tinysrgb&w=300&h=200&fit=crop'
+        before: 'https://images.pexels.com/photos/355164/pexels-photo-355164.jpeg?auto=compress&cs=tinysrgb&w=300&h=200&fit=crop',
+        after: 'https://images.pexels.com/photos/273209/pexels-photo-273209.jpeg?auto=compress&cs=tinysrgb&w=300&h=200&fit=crop'
       }
     }
   ];
@@ -68,7 +68,7 @@ const Testimonials: React.FC = () => {
             What Our <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-400 to-amber-600">Clients Say</span>
           </h2>
           <p className="text-xl text-slate-300 max-w-3xl mx-auto leading-relaxed">
-            Real results from real clients who trusted us with their high-ticket construction projects.
+            Real results from real clients who trusted us with their property maintenance and improvement projects.
           </p>
         </div>
 

@@ -7,6 +7,9 @@ const Footer: React.FC = () => {
     'Line Striping',
     'Power Washing',
     'Window Cleaning',
+    'Seal Coating',
+    'Paving',
+    'Crack Sealing',
   ];
 
   const quickLinks = [
@@ -42,7 +45,7 @@ const Footer: React.FC = () => {
           </div>
 
           <div>
-            <h3 className="text-lg font-semibold mb-4 text-amber-400">Services</h3>
+            <h3 className="text-lg font-semibold mb-4 text-amber-400">Our Services</h3>
             <ul className="space-y-2">
               {services.slice(0, 5).map((service) => (
                 <li key={service}>
@@ -58,7 +61,7 @@ const Footer: React.FC = () => {
           </div>
 
           <div>
-            <h3 className="text-lg font-semibold mb-4 text-amber-400">More Services</h3>
+            <h3 className="text-lg font-semibold mb-4 text-amber-400">Quick Links</h3>
             <ul className="space-y-2">
               {services.slice(5).map((service) => (
                 <li key={service}>

@@ -33,6 +33,36 @@ const Services: React.FC = () => {
       image: 'https://images.pexels.com/photos/1571460/pexels-photo-1571460.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop',
       features: ['Streak-Free Results', 'Interior & Exterior', 'Screen Cleaning', 'Regular Maintenance'],
       idealFor: 'Office buildings, Retail stores, Homeowners'
+    },
+    {
+      id: 'seal-coating',
+      title: 'Asphalt Seal Coating',
+      description: 'Protect and extend the life of your asphalt surfaces with professional seal coating.',
+      priceRange: '$0.50 - $1.50/sq ft',
+      icon: Shield,
+      image: 'https://images.pexels.com/photos/3806680/pexels-photo-3806680.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop',
+      features: ['UV Protection', 'Water Resistance', 'Enhanced Appearance', 'Crack Prevention'],
+      idealFor: 'Parking lots, Driveways, Commercial properties'
+    },
+    {
+      id: 'paving',
+      title: 'Asphalt Paving & Repair',
+      description: 'Expert asphalt paving for new installations, overlays, and comprehensive repairs.',
+      priceRange: '$2 - $7/sq ft',
+      icon: Hammer,
+      image: 'https://images.pexels.com/photos/3806686/pexels-photo-3806686.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop',
+      features: ['New Construction', 'Resurfacing', 'Patching', 'Drainage Solutions'],
+      idealFor: 'Roadways, Parking lots, Industrial sites'
+    },
+    {
+      id: 'crack-sealing',
+      title: 'Asphalt Crack Sealing',
+      description: 'Prevent further damage and extend pavement life by sealing cracks effectively.',
+      priceRange: '$1 - $3/linear ft',
+      icon: Wrench,
+      image: 'https://images.pexels.com/photos/3806683/pexels-photo-3806683.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop',
+      features: ['Waterproofs Pavement', 'Prevents Potholes', 'Cost-Effective', 'Extends Pavement Life'],
+      idealFor: 'Parking lots, Driveways, Roads with minor cracks'
     }
   ];
 

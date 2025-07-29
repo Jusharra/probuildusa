@@ -121,16 +121,19 @@ const LeadIntake: React.FC = () => {
 
   const projectTypes = [
     { id: 'luxury-remodel', name: 'Luxury Home Remodeling', icon: '🏠' },
-    { id: 'adu', name: 'Accessory Dwelling Unit (ADU)', icon: '🏘️' },
-    { id: 'commercial', name: 'Commercial Build-Out', icon: '🏢' },
-    { id: 'outdoor-living', name: 'Luxury Outdoor Living', icon: '🌳' },
-    { id: 'custom-home', name: 'Custom Home Building', icon: '🏗️' },
-    { id: 'restoration', name: 'Disaster Restoration', icon: '🔧' },
-    { id: 'solar-smart', name: 'Solar + Smart Home', icon: '⚡' },
-    { id: 'multifamily', name: 'Multifamily Conversion', icon: '🏪' },
-    { id: 'foundation', name: 'Foundation Repair', icon: '🔨' },
-    { id: 'medical', name: 'Medical Facility', icon: '🏥' }
+    { id: 'line-striping', name: 'Line Striping', icon: '📏' },
+    { id: 'power-washing', name: 'Power Washing', icon: '💧' },
+    { id: 'window-cleaning', name: 'Window Cleaning', icon: '🪟' },
+    { id: 'seal-coating', name: 'Seal Coating', icon: '🛡️' },
+    { id: 'paving', name: 'Paving', icon: '🛣️' },
+    { id: 'crack-sealing', name: 'Crack Sealing', icon: '🩹' },
   ];
+
+  // Filter projectTypes to only include the desired services
+  const desiredServiceIds = ['line-striping', 'power-washing', 'window-cleaning', 'seal-coating', 'paving', 'crack-sealing'];
+  const filteredProjectTypes = projectTypes.filter(type => desiredServiceIds.includes(type.id));
+
+
 
   const renderStep = () => {
     switch (currentStep) {
@@ -143,7 +146,7 @@ const LeadIntake: React.FC = () => {
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              {projectTypes.map((type) => (
+              {filteredProjectTypes.map((type) => (
                 <button
                   key={type.id}
                   onClick={() => setFormData({...formData, projectType: type.id})}

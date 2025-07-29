@@ -61,7 +61,10 @@ const ContractorDirectory: React.FC = () => {
   const specialties = [
     'Line Striping',
     'Power Washing',
-    'Window Cleaning'
+    'Window Cleaning',
+    'Seal Coating',
+    'Paving',
+    'Crack Sealing'
   ];
 
   const locations = [

@@ -123,6 +123,121 @@ const ServicePage: React.FC = () => {
         'https://images.pexels.com/photos/305568/pexels-photo-305568.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop',
         'https://images.pexels.com/photos/2102587/pexels-photo-2102587.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop'
       ]
+    },
+    'seal-coating': {
+      title: 'Asphalt Seal Coating',
+      subtitle: 'Protect and Preserve Your Pavement Investment',
+      priceRange: '$0.50 - $1.50/sq ft',
+      timeline: '1-2 days',
+      description: 'Seal coating is a protective layer applied to asphalt pavements to shield them from UV rays, water penetration, and chemical spills. This process not only extends the lifespan of your asphalt but also restores its rich black appearance, enhancing curb appeal and preventing costly repairs down the line.',
+      heroImage: 'https://images.pexels.com/photos/3806680/pexels-photo-3806680.jpeg?auto=compress&cs=tinysrgb&w=1920&h=800&fit=crop',
+      included: [
+        'Thorough surface cleaning and preparation',
+        'Application of high-quality asphalt sealer',
+        'Protection against oxidation and water damage',
+        'Restoration of pavement color and appearance',
+        'Extension of pavement lifespan',
+        'Commercial and residential applications',
+        'Traffic control during application'
+      ],
+      idealFor: [
+        'Parking lots and commercial properties',
+        'Residential driveways',
+        'HOA communities and apartment complexes',
+        'Any asphalt surface showing signs of aging or fading',
+        'Preventative maintenance programs'
+      ],
+      process: [
+        'Initial inspection and surface assessment',
+        'Cleaning of debris, dirt, and oil stains',
+        'Minor crack filling (if necessary)',
+        'Application of one or two coats of sealer',
+        'Curing time and re-opening for traffic',
+        'Final quality check'
+      ],
+      gallery: [
+        'https://images.pexels.com/photos/3806680/pexels-photo-3806680.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop',
+        'https://images.pexels.com/photos/3806681/pexels-photo-3806681.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop',
+        'https://images.pexels.com/photos/3806682/pexels-photo-3806682.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop',
+        'https://images.pexels.com/photos/3806684/pexels-photo-3806684.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop'
+      ]
+    },
+    'paving': {
+      title: 'Asphalt Paving & Repair',
+      subtitle: 'Durable Pavement Solutions for New and Existing Surfaces',
+      priceRange: '$2 - $7/sq ft',
+      timeline: '2-7 days',
+      description: 'From new asphalt installations to comprehensive repairs and overlays, our paving experts deliver smooth, durable, and long-lasting surfaces. We handle everything from sub-base preparation to final compaction, ensuring your pavement can withstand heavy traffic and harsh weather conditions for years to come.',
+      heroImage: 'https://images.pexels.com/photos/3806686/pexels-photo-3806686.jpeg?auto=compress&cs=tinysrgb&w=1920&h=800&fit=crop',
+      included: [
+        'New asphalt construction',
+        'Asphalt overlays and resurfacing',
+        'Pothole repair and patching',
+        'Asphalt removal and replacement',
+        'Drainage correction and grading',
+        'Speed bump and bollard installation',
+        'Commercial and industrial paving',
+        'Roadway and parking lot construction'
+      ],
+      idealFor: [
+        'New commercial developments',
+        'Existing parking lots needing major repair',
+        'Industrial facilities with heavy vehicle traffic',
+        'Roadways and private drives',
+        'Property managers seeking long-term solutions'
+      ],
+      process: [
+        'Site evaluation and project planning',
+        'Excavation and sub-base preparation',
+        'Installation of drainage systems (if needed)',
+        'Application of asphalt layers',
+        'Compaction and finishing',
+        'Curing and final inspection'
+      ],
+      gallery: [
+        'https://images.pexels.com/photos/3806686/pexels-photo-3806686.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop',
+        'https://images.pexels.com/photos/3806687/pexels-photo-3806687.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop',
+        'https://images.pexels.com/photos/3806688/pexels-photo-3806688.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop',
+        'https://images.pexels.com/photos/3806689/pexels-photo-3806689.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop'
+      ]
+    },
+    'crack-sealing': {
+      title: 'Asphalt Crack Sealing',
+      subtitle: 'Prevent Pavement Deterioration with Expert Crack Sealing',
+      priceRange: '$1 - $3/linear ft',
+      timeline: '1 day',
+      description: 'Crack sealing is a crucial preventative maintenance step that stops water penetration into the asphalt sub-base, preventing potholes and further deterioration. Our team uses hot-applied, rubberized crack sealant to effectively fill and seal cracks, extending the life of your pavement and saving you money on major repairs.',
+      heroImage: 'https://images.pexels.com/photos/3806683/pexels-photo-3806683.jpeg?auto=compress&cs=tinysrgb&w=1920&h=800&fit=crop',
+      included: [
+        'Cleaning and preparation of cracks',
+        'Hot-applied rubberized crack sealant',
+        'Prevention of water infiltration',
+        'Arrest further pavement deterioration',
+        'Cost-effective maintenance solution',
+        'Suitable for various crack sizes',
+        'Enhance pavement appearance'
+      ],
+      idealFor: [
+        'Parking lots with minor to moderate cracking',
+        'Residential driveways with visible cracks',
+        'Roadways and pathways showing early signs of wear',
+        'Asphalt surfaces needing preventative maintenance',
+        'Properties looking to extend pavement life'
+      ],
+      process: [
+        'Pavement inspection to identify cracks',
+        'Cleaning cracks of debris and vegetation',
+        'Heating and preparing crack sealant',
+        'Precision application of sealant into cracks',
+        'Allowing sealant to cool and cure',
+        'Final inspection and site cleanup'
+      ],
+      gallery: [
+        'https://images.pexels.com/photos/3806683/pexels-photo-3806683.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop',
+        'https://images.pexels.com/photos/3806685/pexels-photo-3806685.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop',
+        'https://images.pexels.com/photos/3806690/pexels-photo-3806690.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop',
+        'https://images.pexels.com/photos/3806691/pexels-photo-3806691.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop'
+      ]
     }
   };
 
