@@ -59,16 +59,9 @@ const ContractorDirectory: React.FC = () => {
   const regularContractors = filteredContractors.filter(c => !c.featured_profile);
 
   const specialties = [
-    'Luxury Remodeling',
-    'ADUs',
-    'Commercial Build-Outs',
-    'Custom Homes',
-    'Outdoor Living',
-    'Solar + Smart Home',
-    'Foundation Repairs',
-    'Medical Facilities',
-    'Restoration',
-    'Multifamily'
+    'Line Striping',
+    'Power Washing',
+    'Window Cleaning'
   ];
 
   const locations = [

@@ -136,10 +136,10 @@ const WhyPartner: React.FC = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <h1 className="text-4xl md:text-6xl font-bold mb-6 leading-tight">
-              Partner With <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-400 to-amber-600">ProBuild Concierge</span>
+              Partner With <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-400 to-amber-600">Service Pro Network</span>
             </h1>
             <p className="text-xl md:text-2xl text-slate-300 max-w-4xl mx-auto leading-relaxed">
-              Join our exclusive network of premium contractors and get access to high-ticket construction leads that others can't reach.
+              Join our exclusive network of professional service providers and get access to quality leads that others can't reach.
             </p>
           </div>
 

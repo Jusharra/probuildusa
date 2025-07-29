@@ -5,104 +5,34 @@ import { ArrowRight, Home, Building2, TreePine, Wrench, Zap, Users, Hammer, Stet
 const Services: React.FC = () => {
   const services = [
     {
-      id: 'luxury-home-remodeling',
-      title: 'Luxury Home Remodeling',
-      description: 'Transform your home with premium finishes and expert craftsmanship',
-      priceRange: '$50K - $500K+',
+      id: 'line-striping',
+      title: 'Line Striping Services',
+      description: 'Professional parking lot striping, roadway markings, and ADA compliance',
+      priceRange: '$500 - $5K+',
       icon: Home,
-      image: 'https://images.pexels.com/photos/1643383/pexels-photo-1643383.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop',
-      features: ['Custom Design', 'Premium Materials', 'Project Management', 'Licensed Teams'],
-      idealFor: 'Luxury homeowners, High-end properties'
+      image: 'https://images.pexels.com/photos/2199293/pexels-photo-2199293.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop',
+      features: ['ADA Compliance', 'Durable Paint', 'Precise Layout', 'Fast Service'],
+      idealFor: 'Commercial properties, Shopping centers, Schools'
     },
     {
-      id: 'accessory-dwelling-units',
-      title: 'Accessory Dwelling Units (ADUs)',
-      description: 'Add value with custom ADUs, granny flats, and rental units',
-      priceRange: '$75K - $300K',
+      id: 'power-washing',
+      title: 'Power Washing Services',
+      description: 'Deep cleaning for buildings, driveways, sidewalks, and outdoor surfaces',
+      priceRange: '$150 - $2K+',
       icon: Building2,
-      image: 'https://images.pexels.com/photos/323780/pexels-photo-323780.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop',
-      features: ['Permit Handling', 'Design Build', 'Utility Connections', 'Rental Ready'],
-      idealFor: 'Property investors, Multi-generational families'
-    },
-    {
-      id: 'commercial-build-outs',
-      title: 'Commercial Build-Outs',
-      description: 'Professional tenant improvements and commercial renovations',
-      priceRange: '$25K - $1M+',
-      icon: Building2,
-      image: 'https://images.pexels.com/photos/3184291/pexels-photo-3184291.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop',
-      features: ['Fast Track', 'ADA Compliance', 'MEP Coordination', 'Minimal Downtime'],
-      idealFor: 'Business owners, Commercial investors'
-    },
-    {
-      id: 'luxury-outdoor-living',
-      title: 'Luxury Outdoor Living',
-      description: 'Pools, outdoor kitchens, patios, and complete outdoor spaces',
-      priceRange: '$40K - $400K',
-      icon: TreePine,
-      image: 'https://images.pexels.com/photos/1029599/pexels-photo-1029599.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop',
-      features: ['Pool Installation', 'Outdoor Kitchens', 'Landscaping', 'Entertainment Areas'],
-      idealFor: 'Luxury homeowners, Entertainment enthusiasts'
-    },
-    {
-      id: 'custom-home-building',
-      title: 'Custom Home Building',
-      description: 'Ground-up custom homes built to your exact specifications',
-      priceRange: '$200K - $2M+',
-      icon: Home,
-      image: 'https://images.pexels.com/photos/323772/pexels-photo-323772.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop',
-      features: ['Architectural Design', 'Custom Features', 'Premium Materials', 'Full Service'],
-      idealFor: 'Custom home buyers, Land owners'
-    },
-    {
-      id: 'disaster-restoration',
-      title: 'Disaster Restoration',
-      description: 'Insurance rebuilds and emergency restoration services',
-      priceRange: '$15K - $500K',
-      icon: Shield,
       image: 'https://images.pexels.com/photos/5691622/pexels-photo-5691622.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop',
-      features: ['Insurance Claims', 'Emergency Response', 'Full Restoration', '24/7 Service'],
-      idealFor: 'Insurance claims, Emergency situations'
+      features: ['Eco-Friendly Solutions', 'High-Pressure Equipment', 'Surface Protection', 'Quick Results'],
+      idealFor: 'Homeowners, Property managers, Business owners'
     },
     {
-      id: 'solar-smart-home',
-      title: 'Solar + Smart Home Retrofits',
-      description: 'Energy efficiency upgrades and smart home technology',
-      priceRange: '$20K - $150K',
-      icon: Zap,
-      image: 'https://images.pexels.com/photos/4254165/pexels-photo-4254165.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop',
-      features: ['Solar Installation', 'Smart Automation', 'Energy Audits', 'Financing Available'],
-      idealFor: 'Eco-conscious homeowners, Tech enthusiasts'
-    },
-    {
-      id: 'multifamily-conversions',
-      title: 'Multifamily Conversions',
-      description: 'Convert properties into profitable rental units',
-      priceRange: '$50K - $800K',
-      icon: Users,
-      image: 'https://images.pexels.com/photos/323775/pexels-photo-323775.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop',
-      features: ['Unit Conversion', 'Zoning Compliance', 'Rental Optimization', 'ROI Analysis'],
-      idealFor: 'Property investors, Real estate developers'
-    },
-    {
-      id: 'foundation-repairs',
-      title: 'Foundation & Structural Repairs',
-      description: 'Expert foundation and structural engineering solutions',
-      priceRange: '$10K - $200K',
-      icon: Hammer,
-      image: 'https://images.pexels.com/photos/5691479/pexels-photo-5691479.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop',
-      features: ['Engineering Reports', 'Structural Repairs', 'Foundation Work', 'Waterproofing'],
-      idealFor: 'Structural issues, Foundation problems'
-    },
-    {
-      id: 'healthcare-facilities',
-      title: 'Healthcare & Senior Living Facilities',
-      description: 'Specialized construction for outpatient care, behavioral health, and senior living',
-      priceRange: '$50K - $2M+',
-      icon: Stethoscope,
-      image: 'https://images.pexels.com/photos/305568/pexels-photo-305568.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop',
-      features: ['Healthcare Code Compliance', 'Specialized Equipment', 'Infection Control', 'ADA Accessibility'],
-      idealFor: 'Healthcare providers, Senior living operators, Behavioral health clinics'
+      id: 'window-cleaning',
+      title: 'Window Cleaning Services',
+      description: 'Crystal clear windows for residential and commercial properties',
+      priceRange: '$100 - $1K+',
+      icon: TreePine,
+      image: 'https://images.pexels.com/photos/1571460/pexels-photo-1571460.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop',
+      features: ['Streak-Free Results', 'Interior & Exterior', 'Screen Cleaning', 'Regular Maintenance'],
+      idealFor: 'Office buildings, Retail stores, Homeowners'
     }
   ];
 
@@ -111,10 +41,10 @@ const Services: React.FC = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl font-bold mb-6">
-            High-Ticket <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-400 to-amber-600">Construction Services</span>
+            Professional <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-400 to-amber-600">Service Solutions</span>
           </h2>
           <p className="text-xl text-slate-300 max-w-3xl mx-auto leading-relaxed">
-            From luxury remodels to custom builds, we connect you with premium contractors who specialize in high-value projects.
+            From precise line striping to sparkling clean windows, we connect you with expert service providers who deliver exceptional results.
           </p>
         </div>
 
@@ -189,7 +119,7 @@ const Services: React.FC = () => {
             to="/get-started"
             className="inline-flex items-center space-x-2 bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-600 hover:to-amber-700 text-slate-900 px-8 py-4 rounded-xl font-bold text-lg transition-all duration-300 transform hover:scale-105"
           >
-            <span>Start Your Project Today</span>
+            <span>Get Your Service Quote Today</span>
             <ArrowRight className="w-5 h-5" />
           </Link>
         </div>

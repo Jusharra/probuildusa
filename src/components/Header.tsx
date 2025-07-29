@@ -9,11 +9,12 @@ const Header: React.FC = () => {
   const { user, profile, signOut } = useAuth();
 
   const navigation = [
+    { name: 'Line Striping', href: '/services/line-striping' },
+    { name: 'Power Washing', href: '/services/power-washing' },
+    { name: 'Window Cleaning', href: '/services/window-cleaning' },
     { name: 'Find Contractors', href: '/contractors' },
-    { name: 'Services', href: '#services' },
     { name: 'How It Works', href: '#how-it-works' },
     { name: 'Why Choose Us', href: '#why-us' },
-    { name: 'Financing', href: '/financing' },
     { name: 'Partner With Us', href: '/why-partner' },
   ];
 

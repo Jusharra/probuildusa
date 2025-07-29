@@ -4,21 +4,13 @@ import { Phone, Mail, MapPin, Shield, Star, Award } from 'lucide-react';
 
 const Footer: React.FC = () => {
   const services = [
-    'Luxury Home Remodeling',
-    'Accessory Dwelling Units',
-    'Commercial Build-Outs',
-    'Luxury Outdoor Living',
-    'Custom Home Building',
-    'Disaster Restoration',
-    'Solar + Smart Home',
-    'Multifamily Conversions',
-    'Foundation Repairs',
-    'Medical Facilities',
+    'Line Striping',
+    'Power Washing',
+    'Window Cleaning',
   ];
 
   const quickLinks = [
     { name: 'Find Contractors', href: '/contractors' },
-    { name: 'Financing Options', href: '/financing' },
     { name: 'Partner With Us', href: '/why-partner' },
     { name: 'Get Started', href: '/get-started' },
   ];
@@ -35,7 +27,7 @@ const Footer: React.FC = () => {
               <span className="text-xl font-bold">ProBuild Concierge</span>
             </Link>
             <p className="text-slate-400 mb-6 leading-relaxed">
-              High-ticket construction experts on-demand. We connect property owners with qualified contractors for premium projects.
+              Professional line striping, power washing, and window cleaning experts on-demand. We connect property owners with qualified contractors for essential maintenance services.
             </p>
             <div className="flex items-center space-x-4 text-slate-400">
               <div className="flex items-center space-x-2">

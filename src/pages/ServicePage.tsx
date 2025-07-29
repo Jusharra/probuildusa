@@ -400,7 +400,7 @@ const ServicePage: React.FC = () => {
     }
   };
 
-  const currentService = serviceData[service as keyof typeof serviceData] || serviceData['luxury-home-remodeling'];
+  const currentService = serviceData[service as keyof typeof serviceData] || serviceData['line-striping'];
 
   return (
     <div className="min-h-screen bg-slate-900">
