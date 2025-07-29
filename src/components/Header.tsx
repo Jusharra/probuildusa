@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Menu, X, Phone, MessageSquare, User, LogOut, Settings, BarChart3, LogIn, CreditCard } from 'lucide-react';
 import { useAuth } from '../contexts/AuthContext';
@@ -6,12 +6,11 @@ import { useAuth } from '../contexts/AuthContext';
 const Header: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const location = useLocation();
+  const [isServicesDropdownOpen, setIsServicesDropdownOpen] = useState(false);
+  const servicesDropdownRef = useRef<HTMLDivElement>(null);
   const { user, profile, signOut } = useAuth();
 
-  const navigation = [
-    { name: 'Line Striping', href: '/services/line-striping' },
-    { name: 'Power Washing', href: '/services/power-washing' },
-    { name: 'Window Cleaning', href: '/services/window-cleaning' },
+  const mainNavigation = [
     { name: 'Find Contractors', href: '/contractors' },
     { name: 'How It Works', href: '#how-it-works' },
     { name: 'Why Choose Us', href: '#why-us' },
@@ -36,6 +35,22 @@ const Header: React.FC = () => {
     return profile.role === 'admin' ? 'Admin Portal' : 'Partner Portal';
   };
 
+  const services = [
+    { name: 'Line Striping', href: '/services/line-striping' },
+    { name: 'Power Washing', href: '/services/power-washing' },
+    { name: 'Window Cleaning', href: '/services/window-cleaning' },
+  ];
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (servicesDropdownRef.current && !servicesDropdownRef.current.contains(event.target as Node)) {
+        setIsServicesDropdownOpen(false);
+      }
+    };
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, [servicesDropdownRef]);
+
   return (
     <header className="bg-slate-900/95 backdrop-blur-sm border-b border-slate-800 sticky top-0 z-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -47,9 +62,35 @@ const Header: React.FC = () => {
             <span className="text-xl font-bold">ProBuild Concierge</span>
           </Link>
 
-          <nav className="hidden md:flex space-x-8">
-            {navigation.map((item) => (
-              item.href.startsWith('#') ? (
+          <nav className="hidden md:flex items-center space-x-8">
+            {/* Services Dropdown */}
+            <div className="relative group" ref={servicesDropdownRef}>
+              <button
+                className="flex items-center space-x-2 text-slate-300 hover:text-amber-400 transition-colors duration-200"
+                onClick={() => setIsServicesDropdownOpen(!isServicesDropdownOpen)}
+              >
+                <span>Services</span>
+                <ChevronDown className={`w-4 h-4 transition-transform ${isServicesDropdownOpen ? 'rotate-180' : ''}`} />
+              </button>
+              {isServicesDropdownOpen && (
+                <div className="absolute left-0 mt-2 w-48 bg-slate-800 rounded-lg shadow-lg border border-slate-700 py-2 z-50">
+                  {services.map((serviceItem) => (
+                    <Link
+                      key={serviceItem.name}
+                      to={serviceItem.href}
+                      className="block px-4 py-2 text-sm text-slate-300 hover:bg-slate-700 transition-colors"
+                      onClick={() => setIsServicesDropdownOpen(false)}
+                    >
+                      {serviceItem.name}
+                    </Link>
+                  ))}
+                </div>
+              )}
+            </div>
+
+            {/* Main Navigation Items */}
+            {mainNavigation.map((item) => (
+              item.href.startsWith('#') ? ( // Check if it's an anchor link
                 <a
                   key={item.name}
                   href={item.href}
@@ -57,7 +98,7 @@ const Header: React.FC = () => {
                 >
                   {item.name}
                 </a>
-              ) : (
+              ) : ( // Regular react-router-dom Link
                 <Link
                   key={item.name}
                   to={item.href}
@@ -157,26 +198,46 @@ const Header: React.FC = () => {
 
         {isMenuOpen && (
           <div className="md:hidden py-4 border-t border-slate-800">
-            <nav className="space-y-4">
-              {navigation.map((item) => (
-                item.href.startsWith('#') ? (
-                  <a
-                    key={item.name}
-                    href={item.href}
-                    className="block text-slate-300 hover:text-amber-400 transition-colors"
-                    onClick={() => setIsMenuOpen(false)}
-                  >
-                    {item.name}
-                  </a>
-                ) : (
-                  <Link
-                    key={item.name}
-                    to={item.href}
-                    className="block text-slate-300 hover:text-amber-400 transition-colors"
-                    onClick={() => setIsMenuOpen(false)}
-                  >
-                    {item.name}
-                  </Link>
+            <nav className="space-y-4" ref={servicesDropdownRef}>
+              {/* Services Dropdown for Mobile */}
+              <div>
+                <button
+                  className="flex items-center justify-between w-full text-slate-300 hover:text-amber-400 transition-colors"
+                  onClick={() => setIsServicesDropdownOpen(!isServicesDropdownOpen)}
+                >
+                  <span>Services</span>
+                  <ChevronDown className={`w-4 h-4 transition-transform ${isServicesDropdownOpen ? 'rotate-180' : ''}`} />
+                </button>
+                {isServicesDropdownOpen && (
+                  <div className="pl-4 mt-2 space-y-2">
+                    {services.map((serviceItem) => (
+                      <Link
+                        key={serviceItem.name}
+                        to={serviceItem.href}
+                        className="block text-sm text-slate-300 hover:text-amber-400 transition-colors"
+                        onClick={() => {
+                          setIsServicesDropdownOpen(false);
+                          setIsMenuOpen(false);
+                        }}
+                      >
+                        {serviceItem.name}
+                      </Link>
+                    ))}
+                  </div>
+                )}
+              </div>
+
+              {/* Main Navigation Items for Mobile */}
+              {mainNavigation.map((item) => (
+                <Link
+                  key={item.name}
+                  to={item.href}
+                  className="block text-slate-300 hover:text-amber-400 transition-colors"
+                  onClick={() => setIsMenuOpen(false)} // Close mobile menu on click
+                >
+                  {item.name}
+                </Link>
+
                 )
               ))}
               
