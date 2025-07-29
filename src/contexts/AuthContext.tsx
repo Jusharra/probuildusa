@@ -151,35 +151,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         // Retry recursively
         return await loadProfile(userId, retryCount + 1);
       }
-      
-      // If still no profile after retries, create one manually as fallback
-      if (!fetchedProfile) {
-        console.log('🚨 [AuthContext] Profile still not found after retries, creating manually...');
-        
-        const { data: { user } } = await supabase.auth.getUser();
-        if (user && user.email) {
-          const userData = user.user_metadata || {};
-          
-          try {
-            fetchedProfile = await AuthService.createProfile({
-              id: user.id,
-              email: user.email,
-              full_name: userData.full_name || '',
-              role: (userData.role as 'admin' | 'professional') || 'professional'
-            });
-            console.log('✅ [AuthContext] Manual profile creation successful');
-          } catch (createError: any) {
-            console.error('💥 [AuthContext] Failed to create profile manually:', createError);
-            
-            // If it's a unique violation, the profile might have been created by trigger
-            if (createError.code === '23505') {
-              console.log('🔄 [AuthContext] Profile exists, trying to fetch again...');
-              fetchedProfile = await AuthService.getCurrentProfile();
-            }
-          }
-        }
-      }
-      
+
       if (fetchedProfile) {
         setProfile(fetchedProfile);
         const profileEndTime = performance.now();
