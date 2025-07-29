@@ -40,7 +40,7 @@ const Services: React.FC = () => {
       description: 'Protect and extend the life of your asphalt surfaces with professional seal coating.',
       priceRange: '$0.50 - $1.50/sq ft',
       icon: Shield,
-      image: 'https://images.pexels.com/photos/3806680/pexels-photo-3806680.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop',
+      image: 'https://images.pexels.com/photos/3806249/pexels-photo-3806249.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop',
       features: ['UV Protection', 'Water Resistance', 'Enhanced Appearance', 'Crack Prevention'],
       idealFor: 'Parking lots, Driveways, Commercial properties'
     },
@@ -50,7 +50,7 @@ const Services: React.FC = () => {
       description: 'Expert asphalt paving for new installations, overlays, and comprehensive repairs.',
       priceRange: '$2 - $7/sq ft',
       icon: Hammer,
-      image: 'https://images.pexels.com/photos/3806686/pexels-photo-3806686.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop',
+      image: 'https://images.pexels.com/photos/3806242/pexels-photo-3806242.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop',
       features: ['New Construction', 'Resurfacing', 'Patching', 'Drainage Solutions'],
       idealFor: 'Roadways, Parking lots, Industrial sites'
     },
@@ -60,7 +60,7 @@ const Services: React.FC = () => {
       description: 'Prevent further damage and extend pavement life by sealing cracks effectively.',
       priceRange: '$1 - $3/linear ft',
       icon: Wrench,
-      image: 'https://images.pexels.com/photos/3806683/pexels-photo-3806683.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop',
+      image: 'https://images.pexels.com/photos/3806245/pexels-photo-3806245.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop',
       features: ['Waterproofs Pavement', 'Prevents Potholes', 'Cost-Effective', 'Extends Pavement Life'],
       idealFor: 'Parking lots, Driveways, Roads with minor cracks'
     }

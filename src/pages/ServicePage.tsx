@@ -130,7 +130,7 @@ const ServicePage: React.FC = () => {
       priceRange: '$0.50 - $1.50/sq ft',
       timeline: '1-2 days',
       description: 'Seal coating is a protective layer applied to asphalt pavements to shield them from UV rays, water penetration, and chemical spills. This process not only extends the lifespan of your asphalt but also restores its rich black appearance, enhancing curb appeal and preventing costly repairs down the line.',
-      heroImage: 'https://images.pexels.com/photos/3806680/pexels-photo-3806680.jpeg?auto=compress&cs=tinysrgb&w=1920&h=800&fit=crop',
+      heroImage: 'https://images.pexels.com/photos/3806249/pexels-photo-3806249.jpeg?auto=compress&cs=tinysrgb&w=1920&h=800&fit=crop',
       included: [
         'Thorough surface cleaning and preparation',
         'Application of high-quality asphalt sealer',
@@ -156,10 +156,10 @@ const ServicePage: React.FC = () => {
         'Final quality check'
       ],
       gallery: [
-        'https://images.pexels.com/photos/3806680/pexels-photo-3806680.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop',
-        'https://images.pexels.com/photos/3806681/pexels-photo-3806681.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop',
-        'https://images.pexels.com/photos/3806682/pexels-photo-3806682.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop',
-        'https://images.pexels.com/photos/3806684/pexels-photo-3806684.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop'
+        'https://images.pexels.com/photos/3806249/pexels-photo-3806249.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop',
+        'https://images.pexels.com/photos/3806248/pexels-photo-3806248.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop',
+        'https://images.pexels.com/photos/3806247/pexels-photo-3806247.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop',
+        'https://images.pexels.com/photos/3806246/pexels-photo-3806246.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop'
       ]
     },
     'paving': {
@@ -168,7 +168,7 @@ const ServicePage: React.FC = () => {
       priceRange: '$2 - $7/sq ft',
       timeline: '2-7 days',
       description: 'From new asphalt installations to comprehensive repairs and overlays, our paving experts deliver smooth, durable, and long-lasting surfaces. We handle everything from sub-base preparation to final compaction, ensuring your pavement can withstand heavy traffic and harsh weather conditions for years to come.',
-      heroImage: 'https://images.pexels.com/photos/3806686/pexels-photo-3806686.jpeg?auto=compress&cs=tinysrgb&w=1920&h=800&fit=crop',
+      heroImage: 'https://images.pexels.com/photos/3806242/pexels-photo-3806242.jpeg?auto=compress&cs=tinysrgb&w=1920&h=800&fit=crop',
       included: [
         'New asphalt construction',
         'Asphalt overlays and resurfacing',
@@ -195,10 +195,10 @@ const ServicePage: React.FC = () => {
         'Curing and final inspection'
       ],
       gallery: [
-        'https://images.pexels.com/photos/3806686/pexels-photo-3806686.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop',
-        'https://images.pexels.com/photos/3806687/pexels-photo-3806687.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop',
-        'https://images.pexels.com/photos/3806688/pexels-photo-3806688.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop',
-        'https://images.pexels.com/photos/3806689/pexels-photo-3806689.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop'
+        'https://images.pexels.com/photos/3806242/pexels-photo-3806242.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop',
+        'https://images.pexels.com/photos/3806241/pexels-photo-3806241.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop',
+        'https://images.pexels.com/photos/3806240/pexels-photo-3806240.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop',
+        'https://images.pexels.com/photos/3806239/pexels-photo-3806239.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop'
       ]
     },
     'crack-sealing': {
@@ -207,7 +207,7 @@ const ServicePage: React.FC = () => {
       priceRange: '$1 - $3/linear ft',
       timeline: '1 day',
       description: 'Crack sealing is a crucial preventative maintenance step that stops water penetration into the asphalt sub-base, preventing potholes and further deterioration. Our team uses hot-applied, rubberized crack sealant to effectively fill and seal cracks, extending the life of your pavement and saving you money on major repairs.',
-      heroImage: 'https://images.pexels.com/photos/3806683/pexels-photo-3806683.jpeg?auto=compress&cs=tinysrgb&w=1920&h=800&fit=crop',
+      heroImage: 'https://images.pexels.com/photos/3806245/pexels-photo-3806245.jpeg?auto=compress&cs=tinysrgb&w=1920&h=800&fit=crop',
       included: [
         'Cleaning and preparation of cracks',
         'Hot-applied rubberized crack sealant',
@@ -233,10 +233,10 @@ const ServicePage: React.FC = () => {
         'Final inspection and site cleanup'
       ],
       gallery: [
-        'https://images.pexels.com/photos/3806683/pexels-photo-3806683.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop',
-        'https://images.pexels.com/photos/3806685/pexels-photo-3806685.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop',
-        'https://images.pexels.com/photos/3806690/pexels-photo-3806690.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop',
-        'https://images.pexels.com/photos/3806691/pexels-photo-3806691.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop'
+        'https://images.pexels.com/photos/3806245/pexels-photo-3806245.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop',
+        'https://images.pexels.com/photos/3806244/pexels-photo-3806244.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop',
+        'https://images.pexels.com/photos/3806243/pexels-photo-3806243.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop',
+        'https://images.pexels.com/photos/3806238/pexels-photo-3806238.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop'
       ]
     }
   };
