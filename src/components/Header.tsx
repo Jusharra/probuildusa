@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Menu, X, Phone, MessageSquare, User, LogOut, Settings, BarChart3, LogIn, CreditCard } from 'lucide-react';
+import { Menu, X, Phone, MessageSquare, User, LogOut, Settings, BarChart3, LogIn, CreditCard, ChevronDown } from 'lucide-react';
 import { useAuth } from '../contexts/AuthContext';
 
 const Header: React.FC = () => {
@@ -237,8 +237,6 @@ const Header: React.FC = () => {
                 >
                   {item.name}
                 </Link>
-
-                )
               ))}
               
               <div className="pt-4 space-y-3 border-t border-slate-800">
