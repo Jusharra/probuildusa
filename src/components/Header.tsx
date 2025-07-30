@@ -12,8 +12,8 @@ const Header: React.FC = () => {
 
   const mainNavigation = [
     { name: 'Find Contractors', href: '/contractors' },
-    { name: 'How It Works', href: '#how-it-works' },
-    { name: 'Why Choose Us', href: '#why-us' },
+    { name: 'How It Works', href: '/how-it-works' },
+    { name: 'Why Choose Us', href: '/why-choose-us' },
     { name: 'Partner With Us', href: '/why-partner' },
   ];
 
@@ -96,23 +96,13 @@ const Header: React.FC = () => {
 
             {/* Main Navigation Items */}
             {mainNavigation.map((item) => (
-              item.href.startsWith('#') ? ( // Check if it's an anchor link
-                <a
-                  key={item.name}
-                  href={item.href}
-                  className="text-slate-300 hover:text-amber-400 transition-colors duration-200"
-                >
-                  {item.name}
-                </a>
-              ) : ( // Regular react-router-dom Link
-                <Link
-                  key={item.name}
-                  to={item.href}
-                  className="text-slate-300 hover:text-amber-400 transition-colors duration-200"
-                >
-                  {item.name}
-                </Link>
-              )
+              <Link
+                key={item.name}
+                to={item.href}
+                className="text-slate-300 hover:text-amber-400 transition-colors duration-200"
+              >
+                {item.name}
+              </Link>
             ))}
           </nav>
 
@@ -239,7 +229,7 @@ const Header: React.FC = () => {
                 <Link
                   key={item.name}
                   to={item.href}
-                  className="block text-slate-300 hover:text-amber-400 transition-colors" // Close main mobile menu
+                  className="block text-slate-300 hover:text-amber-400 transition-colors"
                   onClick={() => setIsMenuOpen(false)} // Close mobile menu on click
                 >
                   {item.name}

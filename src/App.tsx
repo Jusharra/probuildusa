@@ -21,6 +21,8 @@ import PavementMaintenanceGuidance from './pages/PavementMaintenanceGuidance';
 import FAQs from './pages/FAQs';
 import ParkingLotStripingGuide from './pages/ParkingLotStripingGuide';
 import CancelPage from './pages/CancelPage';
+import HowItWorksPage from './pages/HowItWorksPage';
+import WhyChooseUsPage from './pages/WhyChooseUsPage';
 
 // Protected Route Component
 const ProtectedRoute: React.FC<{
@@ -103,6 +105,8 @@ function AppContent() {
         <Route path="/faqs" element={<PublicRoute><FAQs /></PublicRoute>} />
         <Route path="/parking-lot-striping-guide" element={<PublicRoute><ParkingLotStripingGuide /></PublicRoute>} />
         <Route path="/pricing" element={<PublicRoute><PricingPage /></PublicRoute>} />
+        <Route path="/how-it-works" element={<PublicRoute><HowItWorksPage /></PublicRoute>} />
+        <Route path="/why-choose-us" element={<PublicRoute><WhyChooseUsPage /></PublicRoute>} />
         
         {/* Payment Routes */}
         <Route path="/success" element={<PublicRoute hideLayout><SuccessPage /></PublicRoute>} />
