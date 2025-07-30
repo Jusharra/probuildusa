@@ -31,6 +31,9 @@ function corsResponse(body: string | object | null, status = 200) {
       'Content-Type': 'application/json',
     },
   });
+  amount?: number; // Amount in cents for dynamic payments
+  currency?: string; // Currency code (e.g., 'usd')
+  leadId?: string; // Lead ID to associate with the payment
 }
 
 Deno.serve(async (req) => {
@@ -43,21 +46,38 @@ Deno.serve(async (req) => {
       return corsResponse({ error: 'Method not allowed' }, 405);
     }
 
-    const { price_id, success_url, cancel_url, mode } = await req.json();
+    const { price_id, success_url, cancel_url, mode, amount, currency, lead_id } = await req.json();
 
-    const error = validateParameters(
-      { price_id, success_url, cancel_url, mode },
-      {
-        cancel_url: 'string',
-        price_id: 'string',
-        success_url: 'string',
-        mode: { values: ['payment', 'subscription'] },
-      },
-    );
-
-    if (error) {
-      return corsResponse({ error }, 400);
+    // For dynamic payments, we need amount and currency instead of price_id
+    if (amount && currency) {
+      const error = validateParameters(
+        { success_url, cancel_url, mode, amount, currency },
+        {
+          cancel_url: 'string',
+          success_url: 'string',
+          mode: { values: ['payment', 'subscription'] },
+          amount: 'number',
+          currency: 'string',
+        },
+      );
+      if (error) {
+        return corsResponse({ error }, 400);
+      }
+    } else {
+      const error = validateParameters(
+        { price_id, success_url, cancel_url, mode },
+        {
+          cancel_url: 'string',
+          price_id: 'string',
+          success_url: 'string',
+          mode: { values: ['payment', 'subscription'] },
+        },
+      );
+      if (error) {
+        return corsResponse({ error }, 400);
+      }
     }
+
 
     const authHeader = req.headers.get('Authorization')!;
     const token = authHeader.replace('Bearer ', '');
@@ -177,20 +197,47 @@ Deno.serve(async (req) => {
       }
     }
 
-    // create Checkout Session
-    const session = await stripe.checkout.sessions.create({
+    // Create Checkout Session with dynamic or static pricing
+    const sessionConfig: Stripe.Checkout.SessionCreateParams = {
       customer: customerId,
       payment_method_types: ['card'],
-      line_items: [
+      mode,
+      success_url,
+      cancel_url,
+    };
+
+    // Add client_reference_id if lead_id is provided
+    if (lead_id) {
+      sessionConfig.client_reference_id = lead_id;
+    }
+
+    // Configure line items based on whether we have dynamic pricing or a price_id
+    if (amount && currency) {
+      // Dynamic pricing for deposits
+      sessionConfig.line_items = [
+        {
+          price_data: {
+            currency: currency,
+            product_data: {
+              name: 'Service Deposit',
+              description: 'Deposit to secure your service booking and priority scheduling',
+            },
+            unit_amount: amount,
+          },
+          quantity: 1,
+        },
+      ];
+    } else {
+      // Static pricing using price_id
+      sessionConfig.line_items = [
         {
           price: price_id,
           quantity: 1,
         },
-      ],
-      mode,
-      success_url,
-      cancel_url,
-    });
+      ];
+    }
+
+    const session = await stripe.checkout.sessions.create(sessionConfig);
 
     console.log(`Created checkout session ${session.id} for customer ${customerId}`);
 
@@ -201,7 +248,7 @@ Deno.serve(async (req) => {
   }
 });
 
-type ExpectedType = 'string' | { values: string[] };
+type ExpectedType = 'string' | 'number' | { values: string[] };
 type Expectations<T> = { [K in keyof T]: ExpectedType };
 
 function validateParameters<T extends Record<string, any>>(values: T, expected: Expectations<T>): string | undefined {
@@ -215,6 +262,13 @@ function validateParameters<T extends Record<string, any>>(values: T, expected: 
       }
       if (typeof value !== 'string') {
         return `Expected parameter ${parameter} to be a string got ${JSON.stringify(value)}`;
+      }
+    } else if (expectation === 'number') {
+      if (value == null) {
+        return `Missing required parameter ${parameter}`;
+      }
+      if (typeof value !== 'number') {
+        return `Expected parameter ${parameter} to be a number got ${JSON.stringify(value)}`;
       }
     } else {
       if (!expectation.values.includes(value)) {

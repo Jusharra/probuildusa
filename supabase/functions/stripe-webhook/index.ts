@@ -31,7 +31,7 @@ Deno.serve(async (req) => {
       return new Response('No signature found', { status: 400 });
     }
 
-    // get the raw body
+  const { mode, payment_status, client_reference_id } = stripeData as Stripe.Checkout.Session;
     const body = await req.text();
 
     // verify the webhook signature
@@ -156,6 +156,40 @@ async function syncCustomerFromStripe(customerId: string) {
 
     // assumes that a customer can only have a single subscription
     const subscription = subscriptions.data[0];
+      // If this is a deposit payment (has client_reference_id which is our leadId)
+      if (client_reference_id) {
+        // Update the lead's deposit status
+        const { error: leadUpdateError } = await supabase
+          .from('leads')
+          .update({
+            deposit_status: 'paid',
+            deposit_amount: amount_total,
+          })
+          .eq('id', client_reference_id);
+
+        if (leadUpdateError) {
+          console.error('Error updating lead deposit status:', leadUpdateError);
+        } else {
+          console.info(`Successfully updated lead ${client_reference_id} deposit status to paid`);
+        }
+
+        // Record the deposit payment
+        const { error: paymentError } = await supabase.from('stripe_payments').insert({
+          user_id: null, // No user associated with deposit payments
+          type: 'deposit_fee',
+          amount: amount_total,
+          currency: currency,
+          stripe_invoice_id: checkout_session_id,
+          payment_status: 'paid',
+        });
+
+        if (paymentError) {
+          console.error('Error recording deposit payment:', paymentError);
+        } else {
+          console.info(`Successfully recorded deposit payment for lead ${client_reference_id}`);
+        }
+      }
+
 
     // store subscription state
     const { error: subError } = await supabase.from('stripe_subscriptions').upsert(
