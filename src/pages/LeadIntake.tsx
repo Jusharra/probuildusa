@@ -32,12 +32,13 @@ const LeadIntake: React.FC = () => {
     timeline: '',
     startDate: '',
     urgency: '',
-    permits: '',
+    propertyType: '',
+    projectMetrics: '',
     
     // Step 4: Project Details
-    projectSize: '',
-    currentCondition: '',
-    specialRequirements: '',
+    siteCondition: '',
+    specificNeeds: '',
+    frequency: '',
     inspirationImages: [],
     
     // Step 5: Contact Info
@@ -98,7 +99,7 @@ const LeadIntake: React.FC = () => {
         zip_code: formData.zip,
         budget: budgetNumber,
         timeline: formData.timeline,
-        description: formData.projectDescription,
+        description: `${formData.projectDescription}\n\nProperty Type: ${formData.propertyType}\nProject Metrics: ${formData.projectMetrics}\nSite Condition: ${formData.siteCondition}\nSpecific Needs: ${formData.specificNeeds}\nService Frequency: ${formData.frequency}`,
         source: source,
         status: 'new',
         assigned_contractor_id: contractorId || null
@@ -289,8 +290,8 @@ const LeadIntake: React.FC = () => {
         return (
           <div className="space-y-6">
             <div className="text-center mb-8">
-              <h2 className="text-3xl font-bold mb-4">Timeline & Project Details</h2>
-              <p className="text-slate-400">When would you like to start and how urgent is this project?</p>
+              <h2 className="text-3xl font-bold mb-4">Timeline & Property Details</h2>
+              <p className="text-slate-400">Tell us about your timeline and property specifics</p>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -307,15 +308,35 @@ const LeadIntake: React.FC = () => {
                 >
                   <option value="">Select timeline</option>
                   <option value="asap">ASAP</option>
-                  <option value="1-3months">1-3 months</option>
-                  <option value="3-6months">3-6 months</option>
-                  <option value="6-12months">6-12 months</option>
-                  <option value="planning">Just planning</option>
+                  <option value="this-week">This Week</option>
+                  <option value="this-month">This Month</option>
+                  <option value="next-month">Next Month</option>
+                  <option value="flexible">Flexible</option>
                 </select>
               </div>
 
               <div>
-                <label className="block text-sm font-semibold text-slate-300 mb-2">Preferred Start Date</label>
+                <label className="block text-sm font-semibold text-slate-300 mb-2">Property Type</label>
+                <select
+                  name="propertyType"
+                  value={formData.propertyType}
+                  onChange={handleInputChange}
+                  className="w-full bg-slate-700 border border-slate-600 rounded-lg px-4 py-3 text-white focus:ring-2 focus:ring-amber-400 focus:border-transparent transition-all"
+                >
+                  <option value="">Select property type</option>
+                  <option value="commercial">Commercial Property</option>
+                  <option value="industrial">Industrial Facility</option>
+                  <option value="retail">Retail Location</option>
+                  <option value="office">Office Building</option>
+                  <option value="residential">Residential Property</option>
+                  <option value="municipal">Municipal/Government</option>
+                  <option value="healthcare">Healthcare Facility</option>
+                  <option value="education">Educational Institution</option>
+                </select>
+              </div>
+
+              <div>
+                <label className="block text-sm font-semibold text-slate-300 mb-2">Preferred Start Date (Optional)</label>
                 <input
                   type="date"
                   name="startDate"
@@ -326,47 +347,33 @@ const LeadIntake: React.FC = () => {
               </div>
 
               <div>
-                <label className="block text-sm font-semibold text-slate-300 mb-2">Project Urgency</label>
+                <label className="block text-sm font-semibold text-slate-300 mb-2">Service Frequency</label>
                 <select
-                  name="urgency"
-                  value={formData.urgency}
+                  name="frequency"
+                  value={formData.frequency}
                   onChange={handleInputChange}
                   className="w-full bg-slate-700 border border-slate-600 rounded-lg px-4 py-3 text-white focus:ring-2 focus:ring-amber-400 focus:border-transparent transition-all"
                 >
-                  <option value="">Select urgency level</option>
-                  <option value="emergency">Emergency (Insurance claim, etc.)</option>
-                  <option value="high">High (Moving deadline, event)</option>
-                  <option value="normal">Normal</option>
-                  <option value="flexible">Flexible (Can wait for right contractor)</option>
-                </select>
-              </div>
-
-              <div>
-                <label className="block text-sm font-semibold text-slate-300 mb-2">Permit Status</label>
-                <select
-                  name="permits"
-                  value={formData.permits}
-                  onChange={handleInputChange}
-                  className="w-full bg-slate-700 border border-slate-600 rounded-lg px-4 py-3 text-white focus:ring-2 focus:ring-amber-400 focus:border-transparent transition-all"
-                >
-                  <option value="">Select permit status</option>
-                  <option value="none-needed">No permits needed</option>
-                  <option value="need-help">Need help obtaining permits</option>
-                  <option value="in-progress">Permits in progress</option>
-                  <option value="approved">Permits already approved</option>
-                  <option value="unsure">Not sure what's needed</option>
+                  <option value="">Select frequency needed</option>
+                  <option value="one-time">One-time service</option>
+                  <option value="weekly">Weekly</option>
+                  <option value="monthly">Monthly</option>
+                  <option value="quarterly">Quarterly</option>
+                  <option value="bi-annually">Twice per year</option>
+                  <option value="annually">Annually</option>
+                  <option value="as-needed">As needed</option>
                 </select>
               </div>
 
               <div className="md:col-span-2">
-                <label className="block text-sm font-semibold text-slate-300 mb-2">Project Size/Scope</label>
+                <label className="block text-sm font-semibold text-slate-300 mb-2">Project Measurements</label>
                 <textarea
-                  name="projectSize"
-                  value={formData.projectSize}
+                  name="projectMetrics"
+                  value={formData.projectMetrics}
                   onChange={handleInputChange}
                   rows={3}
                   className="w-full bg-slate-700 border border-slate-600 rounded-lg px-4 py-3 text-white placeholder-slate-400 focus:ring-2 focus:ring-amber-400 focus:border-transparent transition-all"
-                  placeholder="Square footage, number of rooms, specific areas to be worked on, etc."
+                  placeholder="Provide measurements relevant to your service: square footage for cleaning/coating, linear feet for striping, number of windows, parking spaces, building height, etc."
                 />
               </div>
             </div>
@@ -377,39 +384,39 @@ const LeadIntake: React.FC = () => {
         return (
           <div className="space-y-6">
             <div className="text-center mb-8">
-              <h2 className="text-3xl font-bold mb-4">Additional Project Details</h2>
-              <p className="text-slate-400">Help us understand your specific requirements and vision</p>
+              <h2 className="text-3xl font-bold mb-4">Site Condition & Requirements</h2>
+              <p className="text-slate-400">Help us understand the current condition and your specific needs</p>
             </div>
 
             <div className="space-y-6">
               <div>
-                <label className="block text-sm font-semibold text-slate-300 mb-2">Current Condition</label>
+                <label className="block text-sm font-semibold text-slate-300 mb-2">Current Site/Surface Condition</label>
                 <textarea
-                  name="currentCondition"
-                  value={formData.currentCondition}
+                  name="siteCondition"
+                  value={formData.siteCondition}
                   onChange={handleInputChange}
                   rows={3}
                   className="w-full bg-slate-700 border border-slate-600 rounded-lg px-4 py-3 text-white placeholder-slate-400 focus:ring-2 focus:ring-amber-400 focus:border-transparent transition-all"
-                  placeholder="Describe the current state of the space, any existing issues, what needs to be demolished, etc."
+                  placeholder="Describe current condition: existing wear/damage, last service date, stains/debris present, surface material, accessibility issues, etc."
                 />
               </div>
 
               <div>
-                <label className="block text-sm font-semibold text-slate-300 mb-2">Special Requirements</label>
+                <label className="block text-sm font-semibold text-slate-300 mb-2">Specific Service Requirements</label>
                 <textarea
-                  name="specialRequirements"
-                  value={formData.specialRequirements}
+                  name="specificNeeds"
+                  value={formData.specificNeeds}
                   onChange={handleInputChange}
                   rows={3}
                   className="w-full bg-slate-700 border border-slate-600 rounded-lg px-4 py-3 text-white placeholder-slate-400 focus:ring-2 focus:ring-amber-400 focus:border-transparent transition-all"
-                  placeholder="Accessibility needs, eco-friendly materials, smart home integration, specific brands or finishes, etc."
+                  placeholder="Special requirements: eco-friendly products, specific materials/paints, ADA compliance needs, traffic control during service, after-hours work, etc."
                 />
               </div>
 
               <div>
                 <label className="block text-sm font-semibold text-slate-300 mb-2">
                   <Upload className="w-4 h-4 inline mr-1" />
-                  Inspiration Images or Plans
+                  Site Photos or Reference Images
                 </label>
                 <FileUpload
                   relatedTo="lead"
@@ -419,8 +426,8 @@ const LeadIntake: React.FC = () => {
                   maxFiles={5}
                   allowedFileTypes={['image/*', 'application/pdf', '.doc', '.docx']}
                   maxSizeMB={10}
-                  label="Add Inspiration Images or Plans"
-                  description="Upload photos, sketches, or plans to help us understand your vision"
+                  label="Add Site Photos or Reference Images"
+                  description="Upload current site photos, reference images, or specification documents to help us understand your needs"
                   bucketName="uploads"
                 />
               </div>
@@ -638,7 +645,7 @@ const LeadIntake: React.FC = () => {
       case 2:
         return formData.city && formData.state && formData.zip && formData.budget;
       case 3:
-        return formData.timeline;
+        return formData.timeline && formData.propertyType && formData.projectMetrics;
       case 4:
         return true; // Optional step
       case 5:
