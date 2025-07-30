@@ -1,4 +1,3 @@
-```tsx
 import React from 'react';
 import { CheckCircle, Shield, TrendingUp, DollarSign, Clock, Wrench, Brush, Truck } from 'lucide-react';
 import { Link } from 'react-router-dom';
@@ -116,4 +115,3 @@ const PavementMaintenanceGuidance: React.FC = () => {
 };
 
 export default PavementMaintenanceGuidance;
-```
