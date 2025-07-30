@@ -95,11 +95,6 @@ const FileUpload: React.FC<FileUploadProps> = ({
   };
 
   const handleFiles = async (files: File[]) => {
-    if (!user) {
-      onUploadError?.('You must be logged in to upload files');
-      return;
-    }
-
     // Check file count limit
     if (uploadedFiles.length + files.length > maxFiles) {
       onUploadError?.(`Maximum ${maxFiles} files allowed`);
@@ -140,7 +135,7 @@ const FileUpload: React.FC<FileUploadProps> = ({
 
         // Record upload metadata
         const uploadData = {
-          uploaded_by: user.id,
+          uploaded_by: user?.id || null,
           related_to: relatedTo,
           related_id: relatedId,
           file_url: fileUrl,
