@@ -163,3 +163,6 @@ const FAQs: React.FC = () => {
     </div>
   );
 };
+
+
+export default FAQs
