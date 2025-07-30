@@ -108,9 +108,8 @@ const LeadIntake: React.FC = () => {
       // Submit to database
       const createdLead = await LeadService.createLead(leadData);
       
-      // Show success message and redirect
-      alert('Thank you! Your project has been submitted. We\'ll connect you with qualified contractors within 24 hours.');
-      navigate('/');
+      // Redirect to deposit payment page
+      navigate(`/deposit-payment?leadId=${createdLead.id}`);
       
     } catch (error) {
       console.error('Error submitting lead:', error);

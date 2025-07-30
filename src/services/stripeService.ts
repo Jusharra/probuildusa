@@ -52,10 +52,16 @@ export class StripeService {
     const apiUrl = `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/stripe-checkout`;
     
     const payload = {
-      price_id: request.priceId,
       mode: request.mode,
       success_url: request.successUrl || `${this.getBaseUrl()}/success?session_id={CHECKOUT_SESSION_ID}`,
       cancel_url: request.cancelUrl || `${this.getBaseUrl()}/cancel`,
+      ...(request.amount && request.currency ? {
+        amount: request.amount,
+        currency: request.currency,
+      } : {
+        price_id: request.priceId,
+      }),
+      ...(request.leadId && { lead_id: request.leadId }),
     };
 
     const response = await fetch(apiUrl, {
