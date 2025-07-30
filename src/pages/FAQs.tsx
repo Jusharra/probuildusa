@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { ChevronDown, HelpCircle, DollarSign, Users, Shield, Calendar } from 'lucide-react';
 
 const FAQs: React.FC = () => {
