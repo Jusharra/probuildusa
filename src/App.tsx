@@ -14,6 +14,7 @@ import AdminPortal from './pages/AdminPortal';
 import FinancingPage from './pages/FinancingPage';
 import LoginPage from './pages/LoginPage';
 import PasswordResetPage from './pages/PasswordResetPage';
+import PasswordResetPage from './pages/PasswordResetPage';
 import PricingPage from './pages/PricingPage';
 import ProfileSettingsPage from './pages/ProfileSettingsPage';
 import SuccessPage from './pages/SuccessPage';
@@ -114,6 +115,7 @@ function AppContent() {
         
         {/* Authentication Routes */}
         <Route path="/login" element={<PublicRoute hideLayout><LoginPage /></PublicRoute>} />
+        <Route path="/reset-password" element={<PublicRoute hideLayout><PasswordResetPage /></PublicRoute>} />
         <Route path="/reset-password" element={<PublicRoute hideLayout><PasswordResetPage /></PublicRoute>} />
         
         {/* Role-based Dashboard Redirect */}
