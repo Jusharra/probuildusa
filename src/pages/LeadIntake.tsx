@@ -132,7 +132,7 @@ const LeadIntake: React.FC = () => {
   ];
 
   // Filter projectTypes to only include the desired services
-  const desiredServiceIds = ['line-striping', 'power-washing', 'window-cleaning', 'seal-coating', 'paving', 'crack-sealing', 'pressure-washing'];
+  const desiredServiceIds = ['line-striping', 'power-washing', 'window-cleaning', 'seal-coating', 'paving', 'parking-lot-sweeping', 'crack-sealing', 'pressure-washing'];
   const filteredProjectTypes = projectTypes.filter(type => desiredServiceIds.includes(type.id));
 
 
