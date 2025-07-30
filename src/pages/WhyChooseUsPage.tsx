@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Shield, Zap, Users, Award, Clock, DollarSign, Phone, Star, CheckCircle } from 'lucide-react';
+import { Shield, Zap, Users, Award, Clock, DollarSign, Phone, Star, CheckCircle, ArrowRight } from 'lucide-react';
 
 const WhyChooseUsPage: React.FC = () => {
   const competitors = [
