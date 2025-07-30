@@ -47,8 +47,14 @@ const FileUpload: React.FC<FileUploadProps> = ({
   const [uploadProgress, setUploadProgress] = useState<{ [key: string]: number }>({});
   const fileInputRef = useRef<HTMLInputElement>(null);
 
+  // Helper function to validate if a string is a valid UUID
+  const isValidUUID = (str: string): boolean => {
+    const uuidRegex = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
+    return uuidRegex.test(str);
+  };
+
   useEffect(() => {
-    if (relatedId && relatedId !== 'temp') {
+    if (relatedId && isValidUUID(relatedId)) {
       loadExistingFiles();
     }
   }, [relatedTo, relatedId]);
