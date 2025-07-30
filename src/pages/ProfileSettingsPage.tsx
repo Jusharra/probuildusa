@@ -1,11 +1,12 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useAuth } from '../contexts/AuthContext';
 import { ContractorService } from '../services/contractorService';
+import { AuthService } from '../services/authService';
 import FileUpload from '../components/FileUpload';
 import {
   User, Mail, Building2, Phone, Globe,
   Award, Shield, Save, X, AlertCircle, Loader2, Image,
-  CheckCircle, MapPin, Trash2, Plus, ExternalLink
+  CheckCircle, MapPin, Trash2, Plus, ExternalLink, Lock
 } from 'lucide-react';
 
 const ProfileSettingsPage: React.FC = () => {
@@ -36,6 +37,8 @@ const ProfileSettingsPage: React.FC = () => {
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [success, setSuccess] = useState<string | null>(null);
+  const [emailUpdateLoading, setEmailUpdateLoading] = useState(false);
+  const [passwordResetLoading, setPasswordResetLoading] = useState(false);
   const [activeTab, setActiveTab] = useState('general');
   const [isCreatingContractor, setIsCreatingContractor] = useState(false);
 
@@ -228,11 +231,27 @@ const ProfileSettingsPage: React.FC = () => {
     }
 
     try {
-      // Update user profile (full_name, profile_image_url)
-      await updateAuthProfile({
+      // Check if email has changed
+      const emailChanged = formData.email !== profile.email;
+      
+      if (emailChanged) {
+        // Update email via auth service
+        await AuthService.updateUserEmail(formData.email);
+        setSuccess('Email update initiated. Please check your new email address for a confirmation link.');
+      }
+
+      // Update user profile (full_name, profile_image_url, email)
+      const profileUpdates: any = {
         full_name: formData.full_name,
         profile_image_url: formData.profile_image_url,
-      });
+      };
+      
+      // Only update email in profile if it has changed
+      if (emailChanged) {
+        profileUpdates.email = formData.email;
+      }
+      
+      await updateAuthProfile(profileUpdates);
 
       // Update contractor profile if applicable
       if (profile.role === 'professional') {
@@ -272,6 +291,27 @@ const ProfileSettingsPage: React.FC = () => {
       setError(err.message || 'Failed to save profile. Please try again.');
     } finally {
       setSubmitting(false);
+    }
+  };
+
+  const handlePasswordReset = async () => {
+    if (!formData.email) {
+      setError('Please enter your email address first.');
+      return;
+    }
+
+    setPasswordResetLoading(true);
+    setError(null);
+    setSuccess(null);
+
+    try {
+      await AuthService.resetPassword(formData.email);
+      setSuccess('Password reset email sent! Check your inbox for instructions.');
+    } catch (error: any) {
+      console.error('Password reset error:', error);
+      setError(error.message || 'Failed to send password reset email. Please try again.');
+    } finally {
+      setPasswordResetLoading(false);
     }
   };
 
@@ -456,8 +496,11 @@ const ProfileSettingsPage: React.FC = () => {
                     onChange={handleInputChange}
                     className="w-full bg-slate-700 border border-slate-600 rounded-lg px-4 py-3 text-white placeholder-slate-400 focus:ring-2 focus:ring-amber-400 focus:border-transparent"
                     placeholder="Your email"
-                    disabled // Email is usually managed via auth service directly
+                    required
                   />
+                  <p className="text-xs text-slate-400 mt-1">
+                    Changing your email will require confirmation via your new email address.
+                  </p>
                 </div>
                 <div className="md:col-span-2">
                   <label className="block text-sm font-semibold text-slate-300 mb-2">
@@ -487,6 +530,55 @@ const ProfileSettingsPage: React.FC = () => {
                       description="PNG, JPG, GIF up to 2MB"
                       bucketName="uploads"
                     />
+                  </div>
+                </div>
+                
+                {/* Account Security Section */}
+                <div className="md:col-span-2">
+                  <div className="bg-slate-700/50 rounded-xl p-6 border border-slate-600">
+                    <h3 className="text-lg font-bold text-amber-400 mb-4 flex items-center space-x-2">
+                      <Shield className="w-5 h-5" />
+                      <span>Account Security</span>
+                    </h3>
+                    
+                    <div className="space-y-4">
+                      <div>
+                        <h4 className="font-semibold text-slate-300 mb-2">Password</h4>
+                        <p className="text-slate-400 text-sm mb-3">
+                          Reset your password to update your login credentials. A reset link will be sent to your email address.
+                        </p>
+                        <button
+                          type="button"
+                          onClick={handlePasswordReset}
+                          disabled={passwordResetLoading || !formData.email}
+                          className="bg-slate-600 hover:bg-slate-500 disabled:bg-slate-700 disabled:text-slate-500 text-white px-4 py-2 rounded-lg font-semibold transition-all duration-300 flex items-center space-x-2 disabled:cursor-not-allowed"
+                        >
+                          {passwordResetLoading ? (
+                            <>
+                              <Loader2 className="w-4 h-4 animate-spin" />
+                              <span>Sending Reset Email...</span>
+                            </>
+                          ) : (
+                            <>
+                              <Lock className="w-4 h-4" />
+                              <span>Reset Password</span>
+                            </>
+                          )}
+                        </button>
+                      </div>
+                      
+                      <div className="pt-3 border-t border-slate-600">
+                        <div className="flex items-start space-x-3">
+                          <Shield className="w-5 h-5 text-amber-400 flex-shrink-0 mt-0.5" />
+                          <div>
+                            <h4 className="font-semibold text-amber-400 text-sm mb-1">Security Notice</h4>
+                            <p className="text-slate-400 text-xs">
+                              Email changes require confirmation. Password resets are sent to your current email address.
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>

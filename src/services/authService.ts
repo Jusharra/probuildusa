@@ -345,6 +345,31 @@ export class AuthService {
     }
   }
 
+  // Update user email
+  static async updateUserEmail(newEmail: string) {
+    console.log('📧 [AuthService] Updating user email to:', newEmail);
+    const startTime = performance.now();
+    
+    try {
+      const { error } = await supabase.auth.updateUser({
+        email: newEmail
+      });
+      
+      const endTime = performance.now();
+      console.log(`⏱️ [AuthService] Email update took ${(endTime - startTime).toFixed(2)}ms`);
+      
+      if (error) {
+        console.error('❌ [AuthService] Email update error:', error);
+        throw error;
+      }
+      
+      console.log('✅ [AuthService] Email update initiated successfully');
+    } catch (error) {
+      console.error('💥 [AuthService] Failed to update email:', error);
+      throw error;
+    }
+  }
+
   // Update password
   static async updatePassword(newPassword: string) {
     console.log('🔄 [AuthService] Updating user password');
