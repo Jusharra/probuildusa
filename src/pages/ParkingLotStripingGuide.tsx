@@ -1,4 +1,3 @@
-```tsx
 import React from 'react';
 import { CheckCircle, Paintbrush, LayoutDashboard, Shield, Wrench, Lightbulb, ArrowRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
@@ -198,4 +197,3 @@ const ParkingLotStripingGuide: React.FC = () => {
 };
 
 export default ParkingLotStripingGuide;
-```
