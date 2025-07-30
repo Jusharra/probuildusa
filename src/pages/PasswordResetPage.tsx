@@ -62,32 +62,42 @@ const PasswordResetPage: React.FC = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError('');
+    
+    console.log('🔄 [PasswordReset] Starting password update process');
+    console.log('🔍 [PasswordReset] Access token exists:', !!accessToken);
+    console.log('🔍 [PasswordReset] Type:', type);
 
     // Validation
     if (formData.password !== formData.confirmPassword) {
+      console.log('❌ [PasswordReset] Passwords do not match');
       setError('Passwords do not match');
       return;
     }
 
     if (formData.password.length < 6) {
+      console.log('❌ [PasswordReset] Password too short');
       setError('Password must be at least 6 characters long');
       return;
     }
 
-    if (!accessToken) {
+    if (!accessToken || type !== 'recovery') {
+      console.log('❌ [PasswordReset] Invalid parameters:', { accessToken: !!accessToken, type });
       setError('Invalid reset link. Please request a new password reset.');
       return;
     }
 
     try {
       setLoading(true);
+      console.log('📡 [PasswordReset] Calling AuthService.updatePassword...');
       
       // Update password using the access token
       await AuthService.updatePassword(formData.password);
       
+      console.log('✅ [PasswordReset] Password update successful');
       setSuccess(true);
       
       // Redirect to login after 3 seconds
+      console.log('🔄 [PasswordReset] Redirecting to login in 3 seconds');
       setTimeout(() => {
         navigate('/login', { 
           state: { 
@@ -97,9 +107,11 @@ const PasswordResetPage: React.FC = () => {
       }, 3000);
 
     } catch (error: any) {
+      console.error('❌ [PasswordReset] Password update failed:', error);
       console.error('Password reset error:', error);
       setError(error.message || 'Failed to update password. Please try again or request a new reset link.');
     } finally {
+      console.log('🏁 [PasswordReset] Setting loading to false');
       setLoading(false);
     }
   };
