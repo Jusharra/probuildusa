@@ -1,4 +1,3 @@
-```tsx
 import React, { useState } from 'react';
 import { ChevronDown, HelpCircle, DollarSign, Users, Shield, Calendar } from 'lucide-react';
 
@@ -164,6 +163,3 @@ const FAQs: React.FC = () => {
     </div>
   );
 };
-
-export default FAQs;
-```
