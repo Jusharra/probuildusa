@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { Link, useNavigate, useSearchParams } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { Lock, Eye, EyeOff, CheckCircle, AlertCircle, ArrowRight, Shield } from 'lucide-react';
 import { AuthService } from '../services/authService';
 
 const PasswordResetPage: React.FC = () => {
   const navigate = useNavigate();
-  const [searchParams] = useSearchParams();
   const [formData, setFormData] = useState({
     password: '',
     confirmPassword: ''
@@ -15,18 +14,42 @@ const PasswordResetPage: React.FC = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
   const [success, setSuccess] = useState(false);
+  const [accessToken, setAccessToken] = useState<string | null>(null);
+  const [type, setType] = useState<string | null>(null);
 
-  // Get access token from URL parameters
-  const accessToken = searchParams.get('access_token');
-  const refreshToken = searchParams.get('refresh_token');
-  const type = searchParams.get('type');
+  // Parse hash parameters from URL
+  const parseHashParams = () => {
+    const hash = window.location.hash.substring(1); // Remove the # character
+    const params = new URLSearchParams(hash);
+    return {
+      access_token: params.get('access_token'),
+      refresh_token: params.get('refresh_token'),
+      type: params.get('type')
+    };
+  };
 
   useEffect(() => {
+    // Parse hash parameters on component mount
+    const params = parseHashParams();
+    setAccessToken(params.access_token);
+    setType(params.type);
+    
     // Validate that we have the required parameters for password reset
-    if (!accessToken || type !== 'recovery') {
+    if (!params.access_token || params.type !== 'recovery') {
       setError('Invalid or expired password reset link. Please request a new one.');
+    } else {
+      // If we have valid parameters, set the session with the access token
+      // This ensures Supabase knows about the authentication state for password reset
+      if (params.access_token && params.refresh_token) {
+        import('../lib/supabase').then(({ supabase }) => {
+          supabase.auth.setSession({
+            access_token: params.access_token!,
+            refresh_token: params.refresh_token!
+          });
+        });
+      }
     }
-  }, [accessToken, type]);
+  }, []);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormData({
