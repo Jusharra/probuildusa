@@ -83,13 +83,23 @@ const SuccessPage: React.FC = () => {
         </div>
 
         <div className="space-y-4">
-          <Link
-            to="/partner-portal"
-            className="w-full bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-600 hover:to-amber-700 text-slate-900 px-6 py-3 rounded-lg font-bold transition-all duration-300 transform hover:scale-105 flex items-center justify-center space-x-2"
-          >
-            <span>Go to Dashboard</span>
-            <ArrowRight className="w-5 h-5" />
-          </Link>
+          {paymentType === 'deposit' && leadId ? (
+            <Link
+              to={`/thank-you?leadId=${leadId}&type=deposit`}
+              className="w-full bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-600 hover:to-amber-700 text-slate-900 px-6 py-3 rounded-lg font-bold transition-all duration-300 transform hover:scale-105 flex items-center justify-center space-x-2"
+            >
+              <span>View Project Status</span>
+              <ArrowRight className="w-5 h-5" />
+            </Link>
+          ) : (
+            <Link
+              to="/partner-portal"
+              className="w-full bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-600 hover:to-amber-700 text-slate-900 px-6 py-3 rounded-lg font-bold transition-all duration-300 transform hover:scale-105 flex items-center justify-center space-x-2"
+            >
+              <span>Go to Dashboard</span>
+              <ArrowRight className="w-5 h-5" />
+            </Link>
+          )}
           
           <Link
             to="/"

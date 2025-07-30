@@ -45,31 +45,34 @@ export class StripeService {
   static async createCheckoutSession(request: CheckoutSessionRequest): Promise<CheckoutSessionResponse> {
     const { data: { session }, error: sessionError } = await supabase.auth.getSession();
     
-    if (sessionError || !session?.access_token) {
+    // For deposit payments, we don't require authentication
+    const isDepositPayment = request.amount && request.currency && request.leadId;
+    
+    if (!isDepositPayment && (sessionError || !session?.access_token)) {
       throw new Error('User not authenticated');
     }
 
     const apiUrl = `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/stripe-checkout`;
     
     const payload = {
+      price_id: request.priceId,
       mode: request.mode,
       success_url: request.successUrl || `${this.getBaseUrl()}/success?session_id={CHECKOUT_SESSION_ID}`,
       cancel_url: request.cancelUrl || `${this.getBaseUrl()}/cancel`,
-      ...(request.amount && request.currency ? {
-        amount: request.amount,
-        currency: request.currency,
-      } : {
-        price_id: request.priceId,
-      }),
-      ...(request.leadId && { lead_id: request.leadId }),
     };
+
+    const headers: Record<string, string> = {
+      'Content-Type': 'application/json',
+    };
+    
+    // Only add Authorization header if we have a session (for non-deposit payments)
+    if (session?.access_token) {
+      headers['Authorization'] = `Bearer ${session.access_token}`;
+    }
 
     const response = await fetch(apiUrl, {
       method: 'POST',
-      headers: {
-        'Authorization': `Bearer ${session.access_token}`,
-        'Content-Type': 'application/json',
-      },
+      headers,
       body: JSON.stringify(payload),
     });
 
