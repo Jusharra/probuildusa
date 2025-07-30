@@ -87,8 +87,8 @@ const Footer: React.FC = () => {
               {quickLinks.map((link) => (
                 <li key={link.name}>
                   <Link 
-                    to={link.href}
-                    className="text-slate-400 hover:text-amber-400 transition-colors text-sm"
+                    to={link.href} 
+                    className="text-slate-400 hover:text-amber-300 transition-colors text-sm"
                   >
                     {link.name}
                   </Link>
