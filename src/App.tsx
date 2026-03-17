@@ -107,8 +107,6 @@ function AppContent() {
         <Route path="/pricing" element={<PublicRoute><PricingPage /></PublicRoute>} />
         <Route path="/how-it-works" element={<PublicRoute><HowItWorksPage /></PublicRoute>} />
         <Route path="/why-choose-us" element={<PublicRoute><WhyChooseUsPage /></PublicRoute>} />
-        <Route path="/deposit-payment" element={<PublicRoute><DepositPage /></PublicRoute>} />
-        <Route path="/thank-you" element={<PublicRoute><ThankYouPage /></PublicRoute>} />
         
         {/* Payment Routes */}
         <Route path="/success" element={<PublicRoute hideLayout><SuccessPage /></PublicRoute>} />
@@ -116,7 +114,6 @@ function AppContent() {
         
         {/* Authentication Routes */}
         <Route path="/login" element={<PublicRoute hideLayout><LoginPage /></PublicRoute>} />
-        <Route path="/reset-password" element={<PublicRoute hideLayout><PasswordResetPage /></PublicRoute>} />
         <Route path="/reset-password" element={<PublicRoute hideLayout><PasswordResetPage /></PublicRoute>} />
         
         {/* Role-based Dashboard Redirect */}
