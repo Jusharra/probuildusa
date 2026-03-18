@@ -21,6 +21,7 @@ import PavementMaintenanceGuidance from './pages/PavementMaintenanceGuidance';
 import FAQs from './pages/FAQs';
 import ParkingLotStripingGuide from './pages/ParkingLotStripingGuide';
 import CancelPage from './pages/CancelPage';
+import DepositPage from './pages/DepositPage';
 import HowItWorksPage from './pages/HowItWorksPage';
 import WhyChooseUsPage from './pages/WhyChooseUsPage';
 
@@ -109,6 +110,7 @@ function AppContent() {
         <Route path="/why-choose-us" element={<PublicRoute><WhyChooseUsPage /></PublicRoute>} />
         
         {/* Payment Routes */}
+        <Route path="/deposit-payment" element={<PublicRoute hideLayout><DepositPage /></PublicRoute>} />
         <Route path="/success" element={<PublicRoute hideLayout><SuccessPage /></PublicRoute>} />
         <Route path="/cancel" element={<PublicRoute hideLayout><CancelPage /></PublicRoute>} />
         

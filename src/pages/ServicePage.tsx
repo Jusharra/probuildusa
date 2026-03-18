@@ -1,338 +1,223 @@
 import React from 'react';
 import { useParams, Link } from 'react-router-dom';
-import { ArrowRight, CheckCircle, Star, DollarSign, Clock, Shield, Users, Phone } from 'lucide-react';
+import { ArrowRight, CheckCircle, Star, DollarSign, Clock, Shield, Phone } from 'lucide-react';
 
 const ServicePage: React.FC = () => {
   const { service } = useParams<{ service: string }>();
 
-  // Complete service data for all 10 high-ticket construction services
   const serviceData = {
-    'line-striping': {
-      title: 'Professional Line Striping',
-      subtitle: 'Precision Line Striping for Safety and Compliance',
-      priceRange: '$500 - $5K+',
-      timeline: '1-3 days',
-      description: 'Ensure clear, compliant, and durable markings for your property with our professional line striping services. We specialize in creating highly visible and long-lasting lines for parking lots, roadways, sports courts, warehouses, and more, enhancing safety and optimizing traffic flow.',
-      heroImage: 'https://images.pexels.com/photos/753876/pexels-photo-753876.jpeg?auto=compress&cs=tinysrgb&w=1920&h=800&fit=crop',
-      included: [
-        'Parking lot layout & re-striping',
-        'ADA compliance markings',
-        'Fire lane striping',
-        'Directional arrows & stenciling',
-        'Sports court markings',
-        'Custom stenciling and logos',
-        'Warehouse floor markings',
-        'Thermoplastic and durable paint options',
-        'Curb painting',
-        'Reflective paint options'
-      ],
-      idealFor: [
-        'Commercial properties needing compliance',
-        'Retail shopping centers and malls',
-        'Office buildings and medical facilities',
-        'Schools and recreational facilities',
-        'Warehouses and industrial properties'
-      ],
-      process: [
-        'Site assessment and measurement',
-        'Layout planning and design approval',
-        'Surface preparation and cleaning',
-        'Parking lot signs & bollard covers installation',
-        'Precision application of markings',
-        'TBL Durables application',
-        'Quality inspection and touch-ups',
-        'Final walkthrough and documentation'
-      ],
-      gallery: [
-        'https://images.pexels.com/photos/753876/pexels-photo-753876.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop',
-        'https://images.pexels.com/photos/164634/pexels-photo-164634.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop',
-        'https://images.pexels.com/photos/260024/pexels-photo-260024.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop',
-        'https://images.pexels.com/photos/210182/pexels-photo-210182.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop'
-      ]
-    },
-    'power-washing': {
-      title: 'Power Washing Services',
-      subtitle: 'Restore and Protect Your Property\'s Exterior',
-      priceRange: '$150 - $2K+',
-      timeline: '1-2 days',
-      description: 'Our expert power washing services effectively remove dirt, grime, mold, mildew, and other unsightly buildup from various surfaces. We use state-of-the-art equipment and eco-friendly solutions to safely clean buildings, driveways, sidewalks, decks, fences, and more, restoring their original appearance and extending their lifespan.',
-      heroImage: 'https://images.pexels.com/photos/5025639/pexels-photo-5025639.jpeg?auto=compress&cs=tinysrgb&w=1920&h=800&fit=crop',
-      included: [
-        'Building exterior cleaning (siding, brick, stucco)',
-        'Concrete driveway & sidewalk cleaning',
-        'Deck & patio washing',
-        'Fence cleaning',
-        'Graffiti removal',
-        'Soft washing for delicate surfaces',
-        'Commercial & residential properties',
-        'Eco-friendly cleaning solutions'
-      ],
-      idealFor: [
-        'Property managers maintaining curb appeal',
-        'Homeowners preparing for sale',
-        'Commercial buildings needing maintenance',
-        'Restaurants and retail establishments',
-        'Properties with mold, mildew, or staining'
-      ],
-      process: [
-        'Property assessment and surface evaluation',
-        'Equipment setup and safety preparation',
-        'Pre-treatment of stubborn stains',
-        'Professional power washing application',
-        'Post-cleaning inspection and touch-ups',
-        'Property restoration and cleanup'
-      ],
-      gallery: [
-        'https://images.pexels.com/photos/5025639/pexels-photo-5025639.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop',
-        'https://images.pexels.com/photos/4254165/pexels-photo-4254165.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop',
-        'https://images.pexels.com/photos/1463917/pexels-photo-1463917.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop',
-        'https://images.pexels.com/photos/1396122/pexels-photo-1396122.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop'
-      ]
-    },
-    'window-cleaning': {
-      title: 'Window Cleaning Services',
-      subtitle: 'Crystal Clear Views, Every Time',
-      priceRange: '$100 - $1K+',
-      timeline: '1 day',
-      description: 'Experience streak-free, sparkling windows with our professional window cleaning services. Whether it\'s a commercial high-rise or a residential home, our skilled technicians use advanced techniques and purified water systems to deliver impeccable results, enhancing curb appeal and maximizing natural light.',
-      heroImage: 'https://images.pexels.com/photos/355164/pexels-photo-355164.jpeg?auto=compress&cs=tinysrgb&w=1920&h=800&fit=crop',
-      included: [
-        'Commercial window cleaning (low-rise to high-rise)',
-        'Residential window cleaning (interior & exterior)',
-        'Post-construction window cleaning',
-        'Screen cleaning',
-        'Hard water stain removal',
-        'Skylight cleaning',
-        'Regular maintenance programs',
-        'Purified water systems for streak-free results'
-      ],
-      idealFor: [
-        'Office buildings and commercial properties',
-        'Retail stores and restaurants',
-        'Residential homes and condominiums',
-        'Medical facilities requiring spotless windows',
-        'Properties with hard-to-reach windows'
-      ],
-      process: [
-        'Window assessment and access planning',
-        'Setup of safety equipment and tools',
-        'Pre-cleaning of frames and sills',
-        'Professional window cleaning application',
-        'Quality inspection for streak-free finish',
-        'Final cleanup and customer walkthrough'
-      ],
-      gallery: [
-        'https://images.pexels.com/photos/355164/pexels-photo-355164.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop',
-        'https://images.pexels.com/photos/273209/pexels-photo-273209.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop',
-        'https://images.pexels.com/photos/305568/pexels-photo-305568.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop',
-        'https://images.pexels.com/photos/2102587/pexels-photo-2102587.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop'
-      ]
-    },
-    'seal-coating': {
-      title: 'Asphalt Seal Coating',
-      subtitle: 'Protect and Preserve Your Pavement Investment',
-      priceRange: '$0.50 - $1.50/sq ft',
-      timeline: '1-2 days',
-      description: 'Seal coating is a protective layer applied to asphalt pavements to shield them from UV rays, water penetration, and chemical spills. This process not only extends the lifespan of your asphalt but also restores its rich black appearance, enhancing curb appeal and preventing costly repairs down the line.',
-      heroImage: 'https://images.pexels.com/photos/3806249/pexels-photo-3806249.jpeg?auto=compress&cs=tinysrgb&w=1920&h=800&fit=crop',
-      included: [
-        'Thorough surface cleaning and preparation',
-        'Application of high-quality asphalt sealer',
-        'Protection against oxidation and water damage',
-        'Restoration of pavement color and appearance',
-        'Extension of pavement lifespan',
-        'Commercial and residential applications',
-        'Traffic control during application'
-      ],
-      idealFor: [
-        'Parking lots and commercial properties',
-        'Residential driveways',
-        'HOA communities and apartment complexes',
-        'Any asphalt surface showing signs of aging or fading',
-        'Preventative maintenance programs'
-      ],
-      process: [
-        'Initial inspection and surface assessment',
-        'Cleaning of debris, dirt, and oil stains',
-        'Minor crack filling (if necessary)',
-        'Application of one or two coats of sealer',
-        'Curing time and re-opening for traffic',
-        'Final quality check'
-      ],
-      gallery: [
-        'https://images.pexels.com/photos/3806249/pexels-photo-3806249.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop',
-        'https://images.pexels.com/photos/3806248/pexels-photo-3806248.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop',
-        'https://images.pexels.com/photos/3806247/pexels-photo-3806247.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop',
-        'https://images.pexels.com/photos/3806246/pexels-photo-3806246.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop'
-      ]
-    },
-    'paving': {
-      title: 'Asphalt Paving & Repair',
-      subtitle: 'Durable Pavement Solutions for New and Existing Surfaces',
-      priceRange: '$2 - $7/sq ft',
-      timeline: '2-7 days',
-      description: 'From new asphalt installations to comprehensive repairs and overlays, our paving experts deliver smooth, durable, and long-lasting surfaces. We handle everything from sub-base preparation to final compaction, ensuring your pavement can withstand heavy traffic and harsh weather conditions for years to come.',
+    'infrastructure-surface': {
+      title: 'Infrastructure & Surface Services',
+      subtitle: 'Commercial Pavement Solutions for High-Traffic Properties',
+      priceRange: '$500 - $75K+',
+      timeline: '1-7 days',
+      description: 'From freshly striped parking lots to full asphalt resurfacing, we coordinate commercial pavement and surface work that keeps your property safe, compliant, and professional. Businesses, retail centers, and warehouses trust us to manage their surface infrastructure end-to-end.',
       heroImage: 'https://images.pexels.com/photos/3806242/pexels-photo-3806242.jpeg?auto=compress&cs=tinysrgb&w=1920&h=800&fit=crop',
       included: [
-        'New asphalt construction',
-        'Asphalt overlays and resurfacing',
-        'Pothole repair and patching',
-        'Parking blocks and speed bump installation',
-        'Parking lot signs and bollard covers',
-        'Asphalt removal and replacement',
-        'Drainage correction and grading',
-        'Speed bump and bollard installation',
-        'Commercial and industrial paving',
-        'Roadway and parking lot construction'
+        'Parking lot line striping & re-striping',
+        'ADA compliance markings',
+        'Asphalt paving (new & overlay)',
+        'Asphalt sealcoating',
+        'Pothole repair & patching',
+        'Crack sealing (hot-applied rubber)',
+        'Drainage correction & grading',
+        'Parking blocks, speed bumps & bollards',
+        'Fire lane and directional markings',
+        'Parking lot signs & bollard covers',
       ],
       idealFor: [
-        'New commercial developments',
-        'Existing parking lots needing major repair',
-        'Industrial facilities with heavy vehicle traffic',
-        'Roadways and private drives',
-        'Property managers seeking long-term solutions'
+        'Retail shopping centers and strip malls',
+        'Commercial office parks and medical facilities',
+        'Warehouses and distribution centers',
+        'Schools, municipalities, and government properties',
+        'Property management companies and HOAs',
       ],
       process: [
-        'Site evaluation and project planning',
-        'Excavation and sub-base preparation',
-        'Installation of drainage systems (if needed)',
-        'Application of asphalt layers',
-        'Compaction and finishing',
-        'Curing and final inspection'
+        'Site assessment and surface inspection',
+        'Scope of work and layout planning',
+        'Contractor selection and scheduling',
+        'Surface preparation and traffic control',
+        'Service execution and quality inspection',
+        'Final walkthrough and documentation',
       ],
       gallery: [
         'https://images.pexels.com/photos/3806242/pexels-photo-3806242.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop',
-        'https://images.pexels.com/photos/3806241/pexels-photo-3806241.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop',
-        'https://images.pexels.com/photos/3806240/pexels-photo-3806240.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop',
-        'https://images.pexels.com/photos/3806239/pexels-photo-3806239.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop'
-      ]
+        'https://images.pexels.com/photos/753876/pexels-photo-753876.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop',
+        'https://images.pexels.com/photos/3806249/pexels-photo-3806249.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop',
+        'https://images.pexels.com/photos/3806245/pexels-photo-3806245.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop',
+      ],
     },
-    'crack-sealing': {
-      title: 'Asphalt Crack Sealing',
-      subtitle: 'Prevent Pavement Deterioration with Expert Crack Sealing',
-      priceRange: '$1 - $3/linear ft',
-      timeline: '1 day',
-      description: 'Crack sealing is a crucial preventative maintenance step that stops water penetration into the asphalt sub-base, preventing potholes and further deterioration. Our team uses hot-applied, rubberized crack sealant to effectively fill and seal cracks, extending the life of your pavement and saving you money on major repairs.',
-      heroImage: 'https://images.pexels.com/photos/3806245/pexels-photo-3806245.jpeg?auto=compress&cs=tinysrgb&w=1920&h=800&fit=crop',
+    'mechanical-electrical': {
+      title: 'Mechanical & Electrical Systems',
+      subtitle: 'Commercial and Industrial Electrical & HVAC Services',
+      priceRange: '$2,500 - $200K+',
+      timeline: '1-21 days',
+      description: 'Electrical failures and HVAC breakdowns cost businesses thousands per hour. We connect you with licensed, commercial-grade electrical and HVAC contractors who handle everything from panel upgrades to full industrial system installs — fast, code-compliant, and built to last.',
+      heroImage: 'https://images.pexels.com/photos/257736/pexels-photo-257736.jpeg?auto=compress&cs=tinysrgb&w=1920&h=800&fit=crop',
       included: [
-        'Cleaning and preparation of cracks',
-        'Hot-applied rubberized crack sealant',
-        'Prevention of water infiltration',
-        'Arrest further pavement deterioration',
-        'Cost-effective maintenance solution',
-        'Suitable for various crack sizes',
-        'Enhance pavement appearance'
+        'Commercial electrical wiring and installation',
+        'Panel upgrades and service entrance work',
+        'Industrial electrical maintenance and repair',
+        'Emergency electrical response',
+        'Commercial HVAC system installation',
+        'HVAC repair and diagnostics',
+        'Rooftop unit (RTU) replacement',
+        'Preventative HVAC maintenance contracts',
+        'Chiller and boiler systems',
+        'Energy efficiency retrofits',
       ],
       idealFor: [
-        'Parking lots with minor to moderate cracking',
-        'Residential driveways with visible cracks',
-        'Roadways and pathways showing early signs of wear',
-        'Asphalt surfaces needing preventative maintenance',
-        'Properties looking to extend pavement life'
+        'Commercial office buildings and medical offices',
+        'Retail stores, restaurants, and hospitality venues',
+        'Industrial facilities and manufacturing plants',
+        'Warehouses and distribution centers',
+        'Property managers seeking ongoing service contracts',
       ],
       process: [
-        'Pavement inspection to identify cracks',
-        'Cleaning cracks of debris and vegetation',
-        'Heating and preparing crack sealant',
-        'Precision application of sealant into cracks',
-        'Allowing sealant to cool and cure',
-        'Final inspection and site cleanup'
+        'System assessment and scope definition',
+        'Licensed contractor assignment',
+        'Permit acquisition (if required)',
+        'Scheduled installation or repair',
+        'Code compliance inspection',
+        'System testing and sign-off',
       ],
       gallery: [
-        'https://images.pexels.com/photos/3806245/pexels-photo-3806245.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop',
-        'https://images.pexels.com/photos/3806244/pexels-photo-3806244.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop',
-        'https://images.pexels.com/photos/3806243/pexels-photo-3806243.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop',
-        'https://images.pexels.com/photos/3806238/pexels-photo-3806238.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop'
-      ]
+        'https://images.pexels.com/photos/257736/pexels-photo-257736.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop',
+        'https://images.pexels.com/photos/442150/pexels-photo-442150.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop',
+        'https://images.pexels.com/photos/1108572/pexels-photo-1108572.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop',
+        'https://images.pexels.com/photos/159298/gears-cogs-machine-machinery-159298.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop',
+      ],
     },
-    'parking-lot-sweeping': {
-      title: 'Parking Lot Sweeping',
-      subtitle: 'Maintain a Clean and Safe Environment for Your Property',
-      priceRange: '$100 - $1K+',
-      timeline: 'Daily, Weekly, or Monthly',
-      description: 'Our professional parking lot sweeping services ensure your commercial or residential properties remain clean, safe, and inviting. We remove debris, litter, dust, and other unwanted materials, preventing potential hazards, extending pavement life, and enhancing your property\'s curb appeal. Regular sweeping is essential for maintaining a positive image and complying with environmental regulations.',
-      heroImage: 'https://images.pexels.com/photos/5025639/pexels-photo-5025639.jpeg?auto=compress&cs=tinysrgb&w=1920&h=800&fit=crop', // Placeholder image
+    'inspections-compliance': {
+      title: 'Inspections & Compliance',
+      subtitle: 'Due Diligence, Safety, and Pre-Project Clarity',
+      priceRange: '$300 - $10K+',
+      timeline: '1-3 days',
+      description: 'Our inspection services are your compliance bridge — protecting your investment before you buy, build, or sign. From residential home inspections to commercial site evaluations and pre-project safety assessments, we ensure nothing is overlooked before work begins or deals close.',
+      heroImage: 'https://images.pexels.com/photos/5025639/pexels-photo-5025639.jpeg?auto=compress&cs=tinysrgb&w=1920&h=800&fit=crop',
       included: [
-        'Comprehensive debris removal (leaves, dirt, trash)',
-        'Litter and trash pickup',
-        'Dust control and prevention',
-        'Power blowing of sidewalks and corners',
-        'Emptying trash receptacles',
-        'Scheduled daily, weekly, or monthly services',
-        'Emergency sweeping services',
-        'Environmentally friendly disposal of waste'
+        'Home inspections (pre-purchase & pre-listing)',
+        'Commercial property inspections',
+        'Pre-project site condition assessments',
+        'Safety and hazard inspections',
+        'Code compliance reviews',
+        'ADA compliance audits',
+        'Roof and structural assessments',
+        'Electrical and HVAC pre-inspection reports',
+        'Environmental preliminary assessments',
+        'Written inspection reports with photos',
       ],
       idealFor: [
-        'Retail shopping centers and plazas',
-        'Commercial office parks',
-        'Industrial facilities and warehouses',
-        'Apartment complexes and HOAs',
-        'Hospitals and medical centers',
-        'Event venues and parking garages'
+        'Property buyers and sellers',
+        'Real estate investors and developers',
+        'General contractors starting new projects',
+        'Property managers maintaining compliance',
+        'Oil & gas and industrial site operators',
       ],
       process: [
-        'Initial site assessment and cleaning plan',
-        'Pre-sweeping litter and large debris removal',
-        'Mechanical sweeping of main parking areas',
-        'Power blowing of hard-to-reach areas and corners',
-        'Manual detailing and trash receptacle emptying',
-        'Post-service inspection and reporting'
+        'Intake and site access coordination',
+        'Certified inspector assignment',
+        'On-site inspection and documentation',
+        'Photo-backed written report delivery',
+        'Debrief and recommendations call',
+        'Compliance pathway planning (if needed)',
       ],
       gallery: [
         'https://images.pexels.com/photos/5025639/pexels-photo-5025639.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop',
-        'https://images.pexels.com/photos/4254165/pexels-photo-4254165.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop',
-        'https://images.pexels.com/photos/1463917/pexels-photo-1463917.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop',
-        'https://images.pexels.com/photos/1396122/pexels-photo-1396122.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop'
-      ]
+        'https://images.pexels.com/photos/1216589/pexels-photo-1216589.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop',
+        'https://images.pexels.com/photos/209251/pexels-photo-209251.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop',
+        'https://images.pexels.com/photos/2760243/pexels-photo-2760243.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop',
+      ],
     },
-    'pressure-washing': {
-      title: 'Pressure Washing Services',
-      subtitle: 'Deep Cleaning for Tough Stains and Grime',
-      priceRange: '$200 - $3K+',
-      timeline: '1-2 days',
-      description: 'Our pressure washing services utilize high-powered water jets to effectively remove stubborn dirt, mold, mildew, oil stains, and graffiti from various hard surfaces. Ideal for concrete, brick, stone, and other durable materials, we restore the cleanliness and appearance of your property with precision and efficiency.',
-      heroImage: 'https://images.pexels.com/photos/5691622/pexels-photo-5691622.jpeg?auto=compress&cs=tinysrgb&w=1920&h=800&fit=crop',
+    'oil-gas-industrial': {
+      title: 'Oil & Gas / Industrial Services',
+      subtitle: 'Site Coordination, Safety & Environmental Compliance',
+      priceRange: '$10K - $500K+',
+      timeline: 'Project-based',
+      description: 'This is your differentiator. Nobody at our level is coordinating oil & gas site services — from cleanup and equipment maintenance to environmental compliance and regulatory reporting. We bridge the gap between operators and qualified, compliant contractors so projects move without delays or liability.',
+      heroImage: 'https://images.pexels.com/photos/1108701/pexels-photo-1108701.jpeg?auto=compress&cs=tinysrgb&w=1920&h=800&fit=crop',
       included: [
-        'Concrete driveways and sidewalks',
-        'Brick and stone exteriors',
-        'Parking garages and commercial lots',
-        'Graffiti and rust stain removal',
-        'Heavy equipment cleaning',
-        'Pre-treatment for deep stains',
-        'Post-cleaning rinse and inspection',
-        'Eco-friendly cleaning agents (upon request)'
+        'Site cleanup coordination and remediation oversight',
+        'Equipment maintenance coordination',
+        'Safety inspections and hazard assessments',
+        'Environmental compliance services',
+        'Spill response coordination',
+        'Regulatory reporting assistance',
+        'Contractor vetting for industrial projects',
+        'Ongoing site monitoring coordination',
+        'Documentation and compliance recordkeeping',
+        'OSHA and EPA compliance support',
       ],
       idealFor: [
-        'Commercial properties with high traffic areas',
-        'Industrial facilities with heavy machinery',
-        'Residential properties with stained concrete or brick',
-        'Property managers seeking exterior revitalization',
-        'Businesses needing graffiti removal'
+        'Oil & gas operators and exploration companies',
+        'Industrial facility managers',
+        'Energy companies with active field sites',
+        'Environmental and regulatory consultants',
+        'Property owners with industrial legacy sites',
+      ],
+      process: [
+        'Site and scope intake consultation',
+        'Regulatory and compliance review',
+        'Qualified contractor sourcing and vetting',
+        'Project coordination and scheduling',
+        'On-site oversight and documentation',
+        'Compliance sign-off and reporting delivery',
+      ],
+      gallery: [
+        'https://images.pexels.com/photos/1108701/pexels-photo-1108701.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop',
+        'https://images.pexels.com/photos/2101137/pexels-photo-2101137.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop',
+        'https://images.pexels.com/photos/247763/pexels-photo-247763.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop',
+        'https://images.pexels.com/photos/1108572/pexels-photo-1108572.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop',
+      ],
+    },
+    'pressure-washing': {
+      title: 'Pressure Washing',
+      subtitle: 'Commercial & Industrial Surface Cleaning',
+      priceRange: '$200 - $5K+',
+      timeline: '1-2 days',
+      description: 'Commercial-grade pressure washing for businesses, parking structures, industrial facilities, and exterior surfaces. A practical starting point to assess your property\'s needs — and often the first step before larger surface or compliance projects.',
+      heroImage: 'https://images.pexels.com/photos/5691622/pexels-photo-5691622.jpeg?auto=compress&cs=tinysrgb&w=1920&h=800&fit=crop',
+      included: [
+        'Concrete driveways, sidewalks, and lots',
+        'Building exteriors (brick, stucco, siding)',
+        'Parking garages and structures',
+        'Graffiti and rust stain removal',
+        'Grease and oil removal',
+        'Pre-treatment for stubborn stains',
+        'Eco-friendly cleaning agents available',
+        'Commercial and industrial properties',
+      ],
+      idealFor: [
+        'Businesses prepping for surface work or restriping',
+        'Property managers maintaining curb appeal',
+        'Industrial sites with heavy grime buildup',
+        'Retail and restaurant exterior maintenance',
+        'Properties preparing for inspections or sale',
       ],
       process: [
         'Surface assessment and preparation',
         'Application of appropriate cleaning solutions',
-        'High-pressure washing application',
-        'Detailed rinsing to remove all residue',
-        'Final inspection for quality assurance'
+        'High-pressure washing execution',
+        'Detailed rinse and inspection',
+        'Final quality review and site cleanup',
       ],
       gallery: [
         'https://images.pexels.com/photos/5691622/pexels-photo-5691622.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop',
         'https://images.pexels.com/photos/5025639/pexels-photo-5025639.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop',
         'https://images.pexels.com/photos/4254165/pexels-photo-4254165.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop',
-        'https://images.pexels.com/photos/1463917/pexels-photo-1463917.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop'
-      ]
-    }
+        'https://images.pexels.com/photos/1463917/pexels-photo-1463917.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop',
+      ],
+    },
   };
 
-  const currentService = serviceData[service as keyof typeof serviceData] || serviceData['line-striping'];
+  const currentService = serviceData[service as keyof typeof serviceData] || serviceData['infrastructure-surface'];
 
   return (
     <div className="min-h-screen bg-slate-900">
       {/* Hero Section */}
       <section className="relative h-[70vh] flex items-center justify-center overflow-hidden">
         <div className="absolute inset-0 z-0">
-          <img 
+          <img
             src={currentService.heroImage}
             alt={currentService.title}
             className="w-full h-full object-cover"
@@ -347,7 +232,7 @@ const ServicePage: React.FC = () => {
           <p className="text-xl md:text-2xl text-slate-300 mb-8 leading-relaxed">
             {currentService.subtitle}
           </p>
-          
+
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-8">
             <div className="flex items-center space-x-2 bg-slate-800/50 backdrop-blur-sm px-4 py-2 rounded-lg">
               <DollarSign className="w-5 h-5 text-amber-400" />
@@ -360,7 +245,7 @@ const ServicePage: React.FC = () => {
           </div>
 
           <Link
-            to="/get-started"
+            to={`/get-started?service=${service}`}
             className="inline-flex items-center space-x-2 bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-600 hover:to-amber-700 text-slate-900 px-8 py-4 rounded-xl font-bold text-lg transition-all duration-300 transform hover:scale-105"
           >
             <span>Get Your Quote</span>
@@ -405,7 +290,7 @@ const ServicePage: React.FC = () => {
             <div className="lg:sticky lg:top-8">
               <div className="bg-slate-900 rounded-2xl p-8 border border-slate-700">
                 <h3 className="text-2xl font-bold mb-6 text-center">Get Started Today</h3>
-                
+
                 <div className="space-y-4 mb-6">
                   <div className="flex items-center justify-between py-3 border-b border-slate-700">
                     <span className="text-slate-400">Project Value:</span>
@@ -422,7 +307,7 @@ const ServicePage: React.FC = () => {
                 </div>
 
                 <Link
-                  to="/get-started"
+                  to={`/get-started?service=${service}`}
                   className="w-full bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-600 hover:to-amber-700 text-slate-900 px-6 py-4 rounded-lg font-bold text-lg transition-all duration-300 transform hover:scale-105 flex items-center justify-center space-x-2 mb-4"
                 >
                   <span>Request Quote</span>
@@ -431,7 +316,7 @@ const ServicePage: React.FC = () => {
 
                 <button className="w-full border-2 border-slate-600 hover:border-amber-400 text-white px-6 py-3 rounded-lg font-semibold transition-all duration-300 flex items-center justify-center space-x-2">
                   <Phone className="w-5 h-5" />
-                  <span>Call (555) 123-BUILD</span>
+                  <span>Call (661) 123-BUILD</span>
                 </button>
 
                 <div className="mt-6 pt-6 border-t border-slate-700">
@@ -442,7 +327,7 @@ const ServicePage: React.FC = () => {
                     </div>
                     <div className="flex items-center space-x-1">
                       <Star className="w-4 h-4 text-amber-400" />
-                      <span>5-Star Pros</span>
+                      <span>Vetted Pros</span>
                     </div>
                   </div>
                 </div>
@@ -456,7 +341,7 @@ const ServicePage: React.FC = () => {
       <section className="py-16 bg-slate-900">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className="text-3xl font-bold text-center mb-12">Our Process</h2>
-          
+
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {currentService.process.map((step, index) => (
               <div key={index} className="relative">
@@ -469,7 +354,7 @@ const ServicePage: React.FC = () => {
                   </div>
                   <p className="text-slate-300 leading-relaxed">{step}</p>
                 </div>
-                
+
                 {index < currentService.process.length - 1 && (
                   <div className="hidden lg:block absolute top-12 -right-4 w-8 h-0.5 bg-gradient-to-r from-amber-400 to-transparent"></div>
                 )}
@@ -483,12 +368,12 @@ const ServicePage: React.FC = () => {
       <section className="py-16 bg-slate-800">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className="text-3xl font-bold text-center mb-12">Project Gallery</h2>
-          
+
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {currentService.gallery.map((image, index) => (
               <div key={index} className="group relative overflow-hidden rounded-xl aspect-square">
-                <img 
-                  src={image} 
+                <img
+                  src={image}
                   alt={`${currentService.title} example ${index + 1}`}
                   className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
                 />
@@ -506,18 +391,18 @@ const ServicePage: React.FC = () => {
             Ready to Start Your <span className="text-amber-400">{currentService.title}</span> Project?
           </h2>
           <p className="text-xl text-slate-300 mb-8 leading-relaxed">
-            Get matched with premium contractors who specialize in high-end projects like yours.
+            Get matched with vetted contractors who specialize in commercial-grade work.
           </p>
-          
+
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link
-              to="/get-started"
+              to={`/get-started?service=${service}`}
               className="bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-600 hover:to-amber-700 text-slate-900 px-8 py-4 rounded-xl font-bold text-lg transition-all duration-300 transform hover:scale-105 flex items-center justify-center space-x-2"
             >
               <span>Get Your Quote Now</span>
               <ArrowRight className="w-5 h-5" />
             </Link>
-            
+
             <button className="border-2 border-amber-400 text-amber-400 hover:bg-amber-400 hover:text-slate-900 px-8 py-4 rounded-xl font-bold text-lg transition-all duration-300 flex items-center justify-center space-x-2">
               <Phone className="w-5 h-5" />
               <span>Call Now</span>

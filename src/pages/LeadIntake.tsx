@@ -1,25 +1,26 @@
 import React, { useState } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
-import { ArrowLeft, ArrowRight, Upload, MapPin, DollarSign, Calendar, User, Phone, Mail } from 'lucide-react';
+import { ArrowLeft, ArrowRight, Upload, MapPin, DollarSign, Calendar, User, Phone, Mail, AlertTriangle, HardHat, ClipboardCheck } from 'lucide-react';
 import { LeadService } from '../services/leadService';
 import { useAuth } from '../contexts/AuthContext';
 import FileUpload from '../components/FileUpload';
 
 const LeadIntake: React.FC = () => {
   const navigate = useNavigate();
-  const { user } = useAuth();
+  useAuth();
   const [searchParams] = useSearchParams();
   const contractorId = searchParams.get('contractorId');
   const source = searchParams.get('source') || 'website_form';
-  
+  const preselectedService = searchParams.get('service') || '';
+
   const [currentStep, setCurrentStep] = useState(1);
   const [loading, setLoading] = useState(false);
-  const [tempLeadId, setTempLeadId] = useState(`temp-${Date.now()}`);
+  const [tempLeadId] = useState(`temp-${Date.now()}`);
   const [formData, setFormData] = useState({
-    // Step 1: Project Type
-    projectType: '',
+    // Step 1
+    projectType: preselectedService,
     projectDescription: '',
-    
+
     // Step 2: Location & Budget
     address: '',
     city: '',
@@ -27,32 +28,71 @@ const LeadIntake: React.FC = () => {
     zip: '',
     budget: '',
     budgetFlexible: false,
-    
-    // Step 3: Timeline & Details
+
+    // Step 3: Service-Specific Technical Data
+
+    // Infrastructure & Surface
+    sqFootage: '',
+    parkingSpaces: '',
+    surfaceMaterial: '',
+    surfaceCondition: '',
+    adaCompliance: '',
+    striping: '',
+
+    // Mechanical & Electrical
+    systemType: '',
+    buildingSqFt: '',
+    panelAmperage: '',
+    equipmentAge: '',
+    numberOfUnits: '',
+    mechanicalWorkScope: '',
+
+    // Inspections & Compliance
+    inspectionType: '',
+    propertyYearBuilt: '',
+    lastInspectionDate: '',
+    complianceConcern: '',
+    certifyingBody: '',
+
+    // Oil & Gas / Industrial
+    oilGasSiteType: '',
+    acreage: '',
+    regulatoryAgency: '',
+    hazmatPresent: '',
+    cleanupScope: '',
+    environmentalConcern: '',
+
+    // Pressure Washing
+    pwSurfaceType: '',
+    buildingStories: '',
+    stainType: '',
+    pwFrequency: '',
+
+    // Step 4: Site Access & Operational Details
     timeline: '',
     startDate: '',
-    urgency: '',
     propertyType: '',
-    projectMetrics: '',
-    
-    // Step 4: Project Details
-    siteCondition: '',
-    specificNeeds: '',
+    workHoursConstraints: '',
+    siteAccessNotes: '',
+    safetyRequirements: '',
+    permitStatus: '',
+    occupancyStatus: '',
     frequency: '',
-    inspirationImages: [],
-    
+
     // Step 5: Contact Info
     firstName: '',
     lastName: '',
     email: '',
     phone: '',
+    companyName: '',
+    jobTitle: '',
     bestTimeToCall: '',
     preferredContact: '',
-    
+
     // Step 6: Financing
     needsFinancing: '',
     creditScore: '',
-    downPayment: ''
+    downPayment: '',
   });
 
   const totalSteps = 6;
@@ -61,36 +101,24 @@ const LeadIntake: React.FC = () => {
     const { name, value, type } = e.target;
     setFormData({
       ...formData,
-      [name]: type === 'checkbox' ? (e.target as HTMLInputElement).checked : value
+      [name]: type === 'checkbox' ? (e.target as HTMLInputElement).checked : value,
     });
   };
 
-  const nextStep = () => {
-    if (currentStep < totalSteps) setCurrentStep(currentStep + 1);
-  };
+  const nextStep = () => { if (currentStep < totalSteps) setCurrentStep(currentStep + 1); };
+  const prevStep = () => { if (currentStep > 1) setCurrentStep(currentStep - 1); };
 
-  const prevStep = () => {
-    if (currentStep > 1) setCurrentStep(currentStep - 1);
-  };
-
-  const handleUploadSuccess = (upload: any) => {
-    console.log('File uploaded successfully:', upload);
-  };
-
-  const handleUploadError = (error: string) => {
-    console.error('File upload error:', error);
-    alert(`Upload error: ${error}`);
-  };
+  const handleUploadSuccess = (upload: any) => { console.log('File uploaded:', upload); };
+  const handleUploadError = (error: string) => { alert(`Upload error: ${error}`); };
 
   const submitForm = async () => {
     try {
       setLoading(true);
-      
-      // Convert budget string to number
-      const budgetValue = formData.budget.replace(/[^0-9]/g, '');
-      const budgetNumber = budgetValue ? parseInt(budgetValue) : null;
-      
-      // Create lead object
+      const budgetLower = formData.budget.split('-')[0].replace(/[^0-9]/g, '');
+      const budgetNumber = budgetLower ? parseInt(budgetLower) : null;
+
+      const technicalDetails = buildTechnicalSummary();
+
       const leadData = {
         client_name: `${formData.firstName} ${formData.lastName}`.trim(),
         phone: formData.phone,
@@ -99,18 +127,25 @@ const LeadIntake: React.FC = () => {
         zip_code: formData.zip,
         budget: budgetNumber,
         timeline: formData.timeline,
-        description: `${formData.projectDescription}\n\nProperty Type: ${formData.propertyType}\nProject Metrics: ${formData.projectMetrics}\nSite Condition: ${formData.siteCondition}\nSpecific Needs: ${formData.specificNeeds}\nService Frequency: ${formData.frequency}`,
-        source: source,
+        description: [
+          formData.projectDescription && `Overview: ${formData.projectDescription}`,
+          technicalDetails,
+          formData.propertyType && `Property Type: ${formData.propertyType}`,
+          formData.workHoursConstraints && `Work Hours: ${formData.workHoursConstraints}`,
+          formData.siteAccessNotes && `Site Access: ${formData.siteAccessNotes}`,
+          formData.safetyRequirements && `Safety/Certs Required: ${formData.safetyRequirements}`,
+          formData.permitStatus && `Permit Status: ${formData.permitStatus}`,
+          formData.occupancyStatus && `Occupancy: ${formData.occupancyStatus}`,
+          formData.companyName && `Company: ${formData.companyName}`,
+          formData.jobTitle && `Title: ${formData.jobTitle}`,
+        ].filter(Boolean).join('\n'),
+        source,
         status: 'new',
-        assigned_contractor_id: contractorId || null
+        assigned_contractor_id: contractorId || null,
       };
 
-      // Submit to database
       const createdLead = await LeadService.createLead(leadData);
-      
-      // Redirect to deposit payment page
       navigate(`/deposit-payment?leadId=${createdLead.id}`);
-      
     } catch (error) {
       console.error('Error submitting lead:', error);
       alert('There was an error submitting your project. Please try again.');
@@ -119,23 +154,488 @@ const LeadIntake: React.FC = () => {
     }
   };
 
+  const buildTechnicalSummary = (): string => {
+    switch (formData.projectType) {
+      case 'infrastructure-surface':
+        return [
+          formData.sqFootage && `Site Area: ${formData.sqFootage} sq ft`,
+          formData.parkingSpaces && `Parking Spaces: ${formData.parkingSpaces}`,
+          formData.surfaceMaterial && `Surface Material: ${formData.surfaceMaterial}`,
+          formData.surfaceCondition && `Surface Condition: ${formData.surfaceCondition}`,
+          formData.adaCompliance && `ADA Compliance: ${formData.adaCompliance}`,
+          formData.striping && `Striping/Markings: ${formData.striping}`,
+        ].filter(Boolean).join('\n');
+      case 'mechanical-electrical':
+        return [
+          formData.systemType && `System Type: ${formData.systemType}`,
+          formData.buildingSqFt && `Building Size: ${formData.buildingSqFt} sq ft`,
+          formData.panelAmperage && `Panel/Service Amperage: ${formData.panelAmperage}`,
+          formData.equipmentAge && `Equipment Age: ${formData.equipmentAge}`,
+          formData.numberOfUnits && `Number of Units: ${formData.numberOfUnits}`,
+          formData.mechanicalWorkScope && `Scope: ${formData.mechanicalWorkScope}`,
+        ].filter(Boolean).join('\n');
+      case 'inspections-compliance':
+        return [
+          formData.inspectionType && `Inspection Type: ${formData.inspectionType}`,
+          formData.propertyYearBuilt && `Year Built: ${formData.propertyYearBuilt}`,
+          formData.lastInspectionDate && `Last Inspection: ${formData.lastInspectionDate}`,
+          formData.complianceConcern && `Compliance Concern: ${formData.complianceConcern}`,
+          formData.certifyingBody && `Certifying Body: ${formData.certifyingBody}`,
+        ].filter(Boolean).join('\n');
+      case 'oil-gas-industrial':
+        return [
+          formData.oilGasSiteType && `Site Type: ${formData.oilGasSiteType}`,
+          formData.acreage && `Site Acreage: ${formData.acreage}`,
+          formData.regulatoryAgency && `Regulatory Agency: ${formData.regulatoryAgency}`,
+          formData.hazmatPresent && `Hazmat Present: ${formData.hazmatPresent}`,
+          formData.cleanupScope && `Cleanup Scope: ${formData.cleanupScope}`,
+          formData.environmentalConcern && `Environmental Notes: ${formData.environmentalConcern}`,
+        ].filter(Boolean).join('\n');
+      case 'pressure-washing':
+        return [
+          formData.pwSurfaceType && `Surface Type: ${formData.pwSurfaceType}`,
+          formData.sqFootage && `Sq Footage: ${formData.sqFootage}`,
+          formData.buildingStories && `Building Stories: ${formData.buildingStories}`,
+          formData.stainType && `Stain/Soiling Type: ${formData.stainType}`,
+          formData.pwFrequency && `Service Frequency: ${formData.pwFrequency}`,
+        ].filter(Boolean).join('\n');
+      default:
+        return '';
+    }
+  };
+
   const projectTypes = [
-    { id: 'luxury-remodel', name: 'Luxury Home Remodeling', icon: '🏠' },
-    { id: 'line-striping', name: 'Line Striping', icon: '📏' },
-    { id: 'power-washing', name: 'Power Washing', icon: '💧' },
-    { id: 'window-cleaning', name: 'Window Cleaning', icon: '🪟' },
-    { id: 'seal-coating', name: 'Seal Coating', icon: '🛡️' },
-    { id: 'paving', name: 'Paving', icon: '🛣️' },
-    { id: 'parking-lot-sweeping', name: 'Parking Lot Sweeping', icon: '🧹' },
-    { id: 'crack-sealing', name: 'Crack Sealing', icon: '🩹' },
-    { id: 'pressure-washing', name: 'Pressure Washing', icon: '💦' },
+    { id: 'infrastructure-surface', name: 'Infrastructure & Surface', icon: '🏗️', description: 'Striping, paving, sealcoating, parking lot repair, ADA compliance' },
+    { id: 'mechanical-electrical', name: 'Mechanical & Electrical', icon: '⚡', description: 'Commercial electrical, HVAC, panel upgrades, industrial systems' },
+    { id: 'inspections-compliance', name: 'Inspections & Compliance', icon: '🔍', description: 'Code compliance, pre-purchase, fire, ADA, environmental audits' },
+    { id: 'oil-gas-industrial', name: 'Oil & Gas / Industrial', icon: '🛢️', description: 'Site cleanup, equipment install, environmental compliance' },
+    { id: 'pressure-washing', name: 'Pressure Washing', icon: '💧', description: 'Commercial exterior, fleet, industrial surface cleaning' },
   ];
 
-  // Filter projectTypes to only include the desired services
-  const desiredServiceIds = ['line-striping', 'power-washing', 'window-cleaning', 'seal-coating', 'paving', 'parking-lot-sweeping', 'crack-sealing', 'pressure-washing'];
-  const filteredProjectTypes = projectTypes.filter(type => desiredServiceIds.includes(type.id));
+  const renderServiceSpecificStep = () => {
+    switch (formData.projectType) {
+      case 'infrastructure-surface':
+        return (
+          <div className="space-y-6">
+            <div className="text-center mb-8">
+              <h2 className="text-3xl font-bold mb-2">Infrastructure & Surface Details</h2>
+              <p className="text-slate-400">Provide site measurements and surface specifications</p>
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div>
+                <label className="block text-sm font-semibold text-slate-300 mb-2">Total Site Area (sq ft)</label>
+                <input type="number" name="sqFootage" value={formData.sqFootage} onChange={handleInputChange}
+                  className="w-full bg-slate-700 border border-slate-600 rounded-lg px-4 py-3 text-white placeholder-slate-400 focus:ring-2 focus:ring-amber-400 focus:border-transparent"
+                  placeholder="e.g. 45000" />
+              </div>
+              <div>
+                <label className="block text-sm font-semibold text-slate-300 mb-2">Number of Parking Spaces</label>
+                <input type="number" name="parkingSpaces" value={formData.parkingSpaces} onChange={handleInputChange}
+                  className="w-full bg-slate-700 border border-slate-600 rounded-lg px-4 py-3 text-white placeholder-slate-400 focus:ring-2 focus:ring-amber-400 focus:border-transparent"
+                  placeholder="e.g. 250" />
+              </div>
+              <div>
+                <label className="block text-sm font-semibold text-slate-300 mb-2">Surface Material</label>
+                <select name="surfaceMaterial" value={formData.surfaceMaterial} onChange={handleInputChange}
+                  className="w-full bg-slate-700 border border-slate-600 rounded-lg px-4 py-3 text-white focus:ring-2 focus:ring-amber-400 focus:border-transparent">
+                  <option value="">Select surface type</option>
+                  <option value="asphalt">Asphalt</option>
+                  <option value="concrete">Concrete</option>
+                  <option value="pavers">Pavers / Brick</option>
+                  <option value="gravel">Gravel / Aggregate</option>
+                  <option value="mixed">Mixed / Multiple</option>
+                  <option value="unknown">Unknown</option>
+                </select>
+              </div>
+              <div>
+                <label className="block text-sm font-semibold text-slate-300 mb-2">Current Surface Condition</label>
+                <select name="surfaceCondition" value={formData.surfaceCondition} onChange={handleInputChange}
+                  className="w-full bg-slate-700 border border-slate-600 rounded-lg px-4 py-3 text-white focus:ring-2 focus:ring-amber-400 focus:border-transparent">
+                  <option value="">Select condition</option>
+                  <option value="good">Good — minor wear, maintenance only</option>
+                  <option value="fair">Fair — moderate cracking/fading</option>
+                  <option value="poor">Poor — significant damage, potholing</option>
+                  <option value="critical">Critical — full replacement needed</option>
+                  <option value="new">New construction / bare substrate</option>
+                </select>
+              </div>
+              <div>
+                <label className="block text-sm font-semibold text-slate-300 mb-2">ADA Compliance Work Required?</label>
+                <select name="adaCompliance" value={formData.adaCompliance} onChange={handleInputChange}
+                  className="w-full bg-slate-700 border border-slate-600 rounded-lg px-4 py-3 text-white focus:ring-2 focus:ring-amber-400 focus:border-transparent">
+                  <option value="">Select option</option>
+                  <option value="yes-full">Yes — full ADA upgrade needed</option>
+                  <option value="yes-partial">Yes — partial (signage/markings only)</option>
+                  <option value="no">No ADA work required</option>
+                  <option value="unknown">Not sure — needs assessment</option>
+                </select>
+              </div>
+              <div>
+                <label className="block text-sm font-semibold text-slate-300 mb-2">Striping / Markings Needed?</label>
+                <select name="striping" value={formData.striping} onChange={handleInputChange}
+                  className="w-full bg-slate-700 border border-slate-600 rounded-lg px-4 py-3 text-white focus:ring-2 focus:ring-amber-400 focus:border-transparent">
+                  <option value="">Select option</option>
+                  <option value="full-restripe">Full restripe (all spaces + lanes)</option>
+                  <option value="touch-up">Touch-up existing markings</option>
+                  <option value="new-layout">New layout design</option>
+                  <option value="fire-lanes">Fire lanes / safety markings only</option>
+                  <option value="no">No striping needed</option>
+                </select>
+              </div>
+              <div className="md:col-span-2">
+                <label className="block text-sm font-semibold text-slate-300 mb-2">Additional Project Description</label>
+                <textarea name="projectDescription" value={formData.projectDescription} onChange={handleInputChange} rows={3}
+                  className="w-full bg-slate-700 border border-slate-600 rounded-lg px-4 py-3 text-white placeholder-slate-400 focus:ring-2 focus:ring-amber-400 focus:border-transparent"
+                  placeholder="Describe scope: areas affected, last reseal/repave date, known issues (oil stains, drainage problems, structural damage), etc." />
+              </div>
+            </div>
+          </div>
+        );
 
+      case 'mechanical-electrical':
+        return (
+          <div className="space-y-6">
+            <div className="text-center mb-8">
+              <h2 className="text-3xl font-bold mb-2">Mechanical & Electrical Details</h2>
+              <p className="text-slate-400">Provide system specifications and building data</p>
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div>
+                <label className="block text-sm font-semibold text-slate-300 mb-2">System / Trade Type</label>
+                <select name="systemType" value={formData.systemType} onChange={handleInputChange}
+                  className="w-full bg-slate-700 border border-slate-600 rounded-lg px-4 py-3 text-white focus:ring-2 focus:ring-amber-400 focus:border-transparent">
+                  <option value="">Select system type</option>
+                  <option value="electrical-commercial">Commercial Electrical</option>
+                  <option value="electrical-industrial">Industrial Electrical (480V+)</option>
+                  <option value="hvac-commercial">Commercial HVAC</option>
+                  <option value="hvac-industrial">Industrial HVAC / Chillers</option>
+                  <option value="plumbing">Commercial Plumbing</option>
+                  <option value="fire-suppression">Fire Suppression Systems</option>
+                  <option value="generator">Standby Generator / UPS</option>
+                  <option value="lighting">Exterior Lighting / LED Retrofit</option>
+                  <option value="ev-charging">EV Charging Infrastructure</option>
+                  <option value="multiple">Multiple Systems</option>
+                </select>
+              </div>
+              <div>
+                <label className="block text-sm font-semibold text-slate-300 mb-2">Building Size (sq ft)</label>
+                <input type="number" name="buildingSqFt" value={formData.buildingSqFt} onChange={handleInputChange}
+                  className="w-full bg-slate-700 border border-slate-600 rounded-lg px-4 py-3 text-white placeholder-slate-400 focus:ring-2 focus:ring-amber-400 focus:border-transparent"
+                  placeholder="e.g. 25000" />
+              </div>
+              <div>
+                <label className="block text-sm font-semibold text-slate-300 mb-2">Electrical Service Size (Amps)</label>
+                <select name="panelAmperage" value={formData.panelAmperage} onChange={handleInputChange}
+                  className="w-full bg-slate-700 border border-slate-600 rounded-lg px-4 py-3 text-white focus:ring-2 focus:ring-amber-400 focus:border-transparent">
+                  <option value="">Select or enter amperage</option>
+                  <option value="200A">200A (light commercial)</option>
+                  <option value="400A">400A</option>
+                  <option value="800A">800A</option>
+                  <option value="1200A">1200A</option>
+                  <option value="2000A+">2000A+ (industrial)</option>
+                  <option value="unknown">Unknown / needs assessment</option>
+                  <option value="na">N/A — not electrical</option>
+                </select>
+              </div>
+              <div>
+                <label className="block text-sm font-semibold text-slate-300 mb-2">Existing Equipment Age</label>
+                <select name="equipmentAge" value={formData.equipmentAge} onChange={handleInputChange}
+                  className="w-full bg-slate-700 border border-slate-600 rounded-lg px-4 py-3 text-white focus:ring-2 focus:ring-amber-400 focus:border-transparent">
+                  <option value="">Select age range</option>
+                  <option value="0-5">0–5 years</option>
+                  <option value="6-10">6–10 years</option>
+                  <option value="11-20">11–20 years</option>
+                  <option value="20+">20+ years (end of life)</option>
+                  <option value="new-install">New installation (no existing)</option>
+                  <option value="unknown">Unknown</option>
+                </select>
+              </div>
+              <div>
+                <label className="block text-sm font-semibold text-slate-300 mb-2">Number of Units / Zones</label>
+                <input type="text" name="numberOfUnits" value={formData.numberOfUnits} onChange={handleInputChange}
+                  className="w-full bg-slate-700 border border-slate-600 rounded-lg px-4 py-3 text-white placeholder-slate-400 focus:ring-2 focus:ring-amber-400 focus:border-transparent"
+                  placeholder="e.g. 4 RTU, 12 VAV zones, 3 panels" />
+              </div>
+              <div>
+                <label className="block text-sm font-semibold text-slate-300 mb-2">Scope of Work</label>
+                <select name="mechanicalWorkScope" value={formData.mechanicalWorkScope} onChange={handleInputChange}
+                  className="w-full bg-slate-700 border border-slate-600 rounded-lg px-4 py-3 text-white focus:ring-2 focus:ring-amber-400 focus:border-transparent">
+                  <option value="">Select scope</option>
+                  <option value="repair">Repair / troubleshoot existing</option>
+                  <option value="replace">Replace / upgrade equipment</option>
+                  <option value="new-install">New installation</option>
+                  <option value="preventive">Preventive maintenance contract</option>
+                  <option value="retrofit">Energy efficiency retrofit</option>
+                  <option value="code-upgrade">Code compliance upgrade</option>
+                </select>
+              </div>
+              <div className="md:col-span-2">
+                <label className="block text-sm font-semibold text-slate-300 mb-2">Technical Description & Known Issues</label>
+                <textarea name="projectDescription" value={formData.projectDescription} onChange={handleInputChange} rows={3}
+                  className="w-full bg-slate-700 border border-slate-600 rounded-lg px-4 py-3 text-white placeholder-slate-400 focus:ring-2 focus:ring-amber-400 focus:border-transparent"
+                  placeholder="Describe the issue or scope: symptoms, error codes, system model numbers, last service date, specific code violations, load calculations if available, etc." />
+              </div>
+            </div>
+          </div>
+        );
 
+      case 'inspections-compliance':
+        return (
+          <div className="space-y-6">
+            <div className="text-center mb-8">
+              <h2 className="text-3xl font-bold mb-2">Inspection & Compliance Details</h2>
+              <p className="text-slate-400">Specify the inspection scope and compliance requirements</p>
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div>
+                <label className="block text-sm font-semibold text-slate-300 mb-2">Inspection Type</label>
+                <select name="inspectionType" value={formData.inspectionType} onChange={handleInputChange}
+                  className="w-full bg-slate-700 border border-slate-600 rounded-lg px-4 py-3 text-white focus:ring-2 focus:ring-amber-400 focus:border-transparent">
+                  <option value="">Select inspection type</option>
+                  <option value="pre-purchase">Pre-Purchase / Due Diligence</option>
+                  <option value="code-compliance">Building Code Compliance</option>
+                  <option value="fire-life-safety">Fire & Life Safety</option>
+                  <option value="ada-accessibility">ADA / Accessibility</option>
+                  <option value="electrical">Electrical Systems</option>
+                  <option value="structural">Structural / Engineering</option>
+                  <option value="environmental">Environmental / Phase I ESA</option>
+                  <option value="phase-ii">Phase II Environmental</option>
+                  <option value="mold-air">Mold / Indoor Air Quality</option>
+                  <option value="energy-audit">Energy Audit / Benchmarking</option>
+                  <option value="roofing">Roofing Assessment</option>
+                  <option value="elevator">Elevator / Lift Certification</option>
+                  <option value="annual-facility">Annual Facility Inspection</option>
+                </select>
+              </div>
+              <div>
+                <label className="block text-sm font-semibold text-slate-300 mb-2">Year Property Was Built</label>
+                <input type="text" name="propertyYearBuilt" value={formData.propertyYearBuilt} onChange={handleInputChange}
+                  className="w-full bg-slate-700 border border-slate-600 rounded-lg px-4 py-3 text-white placeholder-slate-400 focus:ring-2 focus:ring-amber-400 focus:border-transparent"
+                  placeholder="e.g. 1987" />
+              </div>
+              <div>
+                <label className="block text-sm font-semibold text-slate-300 mb-2">Last Inspection Date</label>
+                <input type="text" name="lastInspectionDate" value={formData.lastInspectionDate} onChange={handleInputChange}
+                  className="w-full bg-slate-700 border border-slate-600 rounded-lg px-4 py-3 text-white placeholder-slate-400 focus:ring-2 focus:ring-amber-400 focus:border-transparent"
+                  placeholder="Month/Year or 'Never'" />
+              </div>
+              <div>
+                <label className="block text-sm font-semibold text-slate-300 mb-2">Certifying / Issuing Authority</label>
+                <select name="certifyingBody" value={formData.certifyingBody} onChange={handleInputChange}
+                  className="w-full bg-slate-700 border border-slate-600 rounded-lg px-4 py-3 text-white focus:ring-2 focus:ring-amber-400 focus:border-transparent">
+                  <option value="">Select authority</option>
+                  <option value="local-ahj">Local AHJ (Authority Having Jurisdiction)</option>
+                  <option value="state-fire">State Fire Marshal</option>
+                  <option value="osha">OSHA</option>
+                  <option value="epa">EPA</option>
+                  <option value="insurance">Insurance Carrier</option>
+                  <option value="lender">Lender / Bank</option>
+                  <option value="municipality">City / County</option>
+                  <option value="internal">Internal / Ownership</option>
+                  <option value="unknown">Not sure yet</option>
+                </select>
+              </div>
+              <div className="md:col-span-2">
+                <label className="block text-sm font-semibold text-slate-300 mb-2">Compliance Concern or Trigger for Inspection</label>
+                <textarea name="complianceConcern" value={formData.complianceConcern} onChange={handleInputChange} rows={2}
+                  className="w-full bg-slate-700 border border-slate-600 rounded-lg px-4 py-3 text-white placeholder-slate-400 focus:ring-2 focus:ring-amber-400 focus:border-transparent"
+                  placeholder="e.g. Failed previous inspection, preparing for sale, tenant complaint, insurance renewal requirement, known violation notice, etc." />
+              </div>
+              <div className="md:col-span-2">
+                <label className="block text-sm font-semibold text-slate-300 mb-2">Scope & Additional Context</label>
+                <textarea name="projectDescription" value={formData.projectDescription} onChange={handleInputChange} rows={3}
+                  className="w-full bg-slate-700 border border-slate-600 rounded-lg px-4 py-3 text-white placeholder-slate-400 focus:ring-2 focus:ring-amber-400 focus:border-transparent"
+                  placeholder="Property size (sq ft / acres), number of buildings, specific systems or areas to inspect, any known issues or prior findings, previous inspection reports available, etc." />
+              </div>
+            </div>
+          </div>
+        );
+
+      case 'oil-gas-industrial':
+        return (
+          <div className="space-y-6">
+            <div className="text-center mb-8">
+              <h2 className="text-3xl font-bold mb-2">Oil, Gas & Industrial Site Details</h2>
+              <p className="text-slate-400">Provide site type, regulatory requirements, and safety scope</p>
+            </div>
+            <div className="bg-amber-500/10 border border-amber-500/30 rounded-lg p-4 flex items-start space-x-3 mb-2">
+              <AlertTriangle className="w-5 h-5 text-amber-400 flex-shrink-0 mt-0.5" />
+              <p className="text-sm text-amber-200">This information is used to match you with contractors who hold the correct certifications, insurance, and regulatory authorizations for your site.</p>
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div>
+                <label className="block text-sm font-semibold text-slate-300 mb-2">Site Type</label>
+                <select name="oilGasSiteType" value={formData.oilGasSiteType} onChange={handleInputChange}
+                  className="w-full bg-slate-700 border border-slate-600 rounded-lg px-4 py-3 text-white focus:ring-2 focus:ring-amber-400 focus:border-transparent">
+                  <option value="">Select site type</option>
+                  <option value="tank-farm">Tank Farm / Storage Facility</option>
+                  <option value="pipeline">Pipeline / Gathering System</option>
+                  <option value="wellsite">Wellsite / Pad</option>
+                  <option value="refinery">Refinery / Processing Plant</option>
+                  <option value="compressor-station">Compressor Station</option>
+                  <option value="distribution-terminal">Distribution Terminal</option>
+                  <option value="industrial-plant">Industrial Manufacturing Plant</option>
+                  <option value="chemical-facility">Chemical / Petrochemical Facility</option>
+                  <option value="remediation-site">Environmental Remediation Site</option>
+                </select>
+              </div>
+              <div>
+                <label className="block text-sm font-semibold text-slate-300 mb-2">Site Acreage</label>
+                <input type="text" name="acreage" value={formData.acreage} onChange={handleInputChange}
+                  className="w-full bg-slate-700 border border-slate-600 rounded-lg px-4 py-3 text-white placeholder-slate-400 focus:ring-2 focus:ring-amber-400 focus:border-transparent"
+                  placeholder="e.g. 12 acres" />
+              </div>
+              <div>
+                <label className="block text-sm font-semibold text-slate-300 mb-2">Primary Regulatory Agency</label>
+                <select name="regulatoryAgency" value={formData.regulatoryAgency} onChange={handleInputChange}
+                  className="w-full bg-slate-700 border border-slate-600 rounded-lg px-4 py-3 text-white focus:ring-2 focus:ring-amber-400 focus:border-transparent">
+                  <option value="">Select agency</option>
+                  <option value="epa">EPA (Environmental Protection Agency)</option>
+                  <option value="osha">OSHA (Federal)</option>
+                  <option value="cal-osha">Cal/OSHA (California)</option>
+                  <option value="phmsa">PHMSA (Pipeline / Hazmat)</option>
+                  <option value="state-oil-gas">State Oil & Gas Commission</option>
+                  <option value="dtsc">DTSC (CA Dept. of Toxic Substances)</option>
+                  <option value="rwqcb">RWQCB (Regional Water Quality Board)</option>
+                  <option value="dot">DOT</option>
+                  <option value="multiple">Multiple agencies</option>
+                  <option value="unknown">Unknown / needs determination</option>
+                </select>
+              </div>
+              <div>
+                <label className="block text-sm font-semibold text-slate-300 mb-2">Hazardous Materials Present?</label>
+                <select name="hazmatPresent" value={formData.hazmatPresent} onChange={handleInputChange}
+                  className="w-full bg-slate-700 border border-slate-600 rounded-lg px-4 py-3 text-white focus:ring-2 focus:ring-amber-400 focus:border-transparent">
+                  <option value="">Select option</option>
+                  <option value="hydrocarbons">Yes — Hydrocarbons (oil/fuel)</option>
+                  <option value="chemicals">Yes — Industrial Chemicals</option>
+                  <option value="asbestos">Yes — Asbestos / ACM</option>
+                  <option value="lead">Yes — Lead Paint / Contamination</option>
+                  <option value="multiple-hazmat">Yes — Multiple hazmat types</option>
+                  <option value="suspected">Suspected — needs assessment</option>
+                  <option value="no">No hazmat present</option>
+                </select>
+              </div>
+              <div>
+                <label className="block text-sm font-semibold text-slate-300 mb-2">Cleanup / Remediation Scope</label>
+                <select name="cleanupScope" value={formData.cleanupScope} onChange={handleInputChange}
+                  className="w-full bg-slate-700 border border-slate-600 rounded-lg px-4 py-3 text-white focus:ring-2 focus:ring-amber-400 focus:border-transparent">
+                  <option value="">Select scope</option>
+                  <option value="surface-only">Surface cleanup only</option>
+                  <option value="soil-excavation">Soil excavation & disposal</option>
+                  <option value="groundwater">Groundwater / pump-and-treat</option>
+                  <option value="tank-cleaning">Tank cleaning / decommissioning</option>
+                  <option value="full-remediation">Full site remediation</option>
+                  <option value="equipment-install">Equipment installation / upgrade</option>
+                  <option value="maintenance">Ongoing O&M contract</option>
+                  <option value="not-cleanup">Not a cleanup — other industrial work</option>
+                </select>
+              </div>
+              <div>
+                <label className="block text-sm font-semibold text-slate-300 mb-2">Environmental / Safety Concern</label>
+                <input type="text" name="environmentalConcern" value={formData.environmentalConcern} onChange={handleInputChange}
+                  className="w-full bg-slate-700 border border-slate-600 rounded-lg px-4 py-3 text-white placeholder-slate-400 focus:ring-2 focus:ring-amber-400 focus:border-transparent"
+                  placeholder="e.g. UST release, soil contamination, NOV received, regulatory deadline" />
+              </div>
+              <div className="md:col-span-2">
+                <label className="block text-sm font-semibold text-slate-300 mb-2">Site Description & Scope of Work</label>
+                <textarea name="projectDescription" value={formData.projectDescription} onChange={handleInputChange} rows={3}
+                  className="w-full bg-slate-700 border border-slate-600 rounded-lg px-4 py-3 text-white placeholder-slate-400 focus:ring-2 focus:ring-amber-400 focus:border-transparent"
+                  placeholder="Describe the work needed: regulatory deadline, prior investigation reports, site history, equipment involved, special access requirements (TWIC, confined space), etc." />
+              </div>
+            </div>
+          </div>
+        );
+
+      case 'pressure-washing':
+        return (
+          <div className="space-y-6">
+            <div className="text-center mb-8">
+              <h2 className="text-3xl font-bold mb-2">Pressure Washing Details</h2>
+              <p className="text-slate-400">Describe the surfaces and cleaning requirements</p>
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div>
+                <label className="block text-sm font-semibold text-slate-300 mb-2">Primary Surface Type</label>
+                <select name="pwSurfaceType" value={formData.pwSurfaceType} onChange={handleInputChange}
+                  className="w-full bg-slate-700 border border-slate-600 rounded-lg px-4 py-3 text-white focus:ring-2 focus:ring-amber-400 focus:border-transparent">
+                  <option value="">Select surface type</option>
+                  <option value="concrete-flatwork">Concrete flatwork (parking, walkways)</option>
+                  <option value="building-exterior">Building exterior (stucco, brick, panel)</option>
+                  <option value="metal-surfaces">Metal surfaces (tanks, equipment)</option>
+                  <option value="fleet-vehicles">Fleet vehicles / heavy equipment</option>
+                  <option value="loading-docks">Loading docks / warehouse floors</option>
+                  <option value="rooftop">Rooftop / HVAC equipment area</option>
+                  <option value="graffiti-removal">Graffiti removal</option>
+                  <option value="multiple">Multiple surface types</option>
+                </select>
+              </div>
+              <div>
+                <label className="block text-sm font-semibold text-slate-300 mb-2">Total Area to Clean (sq ft)</label>
+                <input type="number" name="sqFootage" value={formData.sqFootage} onChange={handleInputChange}
+                  className="w-full bg-slate-700 border border-slate-600 rounded-lg px-4 py-3 text-white placeholder-slate-400 focus:ring-2 focus:ring-amber-400 focus:border-transparent"
+                  placeholder="e.g. 10000" />
+              </div>
+              <div>
+                <label className="block text-sm font-semibold text-slate-300 mb-2">Building Height / Stories</label>
+                <select name="buildingStories" value={formData.buildingStories} onChange={handleInputChange}
+                  className="w-full bg-slate-700 border border-slate-600 rounded-lg px-4 py-3 text-white focus:ring-2 focus:ring-amber-400 focus:border-transparent">
+                  <option value="">Select height</option>
+                  <option value="ground-level">Ground level only</option>
+                  <option value="1-2">1–2 stories</option>
+                  <option value="3-5">3–5 stories</option>
+                  <option value="6-10">6–10 stories</option>
+                  <option value="10+">10+ stories (high-rise)</option>
+                </select>
+              </div>
+              <div>
+                <label className="block text-sm font-semibold text-slate-300 mb-2">Primary Stain / Soiling Type</label>
+                <select name="stainType" value={formData.stainType} onChange={handleInputChange}
+                  className="w-full bg-slate-700 border border-slate-600 rounded-lg px-4 py-3 text-white focus:ring-2 focus:ring-amber-400 focus:border-transparent">
+                  <option value="">Select soiling type</option>
+                  <option value="oil-grease">Oil / grease</option>
+                  <option value="dirt-algae">Dirt / algae / moss</option>
+                  <option value="rust">Rust / mineral deposits</option>
+                  <option value="paint-graffiti">Paint / graffiti</option>
+                  <option value="gum-organic">Gum / organic matter</option>
+                  <option value="chemical">Chemical / industrial residue</option>
+                  <option value="general-grime">General grime / weathering</option>
+                </select>
+              </div>
+              <div>
+                <label className="block text-sm font-semibold text-slate-300 mb-2">Service Frequency Needed</label>
+                <select name="pwFrequency" value={formData.pwFrequency} onChange={handleInputChange}
+                  className="w-full bg-slate-700 border border-slate-600 rounded-lg px-4 py-3 text-white focus:ring-2 focus:ring-amber-400 focus:border-transparent">
+                  <option value="">Select frequency</option>
+                  <option value="one-time">One-time</option>
+                  <option value="monthly">Monthly</option>
+                  <option value="quarterly">Quarterly</option>
+                  <option value="semi-annual">Semi-annual</option>
+                  <option value="annual">Annual</option>
+                  <option value="as-needed">As needed / on-call</option>
+                </select>
+              </div>
+              <div className="md:col-span-2">
+                <label className="block text-sm font-semibold text-slate-300 mb-2">Additional Details</label>
+                <textarea name="projectDescription" value={formData.projectDescription} onChange={handleInputChange} rows={3}
+                  className="w-full bg-slate-700 border border-slate-600 rounded-lg px-4 py-3 text-white placeholder-slate-400 focus:ring-2 focus:ring-amber-400 focus:border-transparent"
+                  placeholder="Water reclamation required? Eco/low-toxicity products needed? Night/weekend work? Specific pressure (PSI) or temperature requirements? Proximity to storm drains?" />
+              </div>
+            </div>
+          </div>
+        );
+
+      default:
+        return (
+          <div className="space-y-6">
+            <div className="text-center mb-8">
+              <h2 className="text-3xl font-bold mb-2">Project Technical Details</h2>
+              <p className="text-slate-400">Go back to Step 1 and select a service category first.</p>
+            </div>
+          </div>
+        );
+    }
+  };
 
   const renderStep = () => {
     switch (currentStep) {
@@ -144,14 +644,13 @@ const LeadIntake: React.FC = () => {
           <div className="space-y-6">
             <div className="text-center mb-8">
               <h2 className="text-3xl font-bold mb-4">What service do you need?</h2>
-              <p className="text-slate-400">Select the service that best describes what you need</p>
+              <p className="text-slate-400">Select the category that best matches your project</p>
             </div>
-
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              {filteredProjectTypes.map((type) => (
+              {projectTypes.map((type) => (
                 <button
                   key={type.id}
-                  onClick={() => setFormData({...formData, projectType: type.id})}
+                  onClick={() => setFormData({ ...formData, projectType: type.id })}
                   className={`p-6 rounded-xl border-2 text-left transition-all duration-300 hover:scale-105 ${
                     formData.projectType === type.id
                       ? 'border-amber-400 bg-amber-400/10'
@@ -159,23 +658,10 @@ const LeadIntake: React.FC = () => {
                   }`}
                 >
                   <div className="text-3xl mb-3">{type.icon}</div>
-                  <div className="font-semibold text-white">{type.name}</div>
+                  <div className="font-semibold text-white mb-1">{type.name}</div>
+                  <div className="text-xs text-slate-400">{type.description}</div>
                 </button>
               ))}
-            </div>
-
-            <div className="mt-8">
-              <label className="block text-sm font-semibold text-slate-300 mb-3">
-                Describe your project in detail
-              </label>
-              <textarea
-                name="projectDescription"
-                value={formData.projectDescription}
-                onChange={handleInputChange}
-                rows={4}
-                className="w-full bg-slate-700 border border-slate-600 rounded-lg px-4 py-3 text-white placeholder-slate-400 focus:ring-2 focus:ring-amber-400 focus:border-transparent transition-all"
-                placeholder="Tell us about your vision, specific requirements, and any special considerations..."
-              />
             </div>
           </div>
         );
@@ -187,98 +673,60 @@ const LeadIntake: React.FC = () => {
               <h2 className="text-3xl font-bold mb-4">Project Location & Budget</h2>
               <p className="text-slate-400">Help us understand your project scope and investment range</p>
             </div>
-
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div className="md:col-span-2">
                 <label className="block text-sm font-semibold text-slate-300 mb-2">
                   <MapPin className="w-4 h-4 inline mr-1" />
-                  Project Address
+                  Project Site Address
                 </label>
-                <input
-                  type="text"
-                  name="address"
-                  value={formData.address}
-                  onChange={handleInputChange}
-                  className="w-full bg-slate-700 border border-slate-600 rounded-lg px-4 py-3 text-white placeholder-slate-400 focus:ring-2 focus:ring-amber-400 focus:border-transparent transition-all"
-                  placeholder="Street address"
-                />
+                <input type="text" name="address" value={formData.address} onChange={handleInputChange}
+                  className="w-full bg-slate-700 border border-slate-600 rounded-lg px-4 py-3 text-white placeholder-slate-400 focus:ring-2 focus:ring-amber-400 focus:border-transparent"
+                  placeholder="Street address (or nearest intersection)" />
               </div>
-
               <div>
                 <label className="block text-sm font-semibold text-slate-300 mb-2">City</label>
-                <input
-                  type="text"
-                  name="city"
-                  value={formData.city}
-                  onChange={handleInputChange}
-                  className="w-full bg-slate-700 border border-slate-600 rounded-lg px-4 py-3 text-white placeholder-slate-400 focus:ring-2 focus:ring-amber-400 focus:border-transparent transition-all"
-                  placeholder="City"
-                />
+                <input type="text" name="city" value={formData.city} onChange={handleInputChange}
+                  className="w-full bg-slate-700 border border-slate-600 rounded-lg px-4 py-3 text-white placeholder-slate-400 focus:ring-2 focus:ring-amber-400 focus:border-transparent"
+                  placeholder="City" />
               </div>
-
               <div>
                 <label className="block text-sm font-semibold text-slate-300 mb-2">State</label>
-                <select
-                  name="state"
-                  value={formData.state}
-                  onChange={handleInputChange}
-                  className="w-full bg-slate-700 border border-slate-600 rounded-lg px-4 py-3 text-white focus:ring-2 focus:ring-amber-400 focus:border-transparent transition-all"
-                >
+                <select name="state" value={formData.state} onChange={handleInputChange}
+                  className="w-full bg-slate-700 border border-slate-600 rounded-lg px-4 py-3 text-white focus:ring-2 focus:ring-amber-400 focus:border-transparent">
                   <option value="">Select State</option>
-                  <option value="CA">California</option>
-                  <option value="TX">Texas</option>
-                  <option value="FL">Florida</option>
-                  <option value="NY">New York</option>
-                  <option value="WA">Washington</option>
-                  <option value="CO">Colorado</option>
-                  <option value="AZ">Arizona</option>
-                  <option value="NV">Nevada</option>
+                  {['AL','AK','AZ','AR','CA','CO','CT','DE','FL','GA','HI','ID','IL','IN','IA','KS','KY','LA','ME','MD','MA','MI','MN','MS','MO','MT','NE','NV','NH','NJ','NM','NY','NC','ND','OH','OK','OR','PA','RI','SC','SD','TN','TX','UT','VT','VA','WA','WV','WI','WY'].map(s => (
+                    <option key={s} value={s}>{s}</option>
+                  ))}
                 </select>
               </div>
-
               <div>
                 <label className="block text-sm font-semibold text-slate-300 mb-2">ZIP Code</label>
-                <input
-                  type="text"
-                  name="zip"
-                  value={formData.zip}
-                  onChange={handleInputChange}
-                  className="w-full bg-slate-700 border border-slate-600 rounded-lg px-4 py-3 text-white placeholder-slate-400 focus:ring-2 focus:ring-amber-400 focus:border-transparent transition-all"
-                  placeholder="ZIP Code"
-                />
+                <input type="text" name="zip" value={formData.zip} onChange={handleInputChange}
+                  className="w-full bg-slate-700 border border-slate-600 rounded-lg px-4 py-3 text-white placeholder-slate-400 focus:ring-2 focus:ring-amber-400 focus:border-transparent"
+                  placeholder="ZIP Code" />
               </div>
-
-              <div className="md:col-span-2">
+              <div>
                 <label className="block text-sm font-semibold text-slate-300 mb-2">
                   <DollarSign className="w-4 h-4 inline mr-1" />
-                  Budget Range
+                  Project Budget Range
                 </label>
-                <select
-                  name="budget"
-                  value={formData.budget}
-                  onChange={handleInputChange}
-                  className="w-full bg-slate-700 border border-slate-600 rounded-lg px-4 py-3 text-white focus:ring-2 focus:ring-amber-400 focus:border-transparent transition-all"
-                >
-                  <option value="">Select your budget range</option>
-                  <option value="25000-50000">$25K - $50K</option>
-                  <option value="50000-100000">$50K - $100K</option>
-                  <option value="100000-250000">$100K - $250K</option>
-                  <option value="250000-500000">$250K - $500K</option>
-                  <option value="500000-1000000">$500K - $1M</option>
+                <select name="budget" value={formData.budget} onChange={handleInputChange}
+                  className="w-full bg-slate-700 border border-slate-600 rounded-lg px-4 py-3 text-white focus:ring-2 focus:ring-amber-400 focus:border-transparent">
+                  <option value="">Select budget range</option>
+                  <option value="10000-25000">$10K – $25K</option>
+                  <option value="25000-50000">$25K – $50K</option>
+                  <option value="50000-100000">$50K – $100K</option>
+                  <option value="100000-250000">$100K – $250K</option>
+                  <option value="250000-500000">$250K – $500K</option>
+                  <option value="500000-1000000">$500K – $1M</option>
                   <option value="1000000+">$1M+</option>
                 </select>
               </div>
-
               <div className="md:col-span-2">
                 <label className="flex items-center space-x-3">
-                  <input
-                    type="checkbox"
-                    name="budgetFlexible"
-                    checked={formData.budgetFlexible}
-                    onChange={handleInputChange}
-                    className="w-5 h-5 text-amber-400 bg-slate-700 border-slate-600 rounded focus:ring-amber-400"
-                  />
-                  <span className="text-slate-300">My budget is flexible for the right solution</span>
+                  <input type="checkbox" name="budgetFlexible" checked={formData.budgetFlexible} onChange={handleInputChange}
+                    className="w-5 h-5 text-amber-400 bg-slate-700 border-slate-600 rounded focus:ring-amber-400" />
+                  <span className="text-slate-300">Budget is flexible for the right solution / qualified contractor</span>
                 </label>
               </div>
             </div>
@@ -286,136 +734,120 @@ const LeadIntake: React.FC = () => {
         );
 
       case 3:
-        return (
-          <div className="space-y-6">
-            <div className="text-center mb-8">
-              <h2 className="text-3xl font-bold mb-4">Timeline & Property Details</h2>
-              <p className="text-slate-400">Tell us about your timeline and property specifics</p>
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <div>
-                <label className="block text-sm font-semibold text-slate-300 mb-2">
-                  <Calendar className="w-4 h-4 inline mr-1" />
-                  When do you want to start?
-                </label>
-                <select
-                  name="timeline"
-                  value={formData.timeline}
-                  onChange={handleInputChange}
-                  className="w-full bg-slate-700 border border-slate-600 rounded-lg px-4 py-3 text-white focus:ring-2 focus:ring-amber-400 focus:border-transparent transition-all"
-                >
-                  <option value="">Select timeline</option>
-                  <option value="asap">ASAP</option>
-                  <option value="this-week">This Week</option>
-                  <option value="this-month">This Month</option>
-                  <option value="next-month">Next Month</option>
-                  <option value="flexible">Flexible</option>
-                </select>
-              </div>
-
-              <div>
-                <label className="block text-sm font-semibold text-slate-300 mb-2">Property Type</label>
-                <select
-                  name="propertyType"
-                  value={formData.propertyType}
-                  onChange={handleInputChange}
-                  className="w-full bg-slate-700 border border-slate-600 rounded-lg px-4 py-3 text-white focus:ring-2 focus:ring-amber-400 focus:border-transparent transition-all"
-                >
-                  <option value="">Select property type</option>
-                  <option value="commercial">Commercial Property</option>
-                  <option value="industrial">Industrial Facility</option>
-                  <option value="retail">Retail Location</option>
-                  <option value="office">Office Building</option>
-                  <option value="residential">Residential Property</option>
-                  <option value="municipal">Municipal/Government</option>
-                  <option value="healthcare">Healthcare Facility</option>
-                  <option value="education">Educational Institution</option>
-                </select>
-              </div>
-
-              <div>
-                <label className="block text-sm font-semibold text-slate-300 mb-2">Preferred Start Date (Optional)</label>
-                <input
-                  type="date"
-                  name="startDate"
-                  value={formData.startDate}
-                  onChange={handleInputChange}
-                  className="w-full bg-slate-700 border border-slate-600 rounded-lg px-4 py-3 text-white focus:ring-2 focus:ring-amber-400 focus:border-transparent transition-all"
-                />
-              </div>
-
-              <div>
-                <label className="block text-sm font-semibold text-slate-300 mb-2">Service Frequency</label>
-                <select
-                  name="frequency"
-                  value={formData.frequency}
-                  onChange={handleInputChange}
-                  className="w-full bg-slate-700 border border-slate-600 rounded-lg px-4 py-3 text-white focus:ring-2 focus:ring-amber-400 focus:border-transparent transition-all"
-                >
-                  <option value="">Select frequency needed</option>
-                  <option value="one-time">One-time service</option>
-                  <option value="weekly">Weekly</option>
-                  <option value="monthly">Monthly</option>
-                  <option value="quarterly">Quarterly</option>
-                  <option value="bi-annually">Twice per year</option>
-                  <option value="annually">Annually</option>
-                  <option value="as-needed">As needed</option>
-                </select>
-              </div>
-
-              <div className="md:col-span-2">
-                <label className="block text-sm font-semibold text-slate-300 mb-2">Project Measurements</label>
-                <textarea
-                  name="projectMetrics"
-                  value={formData.projectMetrics}
-                  onChange={handleInputChange}
-                  rows={3}
-                  className="w-full bg-slate-700 border border-slate-600 rounded-lg px-4 py-3 text-white placeholder-slate-400 focus:ring-2 focus:ring-amber-400 focus:border-transparent transition-all"
-                  placeholder="Provide measurements relevant to your service: square footage for cleaning/coating, linear feet for striping, number of windows, parking spaces, building height, etc."
-                />
-              </div>
-            </div>
-          </div>
-        );
+        return renderServiceSpecificStep();
 
       case 4:
         return (
           <div className="space-y-6">
             <div className="text-center mb-8">
-              <h2 className="text-3xl font-bold mb-4">Site Condition & Requirements</h2>
-              <p className="text-slate-400">Help us understand the current condition and your specific needs</p>
+              <h2 className="text-3xl font-bold mb-2">Site Access & Operational Requirements</h2>
+              <p className="text-slate-400">Help us match contractors who can meet your site-specific constraints</p>
             </div>
-
-            <div className="space-y-6">
-              <div>
-                <label className="block text-sm font-semibold text-slate-300 mb-2">Current Site/Surface Condition</label>
-                <textarea
-                  name="siteCondition"
-                  value={formData.siteCondition}
-                  onChange={handleInputChange}
-                  rows={3}
-                  className="w-full bg-slate-700 border border-slate-600 rounded-lg px-4 py-3 text-white placeholder-slate-400 focus:ring-2 focus:ring-amber-400 focus:border-transparent transition-all"
-                  placeholder="Describe current condition: existing wear/damage, last service date, stains/debris present, surface material, accessibility issues, etc."
-                />
-              </div>
-
-              <div>
-                <label className="block text-sm font-semibold text-slate-300 mb-2">Specific Service Requirements</label>
-                <textarea
-                  name="specificNeeds"
-                  value={formData.specificNeeds}
-                  onChange={handleInputChange}
-                  rows={3}
-                  className="w-full bg-slate-700 border border-slate-600 rounded-lg px-4 py-3 text-white placeholder-slate-400 focus:ring-2 focus:ring-amber-400 focus:border-transparent transition-all"
-                  placeholder="Special requirements: eco-friendly products, specific materials/paints, ADA compliance needs, traffic control during service, after-hours work, etc."
-                />
-              </div>
-
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div>
                 <label className="block text-sm font-semibold text-slate-300 mb-2">
+                  <Calendar className="w-4 h-4 inline mr-1" />
+                  When do you need this started?
+                </label>
+                <select name="timeline" value={formData.timeline} onChange={handleInputChange}
+                  className="w-full bg-slate-700 border border-slate-600 rounded-lg px-4 py-3 text-white focus:ring-2 focus:ring-amber-400 focus:border-transparent">
+                  <option value="">Select timeline</option>
+                  <option value="emergency">Emergency — within 24–48 hours</option>
+                  <option value="asap">ASAP — within 1–2 weeks</option>
+                  <option value="this-month">This month</option>
+                  <option value="next-30-60">Next 30–60 days</option>
+                  <option value="next-quarter">Next quarter</option>
+                  <option value="flexible">Flexible / scheduling open</option>
+                </select>
+              </div>
+              <div>
+                <label className="block text-sm font-semibold text-slate-300 mb-2">Property / Facility Type</label>
+                <select name="propertyType" value={formData.propertyType} onChange={handleInputChange}
+                  className="w-full bg-slate-700 border border-slate-600 rounded-lg px-4 py-3 text-white focus:ring-2 focus:ring-amber-400 focus:border-transparent">
+                  <option value="">Select property type</option>
+                  <option value="commercial-office">Commercial Office</option>
+                  <option value="retail-strip">Retail / Strip Mall</option>
+                  <option value="industrial-warehouse">Industrial / Warehouse</option>
+                  <option value="multifamily">Multifamily / HOA</option>
+                  <option value="healthcare">Healthcare / Medical</option>
+                  <option value="education">Educational Institution</option>
+                  <option value="municipal">Municipal / Government</option>
+                  <option value="hospitality">Hospitality / Hotel</option>
+                  <option value="mixed-use">Mixed Use</option>
+                  <option value="oil-gas-site">Oil & Gas / Industrial Site</option>
+                </select>
+              </div>
+              <div>
+                <label className="block text-sm font-semibold text-slate-300 mb-2">Allowable Work Hours</label>
+                <select name="workHoursConstraints" value={formData.workHoursConstraints} onChange={handleInputChange}
+                  className="w-full bg-slate-700 border border-slate-600 rounded-lg px-4 py-3 text-white focus:ring-2 focus:ring-amber-400 focus:border-transparent">
+                  <option value="">Select work hours</option>
+                  <option value="standard">Standard business hours (M–F, 7am–5pm)</option>
+                  <option value="nights">Nights only (after 7pm)</option>
+                  <option value="weekends">Weekends only</option>
+                  <option value="nights-weekends">Nights & weekends</option>
+                  <option value="shutdown">Full shutdown / outage window</option>
+                  <option value="24-7">24/7 — no restrictions</option>
+                  <option value="flexible">Flexible — contractor can advise</option>
+                </select>
+              </div>
+              <div>
+                <label className="block text-sm font-semibold text-slate-300 mb-2">Occupancy During Work</label>
+                <select name="occupancyStatus" value={formData.occupancyStatus} onChange={handleInputChange}
+                  className="w-full bg-slate-700 border border-slate-600 rounded-lg px-4 py-3 text-white focus:ring-2 focus:ring-amber-400 focus:border-transparent">
+                  <option value="">Select occupancy status</option>
+                  <option value="occupied-full">Fully occupied — work around tenants</option>
+                  <option value="occupied-partial">Partially occupied</option>
+                  <option value="vacant">Vacant / unoccupied</option>
+                  <option value="operational-industrial">Operational industrial facility</option>
+                  <option value="phased-shutdown">Phased sections taken offline</option>
+                </select>
+              </div>
+              <div>
+                <label className="block text-sm font-semibold text-slate-300 mb-2">
+                  <HardHat className="w-4 h-4 inline mr-1" />
+                  Safety / Certification Requirements
+                </label>
+                <select name="safetyRequirements" value={formData.safetyRequirements} onChange={handleInputChange}
+                  className="w-full bg-slate-700 border border-slate-600 rounded-lg px-4 py-3 text-white focus:ring-2 focus:ring-amber-400 focus:border-transparent">
+                  <option value="">Select requirements</option>
+                  <option value="osha-10">OSHA-10 required</option>
+                  <option value="osha-30">OSHA-30 required</option>
+                  <option value="confined-space">Confined space entry</option>
+                  <option value="twic">TWIC card required</option>
+                  <option value="lockout-tagout">Lockout/Tagout (LOTO) program</option>
+                  <option value="hot-work">Hot work permit required</option>
+                  <option value="prevailing-wage">Prevailing wage / Davis-Bacon</option>
+                  <option value="union">Union labor required</option>
+                  <option value="none">No special requirements</option>
+                  <option value="multiple">Multiple — details in notes</option>
+                </select>
+              </div>
+              <div>
+                <label className="block text-sm font-semibold text-slate-300 mb-2">
+                  <ClipboardCheck className="w-4 h-4 inline mr-1" />
+                  Permit Status
+                </label>
+                <select name="permitStatus" value={formData.permitStatus} onChange={handleInputChange}
+                  className="w-full bg-slate-700 border border-slate-600 rounded-lg px-4 py-3 text-white focus:ring-2 focus:ring-amber-400 focus:border-transparent">
+                  <option value="">Select permit status</option>
+                  <option value="not-required">No permit required</option>
+                  <option value="need-to-obtain">Need to obtain — contractor to pull</option>
+                  <option value="already-obtained">Already obtained</option>
+                  <option value="under-review">Submitted, under review</option>
+                  <option value="unknown">Unknown — needs determination</option>
+                </select>
+              </div>
+              <div className="md:col-span-2">
+                <label className="block text-sm font-semibold text-slate-300 mb-2">Site Access Notes & Special Conditions</label>
+                <textarea name="siteAccessNotes" value={formData.siteAccessNotes} onChange={handleInputChange} rows={3}
+                  className="w-full bg-slate-700 border border-slate-600 rounded-lg px-4 py-3 text-white placeholder-slate-400 focus:ring-2 focus:ring-amber-400 focus:border-transparent"
+                  placeholder="Gate codes, key/badge pickup, escort required, overhead clearance limits, weight restrictions, vendor check-in procedures, utility locates required, traffic control needed, etc." />
+              </div>
+              <div className="md:col-span-2">
+                <label className="block text-sm font-semibold text-slate-300 mb-2">
                   <Upload className="w-4 h-4 inline mr-1" />
-                  Site Photos or Reference Images
+                  Upload Site Plans, Photos, or Specs
                 </label>
                 <FileUpload
                   relatedTo="lead"
@@ -423,10 +855,10 @@ const LeadIntake: React.FC = () => {
                   onUploadSuccess={handleUploadSuccess}
                   onUploadError={handleUploadError}
                   maxFiles={5}
-                  allowedFileTypes={['image/*', 'application/pdf', '.doc', '.docx']}
-                  maxSizeMB={10}
-                  label="Add Site Photos or Reference Images"
-                  description="Upload current site photos, reference images, or specification documents to help us understand your needs"
+                  allowedFileTypes={['image/*', 'application/pdf', '.doc', '.docx', '.dwg', '.dxf']}
+                  maxSizeMB={25}
+                  label="Add Site Photos, Plans, or Spec Sheets"
+                  description="Upload site photos, CAD drawings, spec sheets, prior reports, or NOVs to speed up matching"
                   bucketName="uploads"
                 />
               </div>
@@ -438,96 +870,70 @@ const LeadIntake: React.FC = () => {
         return (
           <div className="space-y-6">
             <div className="text-center mb-8">
-              <h2 className="text-3xl font-bold mb-4">Contact Information</h2>
-              <p className="text-slate-400">How can our contractors reach you?</p>
+              <h2 className="text-3xl font-bold mb-4">Your Contact Information</h2>
+              <p className="text-slate-400">Our operations team will reach out within 1 business day</p>
             </div>
-
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div>
                 <label className="block text-sm font-semibold text-slate-300 mb-2">
                   <User className="w-4 h-4 inline mr-1" />
                   First Name
                 </label>
-                <input
-                  type="text"
-                  name="firstName"
-                  value={formData.firstName}
-                  onChange={handleInputChange}
-                  className="w-full bg-slate-700 border border-slate-600 rounded-lg px-4 py-3 text-white placeholder-slate-400 focus:ring-2 focus:ring-amber-400 focus:border-transparent transition-all"
-                  placeholder="First name"
-                  required
-                />
+                <input type="text" name="firstName" value={formData.firstName} onChange={handleInputChange}
+                  className="w-full bg-slate-700 border border-slate-600 rounded-lg px-4 py-3 text-white placeholder-slate-400 focus:ring-2 focus:ring-amber-400 focus:border-transparent"
+                  placeholder="First name" />
               </div>
-
               <div>
                 <label className="block text-sm font-semibold text-slate-300 mb-2">Last Name</label>
-                <input
-                  type="text"
-                  name="lastName"
-                  value={formData.lastName}
-                  onChange={handleInputChange}
-                  className="w-full bg-slate-700 border border-slate-600 rounded-lg px-4 py-3 text-white placeholder-slate-400 focus:ring-2 focus:ring-amber-400 focus:border-transparent transition-all"
-                  placeholder="Last name"
-                  required
-                />
+                <input type="text" name="lastName" value={formData.lastName} onChange={handleInputChange}
+                  className="w-full bg-slate-700 border border-slate-600 rounded-lg px-4 py-3 text-white placeholder-slate-400 focus:ring-2 focus:ring-amber-400 focus:border-transparent"
+                  placeholder="Last name" />
               </div>
-
+              <div>
+                <label className="block text-sm font-semibold text-slate-300 mb-2">Company / Organization</label>
+                <input type="text" name="companyName" value={formData.companyName} onChange={handleInputChange}
+                  className="w-full bg-slate-700 border border-slate-600 rounded-lg px-4 py-3 text-white placeholder-slate-400 focus:ring-2 focus:ring-amber-400 focus:border-transparent"
+                  placeholder="Company name (optional)" />
+              </div>
+              <div>
+                <label className="block text-sm font-semibold text-slate-300 mb-2">Job Title / Role</label>
+                <input type="text" name="jobTitle" value={formData.jobTitle} onChange={handleInputChange}
+                  className="w-full bg-slate-700 border border-slate-600 rounded-lg px-4 py-3 text-white placeholder-slate-400 focus:ring-2 focus:ring-amber-400 focus:border-transparent"
+                  placeholder="e.g. Facilities Director, Property Manager, Owner" />
+              </div>
               <div>
                 <label className="block text-sm font-semibold text-slate-300 mb-2">
                   <Mail className="w-4 h-4 inline mr-1" />
                   Email Address
                 </label>
-                <input
-                  type="email"
-                  name="email"
-                  value={formData.email}
-                  onChange={handleInputChange}
-                  className="w-full bg-slate-700 border border-slate-600 rounded-lg px-4 py-3 text-white placeholder-slate-400 focus:ring-2 focus:ring-amber-400 focus:border-transparent transition-all"
-                  placeholder="your@email.com"
-                  required
-                />
+                <input type="email" name="email" value={formData.email} onChange={handleInputChange}
+                  className="w-full bg-slate-700 border border-slate-600 rounded-lg px-4 py-3 text-white placeholder-slate-400 focus:ring-2 focus:ring-amber-400 focus:border-transparent"
+                  placeholder="your@email.com" />
               </div>
-
               <div>
                 <label className="block text-sm font-semibold text-slate-300 mb-2">
                   <Phone className="w-4 h-4 inline mr-1" />
                   Phone Number
                 </label>
-                <input
-                  type="tel"
-                  name="phone"
-                  value={formData.phone}
-                  onChange={handleInputChange}
-                  className="w-full bg-slate-700 border border-slate-600 rounded-lg px-4 py-3 text-white placeholder-slate-400 focus:ring-2 focus:ring-amber-400 focus:border-transparent transition-all"
-                  placeholder="(555) 123-4567"
-                  required
-                />
+                <input type="tel" name="phone" value={formData.phone} onChange={handleInputChange}
+                  className="w-full bg-slate-700 border border-slate-600 rounded-lg px-4 py-3 text-white placeholder-slate-400 focus:ring-2 focus:ring-amber-400 focus:border-transparent"
+                  placeholder="(555) 123-4567" />
               </div>
-
               <div>
                 <label className="block text-sm font-semibold text-slate-300 mb-2">Best Time to Call</label>
-                <select
-                  name="bestTimeToCall"
-                  value={formData.bestTimeToCall}
-                  onChange={handleInputChange}
-                  className="w-full bg-slate-700 border border-slate-600 rounded-lg px-4 py-3 text-white focus:ring-2 focus:ring-amber-400 focus:border-transparent transition-all"
-                >
+                <select name="bestTimeToCall" value={formData.bestTimeToCall} onChange={handleInputChange}
+                  className="w-full bg-slate-700 border border-slate-600 rounded-lg px-4 py-3 text-white focus:ring-2 focus:ring-amber-400 focus:border-transparent">
                   <option value="">Select best time</option>
-                  <option value="morning">Morning (8am-12pm)</option>
-                  <option value="afternoon">Afternoon (12pm-5pm)</option>
-                  <option value="evening">Evening (5pm-8pm)</option>
+                  <option value="morning">Morning (8am–12pm)</option>
+                  <option value="afternoon">Afternoon (12pm–5pm)</option>
+                  <option value="evening">Evening (5pm–8pm)</option>
                   <option value="anytime">Anytime</option>
                 </select>
               </div>
-
               <div>
                 <label className="block text-sm font-semibold text-slate-300 mb-2">Preferred Contact Method</label>
-                <select
-                  name="preferredContact"
-                  value={formData.preferredContact}
-                  onChange={handleInputChange}
-                  className="w-full bg-slate-700 border border-slate-600 rounded-lg px-4 py-3 text-white focus:ring-2 focus:ring-amber-400 focus:border-transparent transition-all"
-                >
+                <select name="preferredContact" value={formData.preferredContact} onChange={handleInputChange}
+                  className="w-full bg-slate-700 border border-slate-600 rounded-lg px-4 py-3 text-white focus:ring-2 focus:ring-amber-400 focus:border-transparent">
                   <option value="">Select preference</option>
                   <option value="phone">Phone call</option>
                   <option value="email">Email</option>
@@ -543,64 +949,50 @@ const LeadIntake: React.FC = () => {
         return (
           <div className="space-y-6">
             <div className="text-center mb-8">
-              <h2 className="text-3xl font-bold mb-4">Financing Options</h2>
-              <p className="text-slate-400">Would you like information about project financing?</p>
+              <h2 className="text-3xl font-bold mb-4">Project Financing</h2>
+              <p className="text-slate-400">Would you like information about commercial project financing?</p>
             </div>
-
             <div className="space-y-6">
               <div>
                 <label className="block text-sm font-semibold text-slate-300 mb-3">
                   Do you need financing for this project?
                 </label>
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
-                  {['Yes, I need financing', 'Maybe, tell me more', 'No, paying cash'].map((option) => (
-                    <button
-                      key={option}
-                      onClick={() => setFormData({...formData, needsFinancing: option})}
-                      className={`p-4 rounded-lg border-2 text-center transition-all duration-300 ${
+                  {['Yes, I need financing', 'Maybe, tell me more', 'No, paying out of pocket'].map((option) => (
+                    <button key={option}
+                      onClick={() => setFormData({ ...formData, needsFinancing: option })}
+                      className={`p-4 rounded-lg border-2 text-center text-sm transition-all duration-300 ${
                         formData.needsFinancing === option
                           ? 'border-amber-400 bg-amber-400/10'
                           : 'border-slate-700 hover:border-amber-400/50'
                       }`}
-                    >
-                      {option}
-                    </button>
+                    >{option}</button>
                   ))}
                 </div>
               </div>
 
-              {formData.needsFinancing !== 'No, paying cash' && (
+              {formData.needsFinancing !== 'No, paying out of pocket' && formData.needsFinancing !== '' && (
                 <>
                   <div>
-                    <label className="block text-sm font-semibold text-slate-300 mb-2">Credit Score Range</label>
-                    <select
-                      name="creditScore"
-                      value={formData.creditScore}
-                      onChange={handleInputChange}
-                      className="w-full bg-slate-700 border border-slate-600 rounded-lg px-4 py-3 text-white focus:ring-2 focus:ring-amber-400 focus:border-transparent transition-all"
-                    >
-                      <option value="">Select credit score range</option>
-                      <option value="750+">Excellent (750+)</option>
-                      <option value="700-749">Good (700-749)</option>
-                      <option value="650-699">Fair (650-699)</option>
-                      <option value="600-649">Poor (600-649)</option>
-                      <option value="below-600">Below 600</option>
+                    <label className="block text-sm font-semibold text-slate-300 mb-2">Business Credit Profile</label>
+                    <select name="creditScore" value={formData.creditScore} onChange={handleInputChange}
+                      className="w-full bg-slate-700 border border-slate-600 rounded-lg px-4 py-3 text-white focus:ring-2 focus:ring-amber-400 focus:border-transparent">
+                      <option value="">Select credit profile</option>
+                      <option value="excellent">Excellent (750+)</option>
+                      <option value="good">Good (700–749)</option>
+                      <option value="fair">Fair (650–699)</option>
+                      <option value="building">Building / Limited history</option>
                       <option value="unsure">Not sure</option>
                     </select>
                   </div>
-
                   <div>
-                    <label className="block text-sm font-semibold text-slate-300 mb-2">Down Payment Available</label>
-                    <select
-                      name="downPayment"
-                      value={formData.downPayment}
-                      onChange={handleInputChange}
-                      className="w-full bg-slate-700 border border-slate-600 rounded-lg px-4 py-3 text-white focus:ring-2 focus:ring-amber-400 focus:border-transparent transition-all"
-                    >
-                      <option value="">Select down payment amount</option>
-                      <option value="0%">$0 (100% financing)</option>
-                      <option value="5-10%">5-10% of project cost</option>
-                      <option value="10-20%">10-20% of project cost</option>
+                    <label className="block text-sm font-semibold text-slate-300 mb-2">Down Payment / Equity Available</label>
+                    <select name="downPayment" value={formData.downPayment} onChange={handleInputChange}
+                      className="w-full bg-slate-700 border border-slate-600 rounded-lg px-4 py-3 text-white focus:ring-2 focus:ring-amber-400 focus:border-transparent">
+                      <option value="">Select down payment range</option>
+                      <option value="0%">$0 (100% financing needed)</option>
+                      <option value="5-10%">5–10% of project cost</option>
+                      <option value="10-20%">10–20% of project cost</option>
                       <option value="20%+">20%+ of project cost</option>
                     </select>
                   </div>
@@ -608,24 +1000,19 @@ const LeadIntake: React.FC = () => {
               )}
 
               <div className="bg-slate-800/50 rounded-xl p-6 border border-slate-700">
-                <h3 className="font-bold text-amber-400 mb-3">Financing Benefits</h3>
-                <ul className="space-y-2 text-slate-300">
-                  <li className="flex items-start space-x-2">
-                    <div className="w-2 h-2 bg-amber-400 rounded-full mt-2 flex-shrink-0"></div>
-                    <span>Competitive rates starting at 5.99% APR</span>
-                  </li>
-                  <li className="flex items-start space-x-2">
-                    <div className="w-2 h-2 bg-amber-400 rounded-full mt-2 flex-shrink-0"></div>
-                    <span>Up to $1M in funding available</span>
-                  </li>
-                  <li className="flex items-start space-x-2">
-                    <div className="w-2 h-2 bg-amber-400 rounded-full mt-2 flex-shrink-0"></div>
-                    <span>Fast approval process (24-48 hours)</span>
-                  </li>
-                  <li className="flex items-start space-x-2">
-                    <div className="w-2 h-2 bg-amber-400 rounded-full mt-2 flex-shrink-0"></div>
-                    <span>Flexible payment terms up to 20 years</span>
-                  </li>
+                <h3 className="font-bold text-amber-400 mb-3">Commercial Financing Options</h3>
+                <ul className="space-y-2 text-slate-300 text-sm">
+                  {[
+                    'SBA 504 and 7(a) loan programs available',
+                    'Equipment financing up to $5M',
+                    'Working capital lines up to $2M',
+                    'Fast approval: 24–72 hours on most programs',
+                  ].map((item) => (
+                    <li key={item} className="flex items-start space-x-2">
+                      <div className="w-2 h-2 bg-amber-400 rounded-full mt-1.5 flex-shrink-0" />
+                      <span>{item}</span>
+                    </li>
+                  ))}
                 </ul>
               </div>
             </div>
@@ -639,21 +1026,21 @@ const LeadIntake: React.FC = () => {
 
   const canProceed = () => {
     switch (currentStep) {
-      case 1:
-        return formData.projectType && formData.projectDescription;
-      case 2:
-        return formData.city && formData.state && formData.zip && formData.budget;
-      case 3:
-        return formData.timeline && formData.propertyType && formData.projectMetrics;
-      case 4:
-        return true; // Optional step
-      case 5:
-        return formData.firstName && formData.lastName && formData.email && formData.phone;
-      case 6:
-        return true; // Optional step
-      default:
-        return false;
+      case 1: return formData.projectType !== '';
+      case 2: return !!(formData.city && formData.state && formData.zip && formData.budget);
+      case 3: return true; // service-specific step, all fields optional (ops team follows up)
+      case 4: return !!(formData.timeline && formData.propertyType);
+      case 5: return !!(formData.firstName && formData.lastName && formData.email && formData.phone);
+      case 6: return true;
+      default: return false;
     }
+  };
+
+  const hintMessages: Record<number, string> = {
+    1: 'Select a service category to continue.',
+    2: 'Enter city, state, ZIP, and budget range to continue.',
+    4: 'Select a start timeline and property type to continue.',
+    5: 'Enter your name, email, and phone number to continue.',
   };
 
   return (
@@ -666,10 +1053,10 @@ const LeadIntake: React.FC = () => {
             <span>{Math.round((currentStep / totalSteps) * 100)}% Complete</span>
           </div>
           <div className="w-full bg-slate-700 rounded-full h-2">
-            <div 
+            <div
               className="bg-gradient-to-r from-amber-500 to-amber-600 h-2 rounded-full transition-all duration-500"
               style={{ width: `${(currentStep / totalSteps) * 100}%` }}
-            ></div>
+            />
           </div>
         </div>
 
@@ -677,11 +1064,12 @@ const LeadIntake: React.FC = () => {
         <div className="bg-slate-800 rounded-2xl p-8 border border-slate-700">
           {renderStep()}
 
-          {/* Navigation Buttons */}
-          <div className="flex justify-between mt-8 pt-8 border-t border-slate-700">
-            <button
-              onClick={prevStep}
-              disabled={currentStep === 1}
+          {!canProceed() && currentStep !== totalSteps && hintMessages[currentStep] && (
+            <p className="text-center text-sm text-slate-500 mt-6">{hintMessages[currentStep]}</p>
+          )}
+
+          <div className="flex justify-between mt-4 pt-6 border-t border-slate-700">
+            <button onClick={prevStep} disabled={currentStep === 1}
               className={`flex items-center space-x-2 px-6 py-3 rounded-lg font-semibold transition-all duration-300 ${
                 currentStep === 1
                   ? 'text-slate-500 cursor-not-allowed'
@@ -693,14 +1081,12 @@ const LeadIntake: React.FC = () => {
             </button>
 
             {currentStep === totalSteps ? (
-              <button
-                onClick={submitForm}
-                disabled={!canProceed() || loading}
+              <button onClick={submitForm} disabled={!canProceed() || loading}
                 className="bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-600 hover:to-amber-700 text-slate-900 px-8 py-3 rounded-lg font-bold transition-all duration-300 transform hover:scale-105 flex items-center space-x-2 disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 {loading ? (
                   <>
-                    <div className="w-5 h-5 border-2 border-slate-900 border-t-transparent rounded-full animate-spin"></div>
+                    <div className="w-5 h-5 border-2 border-slate-900 border-t-transparent rounded-full animate-spin" />
                     <span>Submitting...</span>
                   </>
                 ) : (
@@ -711,9 +1097,7 @@ const LeadIntake: React.FC = () => {
                 )}
               </button>
             ) : (
-              <button
-                onClick={nextStep}
-                disabled={!canProceed()}
+              <button onClick={nextStep} disabled={!canProceed()}
                 className="bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-600 hover:to-amber-700 text-slate-900 px-6 py-3 rounded-lg font-semibold transition-all duration-300 transform hover:scale-105 flex items-center space-x-2 disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 <span>Next Step</span>
@@ -723,17 +1107,17 @@ const LeadIntake: React.FC = () => {
           </div>
         </div>
 
-        {/* Help Section */}
+        {/* Help */}
         <div className="mt-8 text-center">
-          <p className="text-slate-400 mb-4">Need help with your submission?</p>
+          <p className="text-slate-400 mb-4">Prefer to speak with someone directly?</p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <button className="flex items-center justify-center space-x-2 text-amber-400 hover:text-amber-300 transition-colors">
               <Phone className="w-4 h-4" />
-              <span>Call (555) 123-BUILD</span>
+              <span>Call (661) 123-BUILD</span>
             </button>
             <button className="flex items-center justify-center space-x-2 text-amber-400 hover:text-amber-300 transition-colors">
               <Mail className="w-4 h-4" />
-              <span>Email Support</span>
+              <span>hello@probuildconcierge.com</span>
             </button>
           </div>
         </div>

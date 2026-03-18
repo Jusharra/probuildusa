@@ -11,7 +11,6 @@ const Header: React.FC = () => {
   const { user, profile, signOut } = useAuth();
 
   const mainNavigation = [
-    { name: 'Find Contractors', href: '/contractors' },
     { name: 'How It Works', href: '/how-it-works' },
     { name: 'Why Choose Us', href: '/why-choose-us' },
     { name: 'Partner With Us', href: '/why-partner' },
@@ -37,13 +36,10 @@ const Header: React.FC = () => {
   };
 
   const services = [
-    { name: 'Line Striping', href: '/services/line-striping' },
-    { name: 'Power Washing', href: '/services/power-washing' },
-    { name: 'Window Cleaning', href: '/services/window-cleaning' },
-    { name: 'Seal Coating', href: '/services/seal-coating' },
-    { name: 'Paving', href: '/services/paving' },
-    { name: 'Parking Lot Sweeping', href: '/services/parking-lot-sweeping' },
-    { name: 'Crack Sealing', href: '/services/crack-sealing' },
+    { name: 'Infrastructure & Surface', href: '/services/infrastructure-surface' },
+    { name: 'Mechanical & Electrical', href: '/services/mechanical-electrical' },
+    { name: 'Inspections & Compliance', href: '/services/inspections-compliance' },
+    { name: 'Oil & Gas / Industrial', href: '/services/oil-gas-industrial' },
     { name: 'Pressure Washing', href: '/services/pressure-washing' },
   ];
 
@@ -60,31 +56,34 @@ const Header: React.FC = () => {
   return (
     <header className="bg-slate-900/95 backdrop-blur-sm border-b border-slate-800 sticky top-0 z-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center py-4">
-          <Link to="/" className="flex items-center space-x-2">
-            <div className="w-10 h-10 bg-gradient-to-br from-amber-400 to-amber-600 rounded-lg flex items-center justify-center">
-              <span className="text-slate-900 font-bold text-xl">P</span>
+        <div className="flex justify-between items-center h-16">
+
+          {/* Logo */}
+          <Link to="/" className="flex items-center space-x-3 flex-shrink-0">
+            <div className="w-9 h-9 bg-gradient-to-br from-amber-400 to-amber-600 rounded-lg flex items-center justify-center">
+              <span className="text-slate-900 font-bold text-lg">P</span>
             </div>
-            <span className="text-xl font-bold">ProBuild Concierge</span>
+            <span className="text-lg font-bold whitespace-nowrap">ProBuild Concierge</span>
           </Link>
 
-          <nav className="hidden md:flex items-center space-x-8">
+          {/* Desktop Nav */}
+          <nav className="hidden lg:flex items-center space-x-6">
             {/* Services Dropdown */}
-            <div className="relative group" ref={servicesDropdownRef}>
+            <div className="relative" ref={servicesDropdownRef}>
               <button
-                className="flex items-center space-x-2 text-slate-300 hover:text-amber-400 transition-colors duration-200"
+                className="flex items-center space-x-1 text-sm text-slate-300 hover:text-amber-400 transition-colors duration-200"
                 onClick={() => setIsServicesDropdownOpen(!isServicesDropdownOpen)}
               >
                 <span>Services</span>
                 <ChevronDown className={`w-4 h-4 transition-transform ${isServicesDropdownOpen ? 'rotate-180' : ''}`} />
               </button>
               {isServicesDropdownOpen && (
-                <div className="absolute left-0 mt-2 w-48 bg-slate-800 rounded-lg shadow-lg border border-slate-700 py-2 z-50">
+                <div className="absolute left-0 mt-3 w-56 bg-slate-800 rounded-xl shadow-xl border border-slate-700 py-2 z-50">
                   {services.map((serviceItem) => (
                     <Link
                       key={serviceItem.name}
                       to={serviceItem.href}
-                      className="block px-4 py-2 text-sm text-slate-300 hover:bg-slate-700 transition-colors"
+                      className="block px-4 py-2.5 text-sm text-slate-300 hover:bg-slate-700 hover:text-amber-400 transition-colors"
                       onClick={() => setIsServicesDropdownOpen(false)}
                     >
                       {serviceItem.name}
@@ -94,24 +93,19 @@ const Header: React.FC = () => {
               )}
             </div>
 
-            {/* Main Navigation Items */}
             {mainNavigation.map((item) => (
               <Link
                 key={item.name}
                 to={item.href}
-                className="text-slate-300 hover:text-amber-400 transition-colors duration-200"
+                className="text-sm text-slate-300 hover:text-amber-400 transition-colors duration-200 whitespace-nowrap"
               >
                 {item.name}
               </Link>
             ))}
           </nav>
 
-          <div className="hidden md:flex items-center space-x-4">
-            <button className="flex items-center space-x-2 text-slate-300 hover:text-amber-400 transition-colors">
-              <Phone className="w-4 h-4" />
-              <span>(661) 123-BUILD</span>
-            </button>
-            
+          {/* Right Side Actions */}
+          <div className="hidden lg:flex items-center space-x-3">
             {user && profile ? (
               <div className="flex items-center space-x-4">
                 <Link
@@ -166,17 +160,17 @@ const Header: React.FC = () => {
                 </div>
               </div>
             ) : (
-              <div className="flex items-center space-x-4">
+              <div className="flex items-center space-x-3">
                 <Link
                   to="/login"
-                  className="flex items-center space-x-2 text-slate-300 hover:text-amber-400 transition-colors"
+                  className="text-sm text-slate-300 hover:text-amber-400 transition-colors flex items-center space-x-1.5"
                 >
                   <LogIn className="w-4 h-4" />
                   <span>Sign In</span>
                 </Link>
                 <Link
                   to="/get-started"
-                  className="bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-600 hover:to-amber-700 text-slate-900 px-6 py-2 rounded-lg font-semibold transition-all duration-200 transform hover:scale-105"
+                  className="bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-600 hover:to-amber-700 text-slate-900 px-5 py-2 rounded-lg text-sm font-bold transition-all duration-200 transform hover:scale-105 whitespace-nowrap"
                 >
                   Get Quote
                 </Link>
@@ -184,8 +178,9 @@ const Header: React.FC = () => {
             )}
           </div>
 
-          <button 
-            className="md:hidden"
+          {/* Mobile Menu Toggle */}
+          <button
+            className="lg:hidden p-1"
             onClick={() => setIsMenuOpen(!isMenuOpen)}
           >
             {isMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
@@ -193,7 +188,7 @@ const Header: React.FC = () => {
         </div>
 
         {isMenuOpen && (
-          <div className="md:hidden py-4 border-t border-slate-800">
+          <div className="lg:hidden py-4 border-t border-slate-800">
             <nav className="space-y-4" ref={servicesDropdownRef}>
               {/* Services Dropdown for Mobile */}
               <div>
@@ -225,12 +220,19 @@ const Header: React.FC = () => {
               </div>
 
               {/* Main Navigation Items for Mobile */}
+              <Link
+                to="/contractors"
+                className="block text-slate-300 hover:text-amber-400 transition-colors"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                Find Contractors
+              </Link>
               {mainNavigation.map((item) => (
                 <Link
                   key={item.name}
                   to={item.href}
                   className="block text-slate-300 hover:text-amber-400 transition-colors"
-                  onClick={() => setIsMenuOpen(false)} // Close mobile menu on click
+                  onClick={() => setIsMenuOpen(false)}
                 >
                   {item.name}
                 </Link>

@@ -4,29 +4,28 @@ import { Phone, Mail, MapPin, Shield, Star, Award } from 'lucide-react';
 
 const Footer: React.FC = () => {
   const services = [
-    'Line Striping',
-    'Power Washing',
-    'Window Cleaning',
-    'Seal Coating',
-    'Paving',
-    'Parking Lot Sweeping',
-    'Crack Sealing',
-    'Pressure Washing',
+    { name: 'Infrastructure & Surface', href: '/services/infrastructure-surface' },
+    { name: 'Mechanical & Electrical', href: '/services/mechanical-electrical' },
+    { name: 'Inspections & Compliance', href: '/services/inspections-compliance' },
+    { name: 'Oil & Gas / Industrial', href: '/services/oil-gas-industrial' },
+    { name: 'Pressure Washing', href: '/services/pressure-washing' },
   ];
 
   const quickLinks = [
     { name: 'Find Contractors', href: '/contractors' },
+    { name: 'How It Works', href: '/how-it-works' },
+    { name: 'Why Choose Us', href: '/why-choose-us' },
     { name: 'Partner With Us', href: '/why-partner' },
-    { name: 'Get Started', href: '/get-started' },
-    { name: 'Pavement Maintenance Guidance', href: '/pavement-maintenance-guidance' },
+    { name: 'Get a Quote', href: '/get-started' },
     { name: 'FAQs', href: '/faqs' },
-    { name: 'Parking Lot Striping Guide', href: '/parking-lot-striping-guide' },
   ];
 
   return (
     <footer className="bg-slate-950 border-t border-slate-800">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+
+          {/* Brand */}
           <div className="lg:col-span-1">
             <Link to="/" className="flex items-center space-x-2 mb-4">
               <div className="w-8 h-8 bg-gradient-to-br from-amber-400 to-amber-600 rounded-lg flex items-center justify-center">
@@ -34,8 +33,11 @@ const Footer: React.FC = () => {
               </div>
               <span className="text-xl font-bold">ProBuild Concierge</span>
             </Link>
-            <p className="text-slate-400 mb-6 leading-relaxed">
-              Professional line striping, power washing, and window cleaning experts on-demand. We connect property owners with qualified contractors for essential maintenance services.
+            <p className="text-slate-400 mb-4 leading-relaxed text-sm">
+              Your specialized operations partner for infrastructure, mechanical systems, and compliance-driven projects — nationwide.
+            </p>
+            <p className="text-slate-500 text-xs mb-6 italic">
+              "Where Infrastructure Meets Execution"
             </p>
             <div className="flex items-center space-x-4 text-slate-400">
               <div className="flex items-center space-x-2">
@@ -44,98 +46,97 @@ const Footer: React.FC = () => {
               </div>
               <div className="flex items-center space-x-2">
                 <Star className="w-4 h-4 text-amber-400" />
-                <span className="text-sm">5-Star Pros</span>
+                <span className="text-sm">Vetted Pros</span>
               </div>
             </div>
           </div>
 
+          {/* Services */}
           <div>
-            <h3 className="text-lg font-semibold mb-4 text-amber-400">Our Services</h3>
-            <ul className="space-y-2">
-              {services.slice(0, 5).map((service) => (
-                <li key={service}>
-                  <Link 
-                    to={`/services/${service.toLowerCase().replace(/\s+/g, '-')}`}
+            <h3 className="text-sm font-semibold uppercase tracking-widest text-amber-400 mb-4">Service Categories</h3>
+            <ul className="space-y-2.5">
+              {services.map((service) => (
+                <li key={service.name}>
+                  <Link
+                    to={service.href}
                     className="text-slate-400 hover:text-amber-400 transition-colors text-sm"
                   >
-                    {service}
+                    {service.name}
                   </Link>
                 </li>
               ))}
             </ul>
           </div>
 
+          {/* Quick Links */}
           <div>
-            <h3 className="text-lg font-semibold mb-4 text-amber-400">Quick Links</h3>
-            <ul className="space-y-2">
-              {services.slice(5).map((service) => (
-                <li key={service}>
-                  <Link 
-                    to={`/services/${service.toLowerCase().replace(/\s+/g, '-')}`}
-                    className="text-slate-400 hover:text-amber-400 transition-colors text-sm"
-                  >
-                    {service}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          <div>
-            <h3 className="text-lg font-semibold mb-4 text-amber-400">Quick Links</h3>
-            <ul className="space-y-2 mb-6">
+            <h3 className="text-sm font-semibold uppercase tracking-widest text-amber-400 mb-4">Quick Links</h3>
+            <ul className="space-y-2.5">
               {quickLinks.map((link) => (
                 <li key={link.name}>
-                  <Link 
-                    to={link.href} 
-                    className="text-slate-400 hover:text-amber-300 transition-colors text-sm"
+                  <Link
+                    to={link.href}
+                    className="text-slate-400 hover:text-amber-400 transition-colors text-sm"
                   >
                     {link.name}
                   </Link>
                 </li>
               ))}
             </ul>
+          </div>
 
-            <h3 className="text-lg font-semibold mb-4 text-amber-400">Contact</h3>
-            <div className="space-y-3">
+          {/* Contact */}
+          <div>
+            <h3 className="text-sm font-semibold uppercase tracking-widest text-amber-400 mb-4">Contact</h3>
+            <div className="space-y-3 mb-6">
               <div className="flex items-center space-x-3 text-slate-400">
-                <Phone className="w-4 h-4 text-amber-400" />
-                <span className="text-sm">(555) 123-BUILD</span>
+                <Phone className="w-4 h-4 text-amber-400 flex-shrink-0" />
+                <span className="text-sm">(661) 123-BUILD</span>
               </div>
               <div className="flex items-center space-x-3 text-slate-400">
-                <Mail className="w-4 h-4 text-amber-400" />
+                <Mail className="w-4 h-4 text-amber-400 flex-shrink-0" />
                 <span className="text-sm">hello@probuildconcierge.com</span>
               </div>
               <div className="flex items-start space-x-3 text-slate-400">
-                <MapPin className="w-4 h-4 text-amber-400 mt-0.5" />
-                <span className="text-sm">Serving Premium Markets<br />Nationwide</span>
+                <MapPin className="w-4 h-4 text-amber-400 mt-0.5 flex-shrink-0" />
+                <span className="text-sm">Coordinating Projects<br />Nationwide</span>
               </div>
             </div>
-            <div className="mt-6">
+
+            <h3 className="text-sm font-semibold uppercase tracking-widest text-amber-400 mb-3">For Contractors</h3>
+            <Link
+              to="/why-partner"
+              className="inline-flex items-center space-x-2 text-slate-400 hover:text-amber-400 transition-colors text-sm"
+            >
+              <Award className="w-4 h-4" />
+              <span>Apply to Partner</span>
+            </Link>
+            <div className="mt-2">
               <Link
                 to="/partner-portal"
-                className="inline-flex items-center space-x-2 text-amber-400 hover:text-amber-300 transition-colors text-sm font-semibold"
+                className="text-slate-500 hover:text-slate-400 transition-colors text-xs"
               >
-                <Award className="w-4 h-4" />
-                <span>Partner Portal</span>
+                Partner Portal Login →
               </Link>
             </div>
           </div>
+
         </div>
 
+        {/* Bottom Bar */}
         <div className="border-t border-slate-800 mt-12 pt-8">
-          <div className="flex flex-col md:flex-row justify-between items-center">
-            <p className="text-slate-400 text-sm">
-              © 2025 ProBuild Concierge. All rights reserved.
+          <div className="flex flex-col md:flex-row justify-between items-center gap-4">
+            <p className="text-slate-500 text-sm">
+              © 2025 ProBuild Concierge. All rights reserved. Coordinating high-value projects nationwide.
             </p>
-            <div className="flex space-x-6 mt-4 md:mt-0">
-              <a href="#" className="text-slate-400 hover:text-amber-400 transition-colors text-sm">
+            <div className="flex space-x-6">
+              <a href="#" className="text-slate-500 hover:text-amber-400 transition-colors text-sm">
                 Privacy Policy
               </a>
-              <a href="#" className="text-slate-400 hover:text-amber-400 transition-colors text-sm">
+              <a href="#" className="text-slate-500 hover:text-amber-400 transition-colors text-sm">
                 Terms of Service
               </a>
-              <a href="#" className="text-slate-400 hover:text-amber-400 transition-colors text-sm">
+              <a href="#" className="text-slate-500 hover:text-amber-400 transition-colors text-sm">
                 Contractor Terms
               </a>
             </div>

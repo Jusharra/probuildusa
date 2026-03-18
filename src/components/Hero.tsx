@@ -1,161 +1,122 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowRight, Play, Shield, Star, Users, TrendingUp } from 'lucide-react';
+import { ArrowRight, Phone, Shield, Clock, MapPin } from 'lucide-react';
 
 const Hero: React.FC = () => {
   const [formData, setFormData] = useState({
-    projectType: '',
-    budget: '',
-    timeline: '',
-    location: ''
+    serviceType: '',
+    location: '',
   });
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value
-    });
+    setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
-      {/* Background Image with Overlay */}
+      {/* Background */}
       <div className="absolute inset-0 z-0">
-        <img 
-          src="https://images.pexels.com/photos/323705/pexels-photo-323705.jpeg?auto=compress&cs=tinysrgb&w=1920&h=1080&fit=crop"
-          alt="Luxury construction site"
+        <img
+          src="https://images.pexels.com/photos/1108701/pexels-photo-1108701.jpeg?auto=compress&cs=tinysrgb&w=1920&h=1080&fit=crop"
+          alt="Industrial infrastructure"
           className="w-full h-full object-cover"
         />
-        <div className="absolute inset-0 bg-slate-900/80"></div>
+        <div className="absolute inset-0 bg-slate-900/82"></div>
+        <div className="absolute inset-0 bg-gradient-to-r from-slate-900/60 via-transparent to-slate-900/40"></div>
       </div>
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
         <div className="grid lg:grid-cols-2 gap-12 items-center">
-          {/* Left Column - Hero Content */}
+
+          {/* Left — Hero Copy */}
           <div className="text-left">
-            <div className="flex items-center space-x-2 mb-6">
-              <div className="flex items-center space-x-1">
-                {[...Array(5)].map((_, i) => (
-                  <Star key={i} className="w-4 h-4 text-amber-400 fill-current" />
-                ))}
-              </div>
-              <span className="text-slate-300 text-sm">Trusted by 500+ Property Owners</span>
-            </div>
-
-            <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold leading-tight mb-6">
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-400 to-amber-600">Professional</span><br />
-              Service <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-400 to-amber-600">Solutions</span><br />
-              You Trust.
-            </h1>
-
-            <p className="text-xl md:text-2xl text-slate-300 mb-8 leading-relaxed">
-              Line Striping, Power Washing & Window Cleaning Experts On-Demand.<br />
-              <span className="text-amber-400">Professional results. Reliable service.</span>
+            <p className="text-amber-400 font-semibold uppercase tracking-widest text-sm mb-5">
+              Specialized Operations Partner
             </p>
 
-            <div className="flex flex-col sm:flex-row gap-4 mb-12">
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-6">
+              Infrastructure.{' '}
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-400 to-amber-600">
+                Compliance.
+              </span>
+              <br />
+              Execution—Handled.
+            </h1>
+
+            <p className="text-lg md:text-xl text-slate-300 mb-10 leading-relaxed max-w-xl">
+              We connect property owners, developers, and operators with qualified professionals for high-value construction, mechanical systems, and compliance-driven projects—nationwide.
+            </p>
+
+            <div className="flex flex-col sm:flex-row gap-4 mb-14">
               <Link
                 to="/get-started"
-                className="group bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-600 hover:to-amber-700 text-slate-900 px-8 py-4 rounded-xl font-bold text-lg transition-all duration-300 transform hover:scale-105 flex items-center justify-center space-x-2"
+                className="group bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-600 hover:to-amber-700 text-slate-900 px-8 py-4 rounded-xl font-bold text-base transition-all duration-300 transform hover:scale-105 flex items-center justify-center space-x-2"
               >
-                <span>Get Your Quote</span>
+                <span>Get Matched With a Contractor</span>
                 <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
               </Link>
-              
-              <button className="group flex items-center justify-center space-x-3 text-white border-2 border-slate-600 hover:border-amber-400 px-8 py-4 rounded-xl font-semibold text-lg transition-all duration-300">
-                <Play className="w-5 h-5 text-amber-400" />
-                <span>Watch How It Works</span>
+
+              <button className="group flex items-center justify-center space-x-3 text-white border-2 border-slate-600 hover:border-amber-400 px-8 py-4 rounded-xl font-semibold text-base transition-all duration-300">
+                <Phone className="w-5 h-5 text-amber-400" />
+                <span>Speak With Our Operations Desk</span>
               </button>
             </div>
 
-            {/* Trust Indicators */}
-            <div className="grid grid-cols-3 gap-6">
-              <div className="text-center">
-                <div className="flex items-center justify-center mb-2">
-                  <Shield className="w-6 h-6 text-amber-400" />
+            {/* Trust Stats */}
+            <div className="grid grid-cols-3 gap-6 pt-8 border-t border-slate-700/50">
+              <div>
+                <div className="flex items-center space-x-2 mb-1">
+                  <Shield className="w-5 h-5 text-amber-400" />
                 </div>
                 <div className="text-2xl font-bold text-white">100%</div>
-                <div className="text-sm text-slate-400">Bonded & Insured</div>
+                <div className="text-sm text-slate-400">Licensed & Insured</div>
               </div>
-              <div className="text-center">
-                <div className="flex items-center justify-center mb-2">
-                  <Users className="w-6 h-6 text-amber-400" />
-                </div>
-                <div className="text-2xl font-bold text-white">1000+</div>
-                <div className="text-sm text-slate-400">Happy Customers</div>
-              </div>
-              <div className="text-center">
-                <div className="flex items-center justify-center mb-2">
-                  <TrendingUp className="w-6 h-6 text-amber-400" />
+              <div>
+                <div className="flex items-center space-x-2 mb-1">
+                  <Clock className="w-5 h-5 text-amber-400" />
                 </div>
                 <div className="text-2xl font-bold text-white">24hr</div>
                 <div className="text-sm text-slate-400">Response Time</div>
               </div>
+              <div>
+                <div className="flex items-center space-x-2 mb-1">
+                  <MapPin className="w-5 h-5 text-amber-400" />
+                </div>
+                <div className="text-2xl font-bold text-white">Nationwide</div>
+                <div className="text-sm text-slate-400">Coverage</div>
+              </div>
             </div>
           </div>
 
-          {/* Right Column - Quick Intake Form */}
-          <div className="lg:ml-12">
-            <div className="bg-slate-800/50 backdrop-blur-sm border border-slate-700 rounded-2xl p-8 shadow-2xl">
-              <h3 className="text-2xl font-bold mb-2 text-center">Tell Us What You're Building</h3>
-              <p className="text-slate-400 text-center mb-6">Get matched with expert service providers in 24 hours</p>
-              
-              <form className="space-y-4">
+          {/* Right — Quick Intake */}
+          <div className="lg:ml-8">
+            <div className="bg-slate-800/60 backdrop-blur-sm border border-slate-700 rounded-2xl p-8 shadow-2xl">
+              <h3 className="text-2xl font-bold mb-1">Start Your Project</h3>
+              <p className="text-slate-400 text-sm mb-6">
+                Tell us what you need — we'll match you with vetted professionals in 24 hours.
+              </p>
+
+              <div className="space-y-4">
                 <div>
-                  <label className="block text-sm font-semibold text-slate-300 mb-2">Service Type</label>
-                  <select 
-                    name="projectType"
-                    value={formData.projectType}
+                  <label className="block text-sm font-semibold text-slate-300 mb-2">Service Category</label>
+                  <select
+                    name="serviceType"
+                    value={formData.serviceType}
                     onChange={handleInputChange}
                     className="w-full bg-slate-700 border border-slate-600 rounded-lg px-4 py-3 text-white focus:ring-2 focus:ring-amber-400 focus:border-transparent transition-all"
                   >
-                    <option value="">Select your service type</option>
-                    <option value="line-striping">Line Striping</option>
-                    <option value="power-washing">Power Washing</option>
-                    <option value="window-cleaning">Window Cleaning</option>
-                    <option value="seal-coating">Seal Coating</option>
-                    <option value="paving">Paving</option>
-                    <option value="crack-sealing">Crack Sealing</option>
+                    <option value="">Select a service category</option>
+                    <option value="infrastructure-surface">🏗️ Infrastructure & Surface Services</option>
+                    <option value="mechanical-electrical">⚡ Mechanical & Electrical Systems</option>
+                    <option value="inspections-compliance">🔍 Inspections & Compliance</option>
+                    <option value="oil-gas-industrial">🛢️ Oil & Gas / Industrial Services</option>
+                    <option value="pressure-washing">💧 Pressure Washing</option>
                   </select>
                 </div>
 
                 <div>
-                  <label className="block text-sm font-semibold text-slate-300 mb-2">Property Type</label>
-                  <select 
-                    name="propertyType"
-                    value={formData.propertyType}
-                    onChange={handleInputChange}
-                    className="w-full bg-slate-700 border border-slate-600 rounded-lg px-4 py-3 text-white focus:ring-2 focus:ring-amber-400 focus:border-transparent transition-all"
-                  >
-                    <option value="">Select property type</option>
-                    <option value="commercial">Commercial Property</option>
-                    <option value="residential">Residential Property</option>
-                    <option value="industrial">Industrial Facility</option>
-                    <option value="retail">Retail Location</option>
-                    <option value="office">Office Building</option>
-                  </select>
-                </div>
-
-                <div>
-                  <label className="block text-sm font-semibold text-slate-300 mb-2">Timeline</label>
-                  <select 
-                    name="timeline"
-                    value={formData.timeline}
-                    onChange={handleInputChange}
-                    className="w-full bg-slate-700 border border-slate-600 rounded-lg px-4 py-3 text-white focus:ring-2 focus:ring-amber-400 focus:border-transparent transition-all"
-                  >
-                    <option value="">When do you want to start?</option>
-                    <option value="asap">ASAP</option>
-                    <option value="this-week">This Week</option>
-                    <option value="this-month">This Month</option>
-                    <option value="next-month">Next Month</option>
-                    <option value="flexible">Flexible</option>
-                  </select>
-                </div>
-
-                <div>
-                  <label className="block text-sm font-semibold text-slate-300 mb-2">Location</label>
-                  <input 
+                  <label className="block text-sm font-semibold text-slate-300 mb-2">Project Location</label>
+                  <input
                     type="text"
                     name="location"
                     value={formData.location}
@@ -167,18 +128,30 @@ const Hero: React.FC = () => {
 
                 <Link
                   to="/get-started"
-                  className="w-full bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-600 hover:to-amber-700 text-slate-900 px-6 py-4 rounded-lg font-bold text-lg transition-all duration-300 transform hover:scale-105 flex items-center justify-center space-x-2"
+                  className="w-full bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-600 hover:to-amber-700 text-slate-900 px-6 py-4 rounded-lg font-bold text-base transition-all duration-300 transform hover:scale-105 flex items-center justify-center space-x-2"
                 >
-                  <span>Get My Quote</span>
+                  <span>Get Matched Now</span>
                   <ArrowRight className="w-5 h-5" />
                 </Link>
-              </form>
+              </div>
 
-              <p className="text-xs text-slate-400 text-center mt-4">
-                No spam. We'll connect you with 1-3 qualified pros.
-              </p>
+              <div className="mt-6 pt-6 border-t border-slate-700 space-y-3">
+                <div className="flex items-center space-x-3 text-sm text-slate-400">
+                  <div className="w-2 h-2 bg-green-400 rounded-full flex-shrink-0"></div>
+                  <span>Vetted, licensed, and compliance-ready contractors</span>
+                </div>
+                <div className="flex items-center space-x-3 text-sm text-slate-400">
+                  <div className="w-2 h-2 bg-green-400 rounded-full flex-shrink-0"></div>
+                  <span>No commitment. No spam. Matched within 24 hours.</span>
+                </div>
+                <div className="flex items-center space-x-3 text-sm text-slate-400">
+                  <div className="w-2 h-2 bg-green-400 rounded-full flex-shrink-0"></div>
+                  <span>Commercial, industrial, and regulated projects welcome</span>
+                </div>
+              </div>
             </div>
           </div>
+
         </div>
       </div>
     </section>
