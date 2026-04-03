@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowRight, Building2, Zap, ClipboardCheck, Flame, Droplets, DollarSign } from 'lucide-react';
+import { ArrowRight, Building2, Zap, ClipboardCheck, Flame, DollarSign } from 'lucide-react';
 
 const Services: React.FC = () => {
   const categories = [
@@ -120,30 +120,6 @@ const Services: React.FC = () => {
               </div>
             );
           })}
-        </div>
-
-        {/* Pressure Washing — Entry Funnel Banner */}
-        <div className="bg-slate-900 rounded-2xl border border-slate-700 hover:border-amber-400/30 transition-all duration-300 p-6 flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
-          <div className="flex items-start space-x-4">
-            <div className="bg-slate-700 p-3 rounded-lg flex-shrink-0">
-              <Droplets className="w-6 h-6 text-amber-400" />
-            </div>
-            <div>
-              <div className="flex items-center space-x-2 mb-1">
-                <h3 className="font-bold text-lg">Pressure Washing</h3>
-                <span className="bg-slate-700 text-slate-400 text-xs px-2 py-0.5 rounded-full">Entry Service</span>
-              </div>
-              <p className="text-slate-400 text-sm">Commercial and industrial surface cleaning. A great starting point to evaluate your property's needs before larger projects.</p>
-              <p className="text-amber-400 text-sm font-semibold mt-1">$200 - $5K+</p>
-            </div>
-          </div>
-          <Link
-            to="/services/pressure-washing"
-            className="flex-shrink-0 flex items-center space-x-2 bg-slate-700 hover:bg-slate-600 text-white px-5 py-2.5 rounded-lg font-semibold transition-all duration-300 text-sm"
-          >
-            <span>Get Quote</span>
-            <ArrowRight className="w-4 h-4" />
-          </Link>
         </div>
 
         <div className="text-center mt-12">

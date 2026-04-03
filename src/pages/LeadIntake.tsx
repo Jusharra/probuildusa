@@ -191,14 +191,6 @@ const LeadIntake: React.FC = () => {
           formData.cleanupScope && `Cleanup Scope: ${formData.cleanupScope}`,
           formData.environmentalConcern && `Environmental Notes: ${formData.environmentalConcern}`,
         ].filter(Boolean).join('\n');
-      case 'pressure-washing':
-        return [
-          formData.pwSurfaceType && `Surface Type: ${formData.pwSurfaceType}`,
-          formData.sqFootage && `Sq Footage: ${formData.sqFootage}`,
-          formData.buildingStories && `Building Stories: ${formData.buildingStories}`,
-          formData.stainType && `Stain/Soiling Type: ${formData.stainType}`,
-          formData.pwFrequency && `Service Frequency: ${formData.pwFrequency}`,
-        ].filter(Boolean).join('\n');
       default:
         return '';
     }
@@ -209,7 +201,6 @@ const LeadIntake: React.FC = () => {
     { id: 'mechanical-electrical', name: 'Mechanical & Electrical', icon: '⚡', description: 'Commercial electrical, HVAC, panel upgrades, industrial systems' },
     { id: 'inspections-compliance', name: 'Inspections & Compliance', icon: '🔍', description: 'Code compliance, pre-purchase, fire, ADA, environmental audits' },
     { id: 'oil-gas-industrial', name: 'Oil & Gas / Industrial', icon: '🛢️', description: 'Site cleanup, equipment install, environmental compliance' },
-    { id: 'pressure-washing', name: 'Pressure Washing', icon: '💧', description: 'Commercial exterior, fleet, industrial surface cleaning' },
   ];
 
   const renderServiceSpecificStep = () => {
@@ -542,84 +533,6 @@ const LeadIntake: React.FC = () => {
                 <textarea name="projectDescription" value={formData.projectDescription} onChange={handleInputChange} rows={3}
                   className="w-full bg-slate-700 border border-slate-600 rounded-lg px-4 py-3 text-white placeholder-slate-400 focus:ring-2 focus:ring-amber-400 focus:border-transparent"
                   placeholder="Describe the work needed: regulatory deadline, prior investigation reports, site history, equipment involved, special access requirements (TWIC, confined space), etc." />
-              </div>
-            </div>
-          </div>
-        );
-
-      case 'pressure-washing':
-        return (
-          <div className="space-y-6">
-            <div className="text-center mb-8">
-              <h2 className="text-3xl font-bold mb-2">Pressure Washing Details</h2>
-              <p className="text-slate-400">Describe the surfaces and cleaning requirements</p>
-            </div>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <div>
-                <label className="block text-sm font-semibold text-slate-300 mb-2">Primary Surface Type</label>
-                <select name="pwSurfaceType" value={formData.pwSurfaceType} onChange={handleInputChange}
-                  className="w-full bg-slate-700 border border-slate-600 rounded-lg px-4 py-3 text-white focus:ring-2 focus:ring-amber-400 focus:border-transparent">
-                  <option value="">Select surface type</option>
-                  <option value="concrete-flatwork">Concrete flatwork (parking, walkways)</option>
-                  <option value="building-exterior">Building exterior (stucco, brick, panel)</option>
-                  <option value="metal-surfaces">Metal surfaces (tanks, equipment)</option>
-                  <option value="fleet-vehicles">Fleet vehicles / heavy equipment</option>
-                  <option value="loading-docks">Loading docks / warehouse floors</option>
-                  <option value="rooftop">Rooftop / HVAC equipment area</option>
-                  <option value="graffiti-removal">Graffiti removal</option>
-                  <option value="multiple">Multiple surface types</option>
-                </select>
-              </div>
-              <div>
-                <label className="block text-sm font-semibold text-slate-300 mb-2">Total Area to Clean (sq ft)</label>
-                <input type="number" name="sqFootage" value={formData.sqFootage} onChange={handleInputChange}
-                  className="w-full bg-slate-700 border border-slate-600 rounded-lg px-4 py-3 text-white placeholder-slate-400 focus:ring-2 focus:ring-amber-400 focus:border-transparent"
-                  placeholder="e.g. 10000" />
-              </div>
-              <div>
-                <label className="block text-sm font-semibold text-slate-300 mb-2">Building Height / Stories</label>
-                <select name="buildingStories" value={formData.buildingStories} onChange={handleInputChange}
-                  className="w-full bg-slate-700 border border-slate-600 rounded-lg px-4 py-3 text-white focus:ring-2 focus:ring-amber-400 focus:border-transparent">
-                  <option value="">Select height</option>
-                  <option value="ground-level">Ground level only</option>
-                  <option value="1-2">1–2 stories</option>
-                  <option value="3-5">3–5 stories</option>
-                  <option value="6-10">6–10 stories</option>
-                  <option value="10+">10+ stories (high-rise)</option>
-                </select>
-              </div>
-              <div>
-                <label className="block text-sm font-semibold text-slate-300 mb-2">Primary Stain / Soiling Type</label>
-                <select name="stainType" value={formData.stainType} onChange={handleInputChange}
-                  className="w-full bg-slate-700 border border-slate-600 rounded-lg px-4 py-3 text-white focus:ring-2 focus:ring-amber-400 focus:border-transparent">
-                  <option value="">Select soiling type</option>
-                  <option value="oil-grease">Oil / grease</option>
-                  <option value="dirt-algae">Dirt / algae / moss</option>
-                  <option value="rust">Rust / mineral deposits</option>
-                  <option value="paint-graffiti">Paint / graffiti</option>
-                  <option value="gum-organic">Gum / organic matter</option>
-                  <option value="chemical">Chemical / industrial residue</option>
-                  <option value="general-grime">General grime / weathering</option>
-                </select>
-              </div>
-              <div>
-                <label className="block text-sm font-semibold text-slate-300 mb-2">Service Frequency Needed</label>
-                <select name="pwFrequency" value={formData.pwFrequency} onChange={handleInputChange}
-                  className="w-full bg-slate-700 border border-slate-600 rounded-lg px-4 py-3 text-white focus:ring-2 focus:ring-amber-400 focus:border-transparent">
-                  <option value="">Select frequency</option>
-                  <option value="one-time">One-time</option>
-                  <option value="monthly">Monthly</option>
-                  <option value="quarterly">Quarterly</option>
-                  <option value="semi-annual">Semi-annual</option>
-                  <option value="annual">Annual</option>
-                  <option value="as-needed">As needed / on-call</option>
-                </select>
-              </div>
-              <div className="md:col-span-2">
-                <label className="block text-sm font-semibold text-slate-300 mb-2">Additional Details</label>
-                <textarea name="projectDescription" value={formData.projectDescription} onChange={handleInputChange} rows={3}
-                  className="w-full bg-slate-700 border border-slate-600 rounded-lg px-4 py-3 text-white placeholder-slate-400 focus:ring-2 focus:ring-amber-400 focus:border-transparent"
-                  placeholder="Water reclamation required? Eco/low-toxicity products needed? Night/weekend work? Specific pressure (PSI) or temperature requirements? Proximity to storm drains?" />
               </div>
             </div>
           </div>

@@ -170,44 +170,6 @@ const ServicePage: React.FC = () => {
         'https://images.pexels.com/photos/1108572/pexels-photo-1108572.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop',
       ],
     },
-    'pressure-washing': {
-      title: 'Pressure Washing',
-      subtitle: 'Commercial & Industrial Surface Cleaning',
-      priceRange: '$200 - $5K+',
-      timeline: '1-2 days',
-      description: 'Commercial-grade pressure washing for businesses, parking structures, industrial facilities, and exterior surfaces. A practical starting point to assess your property\'s needs — and often the first step before larger surface or compliance projects.',
-      heroImage: 'https://images.pexels.com/photos/5691622/pexels-photo-5691622.jpeg?auto=compress&cs=tinysrgb&w=1920&h=800&fit=crop',
-      included: [
-        'Concrete driveways, sidewalks, and lots',
-        'Building exteriors (brick, stucco, siding)',
-        'Parking garages and structures',
-        'Graffiti and rust stain removal',
-        'Grease and oil removal',
-        'Pre-treatment for stubborn stains',
-        'Eco-friendly cleaning agents available',
-        'Commercial and industrial properties',
-      ],
-      idealFor: [
-        'Businesses prepping for surface work or restriping',
-        'Property managers maintaining curb appeal',
-        'Industrial sites with heavy grime buildup',
-        'Retail and restaurant exterior maintenance',
-        'Properties preparing for inspections or sale',
-      ],
-      process: [
-        'Surface assessment and preparation',
-        'Application of appropriate cleaning solutions',
-        'High-pressure washing execution',
-        'Detailed rinse and inspection',
-        'Final quality review and site cleanup',
-      ],
-      gallery: [
-        'https://images.pexels.com/photos/5691622/pexels-photo-5691622.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop',
-        'https://images.pexels.com/photos/5025639/pexels-photo-5025639.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop',
-        'https://images.pexels.com/photos/4254165/pexels-photo-4254165.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop',
-        'https://images.pexels.com/photos/1463917/pexels-photo-1463917.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop',
-      ],
-    },
   };
 
   const currentService = serviceData[service as keyof typeof serviceData] || serviceData['infrastructure-surface'];

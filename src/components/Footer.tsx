@@ -8,7 +8,6 @@ const Footer: React.FC = () => {
     { name: 'Mechanical & Electrical', href: '/services/mechanical-electrical' },
     { name: 'Inspections & Compliance', href: '/services/inspections-compliance' },
     { name: 'Oil & Gas / Industrial', href: '/services/oil-gas-industrial' },
-    { name: 'Pressure Washing', href: '/services/pressure-washing' },
   ];
 
   const quickLinks = [

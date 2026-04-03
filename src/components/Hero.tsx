@@ -110,7 +110,6 @@ const Hero: React.FC = () => {
                     <option value="mechanical-electrical">⚡ Mechanical & Electrical Systems</option>
                     <option value="inspections-compliance">🔍 Inspections & Compliance</option>
                     <option value="oil-gas-industrial">🛢️ Oil & Gas / Industrial Services</option>
-                    <option value="pressure-washing">💧 Pressure Washing</option>
                   </select>
                 </div>
 
