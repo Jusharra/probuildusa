@@ -114,38 +114,56 @@ const LeadIntake: React.FC = () => {
   const submitForm = async () => {
     try {
       setLoading(true);
+
+      // Send email via Netlify function (primary — always runs)
+      const emailRes = await fetch('/.netlify/functions/send-quote', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(formData),
+      });
+
+      if (!emailRes.ok) {
+        const err = await emailRes.json().catch(() => ({}));
+        throw new Error(err.error || 'Email delivery failed');
+      }
+
+      // Try Supabase in background — don't block or fail on error
       const budgetLower = formData.budget.split('-')[0].replace(/[^0-9]/g, '');
       const budgetNumber = budgetLower ? parseInt(budgetLower) : null;
+      let leadId = tempLeadId;
 
-      const technicalDetails = buildTechnicalSummary();
+      try {
+        const leadData = {
+          client_name: `${formData.firstName} ${formData.lastName}`.trim(),
+          phone: formData.phone,
+          email: formData.email,
+          project_type: formData.projectType,
+          zip_code: formData.zip,
+          budget: budgetNumber,
+          timeline: formData.timeline,
+          description: [
+            formData.projectDescription && `Overview: ${formData.projectDescription}`,
+            buildTechnicalSummary(),
+            formData.propertyType && `Property Type: ${formData.propertyType}`,
+            formData.workHoursConstraints && `Work Hours: ${formData.workHoursConstraints}`,
+            formData.siteAccessNotes && `Site Access: ${formData.siteAccessNotes}`,
+            formData.safetyRequirements && `Safety/Certs Required: ${formData.safetyRequirements}`,
+            formData.permitStatus && `Permit Status: ${formData.permitStatus}`,
+            formData.occupancyStatus && `Occupancy: ${formData.occupancyStatus}`,
+            formData.companyName && `Company: ${formData.companyName}`,
+            formData.jobTitle && `Title: ${formData.jobTitle}`,
+          ].filter(Boolean).join('\n'),
+          source,
+          status: 'new',
+          assigned_contractor_id: contractorId || null,
+        };
+        const createdLead = await LeadService.createLead(leadData);
+        leadId = createdLead.id;
+      } catch (dbErr) {
+        console.warn('Supabase unavailable — email sent successfully:', dbErr);
+      }
 
-      const leadData = {
-        client_name: `${formData.firstName} ${formData.lastName}`.trim(),
-        phone: formData.phone,
-        email: formData.email,
-        project_type: formData.projectType,
-        zip_code: formData.zip,
-        budget: budgetNumber,
-        timeline: formData.timeline,
-        description: [
-          formData.projectDescription && `Overview: ${formData.projectDescription}`,
-          technicalDetails,
-          formData.propertyType && `Property Type: ${formData.propertyType}`,
-          formData.workHoursConstraints && `Work Hours: ${formData.workHoursConstraints}`,
-          formData.siteAccessNotes && `Site Access: ${formData.siteAccessNotes}`,
-          formData.safetyRequirements && `Safety/Certs Required: ${formData.safetyRequirements}`,
-          formData.permitStatus && `Permit Status: ${formData.permitStatus}`,
-          formData.occupancyStatus && `Occupancy: ${formData.occupancyStatus}`,
-          formData.companyName && `Company: ${formData.companyName}`,
-          formData.jobTitle && `Title: ${formData.jobTitle}`,
-        ].filter(Boolean).join('\n'),
-        source,
-        status: 'new',
-        assigned_contractor_id: contractorId || null,
-      };
-
-      const createdLead = await LeadService.createLead(leadData);
-      navigate(`/deposit-payment?leadId=${createdLead.id}`);
+      navigate(`/deposit-payment?leadId=${leadId}`);
     } catch (error) {
       console.error('Error submitting lead:', error);
       alert('There was an error submitting your project. Please try again.');

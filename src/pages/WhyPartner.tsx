@@ -1,10 +1,36 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowRight, DollarSign, Users, Star, Shield, TrendingUp, Clock, Award, CheckCircle, X } from 'lucide-react';
 import { stripeProducts } from '../stripe-config';
 import ProductCard from '../components/ProductCard';
 
 const WhyPartner: React.FC = () => {
+  const [partnerForm, setPartnerForm] = useState({
+    company: '', contactName: '', email: '', phone: '',
+    specialty: '', licenseNumber: '', yearsInBusiness: '', serviceArea: '', message: '',
+  });
+  const [submitState, setSubmitState] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
+
+  const handlePartnerChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
+    setPartnerForm({ ...partnerForm, [e.target.name]: e.target.value });
+  };
+
+  const handlePartnerSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setSubmitState('loading');
+    try {
+      const res = await fetch('/.netlify/functions/send-partner', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(partnerForm),
+      });
+      if (!res.ok) throw new Error('Failed');
+      setSubmitState('success');
+    } catch {
+      setSubmitState('error');
+    }
+  };
+
   const benefits = [
     {
       icon: DollarSign,
@@ -179,40 +205,93 @@ const WhyPartner: React.FC = () => {
 
             <div className="bg-slate-800/50 backdrop-blur-sm border border-slate-700 rounded-2xl p-8">
               <h3 className="text-2xl font-bold mb-6 text-center">Ready to Partner?</h3>
-              <form className="space-y-4">
-                <input
-                  type="text"
-                  placeholder="Company Name"
-                  className="w-full bg-slate-700 border border-slate-600 rounded-lg px-4 py-3 text-white placeholder-slate-400 focus:ring-2 focus:ring-amber-400 focus:border-transparent transition-all"
-                />
-                <input
-                  type="email"
-                  placeholder="Email Address"
-                  className="w-full bg-slate-700 border border-slate-600 rounded-lg px-4 py-3 text-white placeholder-slate-400 focus:ring-2 focus:ring-amber-400 focus:border-transparent transition-all"
-                />
-                <input
-                  type="tel"
-                  placeholder="Phone Number"
-                  className="w-full bg-slate-700 border border-slate-600 rounded-lg px-4 py-3 text-white placeholder-slate-400 focus:ring-2 focus:ring-amber-400 focus:border-transparent transition-all"
-                />
-                <select className="w-full bg-slate-700 border border-slate-600 rounded-lg px-4 py-3 text-white focus:ring-2 focus:ring-amber-400 focus:border-transparent transition-all">
-                  <option value="">Select Your Specialty</option>
-                  <option value="line-striping">Line Striping</option>
-                  <option value="power-washing">Power Washing</option>
-                  <option value="window-cleaning">Window Cleaning</option>
-                  <option value="seal-coating">Seal Coating</option>
-                  <option value="paving">Paving</option>
-                  <option value="crack-sealing">Crack Sealing</option>
-                  <option value="parking-lot-sweeping">Parking Lot Sweeping</option>
-                  <option value="pressure-washing">Pressure Washing</option>
-                </select>
-                <button
-                  type="submit"
-                  className="w-full bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-600 hover:to-amber-700 text-slate-900 px-6 py-4 rounded-lg font-bold text-lg transition-all duration-300 transform hover:scale-105"
-                >
-                  Apply to Partner
-                </button>
-              </form>
+
+              {submitState === 'success' ? (
+                <div className="text-center py-8">
+                  <div className="w-16 h-16 bg-green-500/20 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <CheckCircle className="w-8 h-8 text-green-400" />
+                  </div>
+                  <h4 className="text-xl font-bold mb-2">Application Received!</h4>
+                  <p className="text-slate-400">We'll review your application and follow up within 24 hours.</p>
+                </div>
+              ) : (
+                <form className="space-y-4" onSubmit={handlePartnerSubmit}>
+                  <div className="grid grid-cols-2 gap-3">
+                    <input name="company" value={partnerForm.company} onChange={handlePartnerChange} required
+                      type="text" placeholder="Company Name"
+                      className="col-span-2 w-full bg-slate-700 border border-slate-600 rounded-lg px-4 py-3 text-white placeholder-slate-400 focus:ring-2 focus:ring-amber-400 focus:border-transparent transition-all" />
+                    <input name="contactName" value={partnerForm.contactName} onChange={handlePartnerChange}
+                      type="text" placeholder="Your Name"
+                      className="w-full bg-slate-700 border border-slate-600 rounded-lg px-4 py-3 text-white placeholder-slate-400 focus:ring-2 focus:ring-amber-400 focus:border-transparent transition-all" />
+                    <input name="phone" value={partnerForm.phone} onChange={handlePartnerChange} required
+                      type="tel" placeholder="Phone Number"
+                      className="w-full bg-slate-700 border border-slate-600 rounded-lg px-4 py-3 text-white placeholder-slate-400 focus:ring-2 focus:ring-amber-400 focus:border-transparent transition-all" />
+                  </div>
+                  <input name="email" value={partnerForm.email} onChange={handlePartnerChange} required
+                    type="email" placeholder="Email Address"
+                    className="w-full bg-slate-700 border border-slate-600 rounded-lg px-4 py-3 text-white placeholder-slate-400 focus:ring-2 focus:ring-amber-400 focus:border-transparent transition-all" />
+                  <select name="specialty" value={partnerForm.specialty} onChange={handlePartnerChange} required
+                    className="w-full bg-slate-700 border border-slate-600 rounded-lg px-4 py-3 text-white focus:ring-2 focus:ring-amber-400 focus:border-transparent transition-all">
+                    <option value="">Select Your Specialty</option>
+                    <optgroup label="Infrastructure & Surface">
+                      <option value="Line Striping">Line Striping</option>
+                      <option value="Asphalt Paving">Asphalt Paving</option>
+                      <option value="Sealcoating">Sealcoating</option>
+                      <option value="Crack Sealing">Crack Sealing</option>
+                      <option value="Parking Lot Repair">Parking Lot Repair</option>
+                      <option value="ADA Compliance Markings">ADA Compliance Markings</option>
+                    </optgroup>
+                    <optgroup label="Mechanical & Electrical">
+                      <option value="Commercial Electrical">Commercial Electrical</option>
+                      <option value="Industrial Electrical">Industrial Electrical</option>
+                      <option value="Panel Upgrades">Panel Upgrades</option>
+                      <option value="Commercial HVAC">Commercial HVAC</option>
+                      <option value="EV Charging Infrastructure">EV Charging Infrastructure</option>
+                      <option value="Exterior / LED Lighting">Exterior / LED Lighting</option>
+                    </optgroup>
+                    <optgroup label="Inspections & Compliance">
+                      <option value="Home Inspections">Home Inspections</option>
+                      <option value="Commercial Inspections">Commercial Inspections</option>
+                      <option value="Fire & Life Safety">Fire & Life Safety</option>
+                      <option value="ADA / Accessibility">ADA / Accessibility</option>
+                      <option value="Environmental Phase I/II">Environmental Phase I / II ESA</option>
+                      <option value="Energy Auditing">Energy Auditing</option>
+                    </optgroup>
+                    <optgroup label="Oil, Gas & Industrial">
+                      <option value="Site Cleanup / Remediation">Site Cleanup / Remediation</option>
+                      <option value="Environmental Compliance">Environmental Compliance</option>
+                      <option value="Industrial Equipment Maintenance">Industrial Equipment Maintenance</option>
+                      <option value="Safety Inspections (O&G)">Safety Inspections (O&G)</option>
+                    </optgroup>
+                    <optgroup label="Operations Support">
+                      <option value="Estimation & Bidding">Estimation & Bidding</option>
+                      <option value="Permit Expediting">Permit Expediting</option>
+                      <option value="Material Procurement">Material Procurement</option>
+                      <option value="Post-Construction Cleanup">Post-Construction Cleanup</option>
+                      <option value="Facility Maintenance">Facility Maintenance</option>
+                      <option value="Clean Truck Check (CA)">Clean Truck Check (CA)</option>
+                    </optgroup>
+                  </select>
+                  <div className="grid grid-cols-2 gap-3">
+                    <input name="licenseNumber" value={partnerForm.licenseNumber} onChange={handlePartnerChange}
+                      type="text" placeholder="License # (optional)"
+                      className="w-full bg-slate-700 border border-slate-600 rounded-lg px-4 py-3 text-white placeholder-slate-400 focus:ring-2 focus:ring-amber-400 focus:border-transparent transition-all" />
+                    <input name="yearsInBusiness" value={partnerForm.yearsInBusiness} onChange={handlePartnerChange}
+                      type="text" placeholder="Years in Business"
+                      className="w-full bg-slate-700 border border-slate-600 rounded-lg px-4 py-3 text-white placeholder-slate-400 focus:ring-2 focus:ring-amber-400 focus:border-transparent transition-all" />
+                  </div>
+                  <input name="serviceArea" value={partnerForm.serviceArea} onChange={handlePartnerChange}
+                    type="text" placeholder="Primary Service Area (e.g. Los Angeles, CA)"
+                    className="w-full bg-slate-700 border border-slate-600 rounded-lg px-4 py-3 text-white placeholder-slate-400 focus:ring-2 focus:ring-amber-400 focus:border-transparent transition-all" />
+                  {submitState === 'error' && (
+                    <p className="text-red-400 text-sm text-center">Something went wrong. Please try again or call us directly.</p>
+                  )}
+                  <button type="submit" disabled={submitState === 'loading'}
+                    className="w-full bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-600 hover:to-amber-700 text-slate-900 px-6 py-4 rounded-lg font-bold text-lg transition-all duration-300 transform hover:scale-105 disabled:opacity-60 disabled:cursor-not-allowed disabled:scale-100">
+                    {submitState === 'loading' ? 'Submitting...' : 'Apply to Partner'}
+                  </button>
+                </form>
+              )}
               <p className="text-xs text-slate-400 text-center mt-4">
                 We'll review your application within 24 hours
               </p>
