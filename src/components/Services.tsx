@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowRight, Building2, Zap, ClipboardCheck, Flame, DollarSign } from 'lucide-react';
+import { ArrowRight, Building2, Zap, ClipboardCheck, Flame, DollarSign, Calculator, FileCheck, Package, Trash2, RefreshCcw, Truck } from 'lucide-react';
 
 const Services: React.FC = () => {
   const categories = [
@@ -120,6 +120,45 @@ const Services: React.FC = () => {
               </div>
             );
           })}
+        </div>
+
+        {/* Operations Support Services */}
+        <div className="mt-12 mb-10">
+          <div className="text-center mb-8">
+            <p className="text-amber-400 font-semibold uppercase tracking-widest text-sm mb-2">End-to-End Project Support</p>
+            <h3 className="text-2xl font-bold text-white">Operations Support Services</h3>
+          </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+            {[
+              { id: 'estimation-bidding', icon: Calculator, title: 'Estimation & Bidding', description: 'Professional quantity take-offs, bid packages, and cost estimation for commercial and industrial projects.' },
+              { id: 'permit-compliance', icon: FileCheck, title: 'Permit & Compliance', description: 'Permit acquisition, code research, regulatory filings, and compliance documentation handled for you.' },
+              { id: 'material-procurement', icon: Package, title: 'Material Procurement', description: 'Sourcing, purchasing, and logistics coordination for construction materials and supplies.' },
+              { id: 'cleanup-coordination', icon: Trash2, title: 'Cleanup Coordination', description: 'Post-construction cleanup, debris removal, and site restoration — fully coordinated.' },
+              { id: 'warranty-maintenance', icon: RefreshCcw, title: 'Warranty & Maintenance Plans', description: 'Ongoing maintenance contracts, warranty management, and preventive care programs.' },
+              { id: 'clean-truck-check', icon: Truck, title: 'Clean Truck Check', description: 'CARB compliance verification and fleet inspections for California Clean Truck Check requirements.', badge: 'CA Only' },
+            ].map(({ id, icon: Icon, title, description, badge }) => (
+              <Link
+                key={id}
+                to={`/services/${id}`}
+                className="group bg-slate-900 border border-slate-700 hover:border-amber-400/50 rounded-xl p-5 flex flex-col transition-all duration-300 hover:-translate-y-0.5"
+              >
+                <div className="flex items-start justify-between mb-3">
+                  <div className="bg-slate-700 group-hover:bg-amber-500/20 p-2.5 rounded-lg transition-colors">
+                    <Icon className="w-5 h-5 text-amber-400" />
+                  </div>
+                  {badge && (
+                    <span className="bg-blue-500/20 text-blue-300 text-xs font-semibold px-2 py-0.5 rounded-full border border-blue-500/30">{badge}</span>
+                  )}
+                </div>
+                <h4 className="font-bold text-white mb-1 group-hover:text-amber-400 transition-colors">{title}</h4>
+                <p className="text-slate-400 text-sm leading-relaxed flex-1">{description}</p>
+                <div className="flex items-center space-x-1 mt-3 text-amber-400 text-sm font-semibold">
+                  <span>Learn More</span>
+                  <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                </div>
+              </Link>
+            ))}
+          </div>
         </div>
 
         <div className="text-center mt-12">

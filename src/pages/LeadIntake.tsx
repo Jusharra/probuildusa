@@ -201,6 +201,12 @@ const LeadIntake: React.FC = () => {
     { id: 'mechanical-electrical', name: 'Mechanical & Electrical', icon: '⚡', description: 'Commercial electrical, HVAC, panel upgrades, industrial systems' },
     { id: 'inspections-compliance', name: 'Inspections & Compliance', icon: '🔍', description: 'Code compliance, pre-purchase, fire, ADA, environmental audits' },
     { id: 'oil-gas-industrial', name: 'Oil & Gas / Industrial', icon: '🛢️', description: 'Site cleanup, equipment install, environmental compliance' },
+    { id: 'estimation-bidding', name: 'Estimation & Bidding', icon: '📋', description: 'Quantity take-offs, bid packages, cost estimation' },
+    { id: 'permit-compliance', name: 'Permit & Compliance', icon: '📄', description: 'Permit acquisition, code research, regulatory filings' },
+    { id: 'material-procurement', name: 'Material Procurement', icon: '📦', description: 'Sourcing, purchasing, and delivery logistics coordination' },
+    { id: 'cleanup-coordination', name: 'Cleanup Coordination', icon: '🧹', description: 'Post-construction cleanup, debris removal, site restoration' },
+    { id: 'warranty-maintenance', name: 'Warranty & Maintenance Plans', icon: '🔄', description: 'Ongoing maintenance contracts and warranty management' },
+    { id: 'clean-truck-check', name: 'Clean Truck Check (CA Only)', icon: '🚛', description: 'CARB compliance verification for California truck fleets' },
   ];
 
   const renderServiceSpecificStep = () => {
@@ -533,6 +539,378 @@ const LeadIntake: React.FC = () => {
                 <textarea name="projectDescription" value={formData.projectDescription} onChange={handleInputChange} rows={3}
                   className="w-full bg-slate-700 border border-slate-600 rounded-lg px-4 py-3 text-white placeholder-slate-400 focus:ring-2 focus:ring-amber-400 focus:border-transparent"
                   placeholder="Describe the work needed: regulatory deadline, prior investigation reports, site history, equipment involved, special access requirements (TWIC, confined space), etc." />
+              </div>
+            </div>
+          </div>
+        );
+
+      case 'estimation-bidding':
+        return (
+          <div className="space-y-6">
+            <div className="text-center mb-8">
+              <h2 className="text-3xl font-bold mb-2">Estimation & Bidding Details</h2>
+              <p className="text-slate-400">Tell us about the project scope and deliverables you need</p>
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div>
+                <label className="block text-sm font-semibold text-slate-300 mb-2">Estimate Type</label>
+                <select name="systemType" value={formData.systemType} onChange={handleInputChange}
+                  className="w-full bg-slate-700 border border-slate-600 rounded-lg px-4 py-3 text-white focus:ring-2 focus:ring-amber-400 focus:border-transparent">
+                  <option value="">Select estimate type</option>
+                  <option value="conceptual">Conceptual / Budget estimate</option>
+                  <option value="schematic">Schematic design estimate</option>
+                  <option value="design-dev">Design development estimate</option>
+                  <option value="bid-package">Full bid package preparation</option>
+                  <option value="quantity-takeoff">Quantity take-off only</option>
+                  <option value="bid-leveling">Bid leveling / comparison</option>
+                  <option value="value-engineering">Value engineering review</option>
+                </select>
+              </div>
+              <div>
+                <label className="block text-sm font-semibold text-slate-300 mb-2">Project Type / Trade</label>
+                <select name="mechanicalWorkScope" value={formData.mechanicalWorkScope} onChange={handleInputChange}
+                  className="w-full bg-slate-700 border border-slate-600 rounded-lg px-4 py-3 text-white focus:ring-2 focus:ring-amber-400 focus:border-transparent">
+                  <option value="">Select trade</option>
+                  <option value="general">General construction</option>
+                  <option value="civil">Civil / site work</option>
+                  <option value="electrical">Electrical</option>
+                  <option value="mechanical">Mechanical / HVAC</option>
+                  <option value="plumbing">Plumbing</option>
+                  <option value="concrete">Concrete / masonry</option>
+                  <option value="steel">Structural steel</option>
+                  <option value="multi-trade">Multi-trade scope</option>
+                  <option value="industrial">Industrial / process</option>
+                </select>
+              </div>
+              <div>
+                <label className="block text-sm font-semibold text-slate-300 mb-2">Total Project Value (Estimated)</label>
+                <input type="text" name="buildingSqFt" value={formData.buildingSqFt} onChange={handleInputChange}
+                  className="w-full bg-slate-700 border border-slate-600 rounded-lg px-4 py-3 text-white placeholder-slate-400 focus:ring-2 focus:ring-amber-400 focus:border-transparent"
+                  placeholder="e.g. $2.5M" />
+              </div>
+              <div>
+                <label className="block text-sm font-semibold text-slate-300 mb-2">Bid / Estimate Deadline</label>
+                <input type="date" name="startDate" value={formData.startDate} onChange={handleInputChange}
+                  className="w-full bg-slate-700 border border-slate-600 rounded-lg px-4 py-3 text-white focus:ring-2 focus:ring-amber-400 focus:border-transparent" />
+              </div>
+              <div className="md:col-span-2">
+                <label className="block text-sm font-semibold text-slate-300 mb-2">Documents Available</label>
+                <div className="grid grid-cols-2 md:grid-cols-3 gap-2">
+                  {['Architectural drawings', 'Structural drawings', 'MEP drawings', 'Specifications (specs book)', 'Geotech report', 'None yet'].map(doc => (
+                    <label key={doc} className="flex items-center space-x-2 text-sm text-slate-300 cursor-pointer">
+                      <input type="checkbox" className="w-4 h-4 text-amber-400 bg-slate-700 border-slate-600 rounded" />
+                      <span>{doc}</span>
+                    </label>
+                  ))}
+                </div>
+              </div>
+              <div className="md:col-span-2">
+                <label className="block text-sm font-semibold text-slate-300 mb-2">Scope Description & Special Requirements</label>
+                <textarea name="projectDescription" value={formData.projectDescription} onChange={handleInputChange} rows={3}
+                  className="w-full bg-slate-700 border border-slate-600 rounded-lg px-4 py-3 text-white placeholder-slate-400 focus:ring-2 focus:ring-amber-400 focus:border-transparent"
+                  placeholder="Describe the project scope, specific deliverables needed (CSI divisions, subcontractor breakdowns, alternates), number of bid packages, prevailing wage requirements, etc." />
+              </div>
+            </div>
+          </div>
+        );
+
+      case 'permit-compliance':
+        return (
+          <div className="space-y-6">
+            <div className="text-center mb-8">
+              <h2 className="text-3xl font-bold mb-2">Permit & Compliance Details</h2>
+              <p className="text-slate-400">Tell us about the permit type and current status</p>
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div>
+                <label className="block text-sm font-semibold text-slate-300 mb-2">Permit Type</label>
+                <select name="inspectionType" value={formData.inspectionType} onChange={handleInputChange}
+                  className="w-full bg-slate-700 border border-slate-600 rounded-lg px-4 py-3 text-white focus:ring-2 focus:ring-amber-400 focus:border-transparent">
+                  <option value="">Select permit type</option>
+                  <option value="building">Building permit</option>
+                  <option value="electrical">Electrical permit</option>
+                  <option value="mechanical">Mechanical / HVAC permit</option>
+                  <option value="plumbing">Plumbing permit</option>
+                  <option value="grading">Grading / earthwork permit</option>
+                  <option value="encroachment">Encroachment / ROW permit</option>
+                  <option value="environmental">Environmental permit (CEQA, etc.)</option>
+                  <option value="fire">Fire department permit</option>
+                  <option value="conditional-use">Conditional use / variance</option>
+                  <option value="multiple">Multiple permit types</option>
+                </select>
+              </div>
+              <div>
+                <label className="block text-sm font-semibold text-slate-300 mb-2">Jurisdiction</label>
+                <input type="text" name="certifyingBody" value={formData.certifyingBody} onChange={handleInputChange}
+                  className="w-full bg-slate-700 border border-slate-600 rounded-lg px-4 py-3 text-white placeholder-slate-400 focus:ring-2 focus:ring-amber-400 focus:border-transparent"
+                  placeholder="e.g. City of Los Angeles, LA County, Bakersfield" />
+              </div>
+              <div>
+                <label className="block text-sm font-semibold text-slate-300 mb-2">Current Permit Status</label>
+                <select name="permitStatus" value={formData.permitStatus} onChange={handleInputChange}
+                  className="w-full bg-slate-700 border border-slate-600 rounded-lg px-4 py-3 text-white focus:ring-2 focus:ring-amber-400 focus:border-transparent">
+                  <option value="">Select status</option>
+                  <option value="not-started">Not started — need full coordination</option>
+                  <option value="submitted">Submitted — pending review</option>
+                  <option value="corrections">Corrections required</option>
+                  <option value="approved">Approved — need inspections</option>
+                  <option value="violation">Active violation / NOV</option>
+                  <option value="expired">Permit expired — need renewal</option>
+                </select>
+              </div>
+              <div>
+                <label className="block text-sm font-semibold text-slate-300 mb-2">Compliance Deadline</label>
+                <input type="date" name="startDate" value={formData.startDate} onChange={handleInputChange}
+                  className="w-full bg-slate-700 border border-slate-600 rounded-lg px-4 py-3 text-white focus:ring-2 focus:ring-amber-400 focus:border-transparent" />
+              </div>
+              <div className="md:col-span-2">
+                <label className="block text-sm font-semibold text-slate-300 mb-2">Compliance Concern & Context</label>
+                <textarea name="projectDescription" value={formData.projectDescription} onChange={handleInputChange} rows={3}
+                  className="w-full bg-slate-700 border border-slate-600 rounded-lg px-4 py-3 text-white placeholder-slate-400 focus:ring-2 focus:ring-amber-400 focus:border-transparent"
+                  placeholder="Describe the project requiring the permit, any violations or prior denials, code concerns, zoning issues, or specific regulatory deadlines you are working toward." />
+              </div>
+            </div>
+          </div>
+        );
+
+      case 'material-procurement':
+        return (
+          <div className="space-y-6">
+            <div className="text-center mb-8">
+              <h2 className="text-3xl font-bold mb-2">Material Procurement Details</h2>
+              <p className="text-slate-400">Describe what you need sourced and delivered</p>
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div>
+                <label className="block text-sm font-semibold text-slate-300 mb-2">Primary Material Category</label>
+                <select name="systemType" value={formData.systemType} onChange={handleInputChange}
+                  className="w-full bg-slate-700 border border-slate-600 rounded-lg px-4 py-3 text-white focus:ring-2 focus:ring-amber-400 focus:border-transparent">
+                  <option value="">Select material type</option>
+                  <option value="concrete-masonry">Concrete / masonry</option>
+                  <option value="steel-metal">Structural steel / metal</option>
+                  <option value="lumber-framing">Lumber / framing</option>
+                  <option value="electrical-materials">Electrical materials and gear</option>
+                  <option value="hvac-equipment">HVAC equipment and ductwork</option>
+                  <option value="plumbing">Plumbing fixtures and pipe</option>
+                  <option value="asphalt-paving">Asphalt / paving materials</option>
+                  <option value="industrial-equipment">Industrial equipment</option>
+                  <option value="specialty">Specialty / hard-to-source</option>
+                  <option value="multiple">Multiple material types</option>
+                </select>
+              </div>
+              <div>
+                <label className="block text-sm font-semibold text-slate-300 mb-2">Estimated Material Budget</label>
+                <input type="text" name="buildingSqFt" value={formData.buildingSqFt} onChange={handleInputChange}
+                  className="w-full bg-slate-700 border border-slate-600 rounded-lg px-4 py-3 text-white placeholder-slate-400 focus:ring-2 focus:ring-amber-400 focus:border-transparent"
+                  placeholder="e.g. $150,000" />
+              </div>
+              <div>
+                <label className="block text-sm font-semibold text-slate-300 mb-2">Delivery Required By</label>
+                <input type="date" name="startDate" value={formData.startDate} onChange={handleInputChange}
+                  className="w-full bg-slate-700 border border-slate-600 rounded-lg px-4 py-3 text-white focus:ring-2 focus:ring-amber-400 focus:border-transparent" />
+              </div>
+              <div>
+                <label className="block text-sm font-semibold text-slate-300 mb-2">Spec Sheets Available?</label>
+                <select name="mechanicalWorkScope" value={formData.mechanicalWorkScope} onChange={handleInputChange}
+                  className="w-full bg-slate-700 border border-slate-600 rounded-lg px-4 py-3 text-white focus:ring-2 focus:ring-amber-400 focus:border-transparent">
+                  <option value="">Select option</option>
+                  <option value="full-specs">Yes — full specs and submittals</option>
+                  <option value="partial-specs">Partial specs available</option>
+                  <option value="no-specs">No specs — standard grade acceptable</option>
+                  <option value="engineer-required">Engineer-specified — must match exactly</option>
+                </select>
+              </div>
+              <div className="md:col-span-2">
+                <label className="block text-sm font-semibold text-slate-300 mb-2">Material List & Requirements</label>
+                <textarea name="projectDescription" value={formData.projectDescription} onChange={handleInputChange} rows={3}
+                  className="w-full bg-slate-700 border border-slate-600 rounded-lg px-4 py-3 text-white placeholder-slate-400 focus:ring-2 focus:ring-amber-400 focus:border-transparent"
+                  placeholder="List materials needed (quantities, grades, sizes), delivery address, staging area constraints, any brand or spec requirements, tax-exempt purchasing, phased delivery schedule, etc." />
+              </div>
+            </div>
+          </div>
+        );
+
+      case 'cleanup-coordination':
+        return (
+          <div className="space-y-6">
+            <div className="text-center mb-8">
+              <h2 className="text-3xl font-bold mb-2">Cleanup Coordination Details</h2>
+              <p className="text-slate-400">Describe the site and type of cleanup needed</p>
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div>
+                <label className="block text-sm font-semibold text-slate-300 mb-2">Cleanup Type</label>
+                <select name="cleanupScope" value={formData.cleanupScope} onChange={handleInputChange}
+                  className="w-full bg-slate-700 border border-slate-600 rounded-lg px-4 py-3 text-white focus:ring-2 focus:ring-amber-400 focus:border-transparent">
+                  <option value="">Select cleanup type</option>
+                  <option value="rough-cleanup">Rough cleanup (construction debris)</option>
+                  <option value="final-cleanup">Final / broom-clean</option>
+                  <option value="detail-cleaning">Detail cleaning (pre-occupancy)</option>
+                  <option value="industrial-cleanup">Industrial / post-maintenance cleanup</option>
+                  <option value="hazmat-cleanup">Hazmat / environmental cleanup</option>
+                  <option value="demo-debris">Demolition debris removal</option>
+                  <option value="full-scope">Full scope (rough + final + detail)</option>
+                </select>
+              </div>
+              <div>
+                <label className="block text-sm font-semibold text-slate-300 mb-2">Site Area (sq ft)</label>
+                <input type="number" name="sqFootage" value={formData.sqFootage} onChange={handleInputChange}
+                  className="w-full bg-slate-700 border border-slate-600 rounded-lg px-4 py-3 text-white placeholder-slate-400 focus:ring-2 focus:ring-amber-400 focus:border-transparent"
+                  placeholder="e.g. 20000" />
+              </div>
+              <div>
+                <label className="block text-sm font-semibold text-slate-300 mb-2">Primary Debris / Waste Type</label>
+                <select name="stainType" value={formData.stainType} onChange={handleInputChange}
+                  className="w-full bg-slate-700 border border-slate-600 rounded-lg px-4 py-3 text-white focus:ring-2 focus:ring-amber-400 focus:border-transparent">
+                  <option value="">Select debris type</option>
+                  <option value="construction-debris">General construction debris</option>
+                  <option value="concrete-masonry">Concrete / masonry waste</option>
+                  <option value="steel-metal">Steel / metal scrap</option>
+                  <option value="drywall-insulation">Drywall / insulation</option>
+                  <option value="hazmat">Hazmat / contaminated material</option>
+                  <option value="vegetation">Vegetation / landscaping</option>
+                  <option value="mixed">Mixed debris</option>
+                </select>
+              </div>
+              <div>
+                <label className="block text-sm font-semibold text-slate-300 mb-2">Hazmat / Special Disposal?</label>
+                <select name="hazmatPresent" value={formData.hazmatPresent} onChange={handleInputChange}
+                  className="w-full bg-slate-700 border border-slate-600 rounded-lg px-4 py-3 text-white focus:ring-2 focus:ring-amber-400 focus:border-transparent">
+                  <option value="">Select option</option>
+                  <option value="no">No — standard debris only</option>
+                  <option value="asbestos">Yes — asbestos / ACM</option>
+                  <option value="lead">Yes — lead paint</option>
+                  <option value="chemicals">Yes — industrial chemicals</option>
+                  <option value="unknown">Unknown — assessment needed</option>
+                </select>
+              </div>
+              <div className="md:col-span-2">
+                <label className="block text-sm font-semibold text-slate-300 mb-2">Site Description & Access Notes</label>
+                <textarea name="projectDescription" value={formData.projectDescription} onChange={handleInputChange} rows={3}
+                  className="w-full bg-slate-700 border border-slate-600 rounded-lg px-4 py-3 text-white placeholder-slate-400 focus:ring-2 focus:ring-amber-400 focus:border-transparent"
+                  placeholder="Describe the site, floors/levels involved, dumpster access, elevator availability, parking for crews, inspection deadline driving the cleanup schedule, LEED certification requirements, etc." />
+              </div>
+            </div>
+          </div>
+        );
+
+      case 'warranty-maintenance':
+        return (
+          <div className="space-y-6">
+            <div className="text-center mb-8">
+              <h2 className="text-3xl font-bold mb-2">Warranty & Maintenance Plan Details</h2>
+              <p className="text-slate-400">Tell us about the systems or services you need covered</p>
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div>
+                <label className="block text-sm font-semibold text-slate-300 mb-2">Systems / Services to Cover</label>
+                <select name="systemType" value={formData.systemType} onChange={handleInputChange}
+                  className="w-full bg-slate-700 border border-slate-600 rounded-lg px-4 py-3 text-white focus:ring-2 focus:ring-amber-400 focus:border-transparent">
+                  <option value="">Select primary system</option>
+                  <option value="hvac">HVAC systems</option>
+                  <option value="electrical">Electrical systems</option>
+                  <option value="plumbing">Plumbing</option>
+                  <option value="fire-suppression">Fire suppression</option>
+                  <option value="parking-surface">Parking lot / surfaces</option>
+                  <option value="roofing">Roofing</option>
+                  <option value="industrial-equipment">Industrial equipment</option>
+                  <option value="full-facility">Full facility (multi-system)</option>
+                </select>
+              </div>
+              <div>
+                <label className="block text-sm font-semibold text-slate-300 mb-2">Number of Units / Assets</label>
+                <input type="text" name="numberOfUnits" value={formData.numberOfUnits} onChange={handleInputChange}
+                  className="w-full bg-slate-700 border border-slate-600 rounded-lg px-4 py-3 text-white placeholder-slate-400 focus:ring-2 focus:ring-amber-400 focus:border-transparent"
+                  placeholder="e.g. 6 RTUs, 3 buildings, 12 units" />
+              </div>
+              <div>
+                <label className="block text-sm font-semibold text-slate-300 mb-2">Current Contract Status</label>
+                <select name="mechanicalWorkScope" value={formData.mechanicalWorkScope} onChange={handleInputChange}
+                  className="w-full bg-slate-700 border border-slate-600 rounded-lg px-4 py-3 text-white focus:ring-2 focus:ring-amber-400 focus:border-transparent">
+                  <option value="">Select status</option>
+                  <option value="no-contract">No current contract</option>
+                  <option value="expiring">Existing contract expiring</option>
+                  <option value="unhappy">Unhappy with current provider</option>
+                  <option value="new-install">New installation needing coverage</option>
+                  <option value="post-warranty">Manufacturer warranty expiring</option>
+                </select>
+              </div>
+              <div>
+                <label className="block text-sm font-semibold text-slate-300 mb-2">Preferred Maintenance Frequency</label>
+                <select name="frequency" value={formData.frequency} onChange={handleInputChange}
+                  className="w-full bg-slate-700 border border-slate-600 rounded-lg px-4 py-3 text-white focus:ring-2 focus:ring-amber-400 focus:border-transparent">
+                  <option value="">Select frequency</option>
+                  <option value="monthly">Monthly</option>
+                  <option value="quarterly">Quarterly</option>
+                  <option value="semi-annual">Semi-annual</option>
+                  <option value="annual">Annual</option>
+                  <option value="custom">Custom schedule</option>
+                  <option value="reactive">Reactive / on-call only</option>
+                </select>
+              </div>
+              <div className="md:col-span-2">
+                <label className="block text-sm font-semibold text-slate-300 mb-2">Scope & Priorities</label>
+                <textarea name="projectDescription" value={formData.projectDescription} onChange={handleInputChange} rows={3}
+                  className="w-full bg-slate-700 border border-slate-600 rounded-lg px-4 py-3 text-white placeholder-slate-400 focus:ring-2 focus:ring-amber-400 focus:border-transparent"
+                  placeholder="Describe the assets needing coverage, building size, equipment makes/models, existing warranty documents, priority response time requirements, 24/7 emergency call-out needs, budget range for annual contract, etc." />
+              </div>
+            </div>
+          </div>
+        );
+
+      case 'clean-truck-check':
+        return (
+          <div className="space-y-6">
+            <div className="text-center mb-8">
+              <h2 className="text-3xl font-bold mb-2">Clean Truck Check Details</h2>
+              <p className="text-slate-400">Provide fleet information for CARB compliance coordination</p>
+            </div>
+            <div className="bg-blue-500/10 border border-blue-500/30 rounded-lg p-4 flex items-start space-x-3 mb-2">
+              <AlertTriangle className="w-5 h-5 text-blue-400 flex-shrink-0 mt-0.5" />
+              <p className="text-sm text-blue-200">California's Clean Truck Check applies to medium and heavy-duty vehicles (GVWR 14,001+ lbs) registered in CA. Non-compliant vehicles face fines and registration holds.</p>
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div>
+                <label className="block text-sm font-semibold text-slate-300 mb-2">Number of Vehicles in Fleet</label>
+                <input type="number" name="numberOfUnits" value={formData.numberOfUnits} onChange={handleInputChange}
+                  className="w-full bg-slate-700 border border-slate-600 rounded-lg px-4 py-3 text-white placeholder-slate-400 focus:ring-2 focus:ring-amber-400 focus:border-transparent"
+                  placeholder="e.g. 12" />
+              </div>
+              <div>
+                <label className="block text-sm font-semibold text-slate-300 mb-2">Primary Vehicle / Fleet Type</label>
+                <select name="systemType" value={formData.systemType} onChange={handleInputChange}
+                  className="w-full bg-slate-700 border border-slate-600 rounded-lg px-4 py-3 text-white focus:ring-2 focus:ring-amber-400 focus:border-transparent">
+                  <option value="">Select fleet type</option>
+                  <option value="semi-trucks">Semi-trucks / tractor-trailers</option>
+                  <option value="dump-trucks">Dump trucks</option>
+                  <option value="box-trucks">Box trucks / straight trucks</option>
+                  <option value="construction-equipment">Construction equipment (Class 7–8)</option>
+                  <option value="field-service">Field service / utility trucks</option>
+                  <option value="mixed-fleet">Mixed fleet</option>
+                </select>
+              </div>
+              <div>
+                <label className="block text-sm font-semibold text-slate-300 mb-2">Current CARB Compliance Status</label>
+                <select name="oilGasSiteType" value={formData.oilGasSiteType} onChange={handleInputChange}
+                  className="w-full bg-slate-700 border border-slate-600 rounded-lg px-4 py-3 text-white focus:ring-2 focus:ring-amber-400 focus:border-transparent">
+                  <option value="">Select status</option>
+                  <option value="compliant">Fully compliant — need annual inspection</option>
+                  <option value="partial">Partially compliant — some vehicles pending</option>
+                  <option value="non-compliant">Non-compliant — need immediate help</option>
+                  <option value="unknown">Unknown — need full fleet assessment</option>
+                  <option value="new">New to CA operations</option>
+                </select>
+              </div>
+              <div>
+                <label className="block text-sm font-semibold text-slate-300 mb-2">Compliance / Inspection Deadline</label>
+                <input type="date" name="startDate" value={formData.startDate} onChange={handleInputChange}
+                  className="w-full bg-slate-700 border border-slate-600 rounded-lg px-4 py-3 text-white focus:ring-2 focus:ring-amber-400 focus:border-transparent" />
+              </div>
+              <div className="md:col-span-2">
+                <label className="block text-sm font-semibold text-slate-300 mb-2">Fleet Details & Additional Notes</label>
+                <textarea name="projectDescription" value={formData.projectDescription} onChange={handleInputChange} rows={3}
+                  className="w-full bg-slate-700 border border-slate-600 rounded-lg px-4 py-3 text-white placeholder-slate-400 focus:ring-2 focus:ring-amber-400 focus:border-transparent"
+                  placeholder="List vehicle years/makes/models if known, VIPER IDs, any active violations or registration holds, fleet operating location (yard address), any vehicles already inspected, preferred inspection site or mobile inspection needed, etc." />
               </div>
             </div>
           </div>

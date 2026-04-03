@@ -40,6 +40,12 @@ const Header: React.FC = () => {
     { name: 'Mechanical & Electrical', href: '/services/mechanical-electrical' },
     { name: 'Inspections & Compliance', href: '/services/inspections-compliance' },
     { name: 'Oil & Gas / Industrial', href: '/services/oil-gas-industrial' },
+    { name: 'Estimation & Bidding', href: '/services/estimation-bidding' },
+    { name: 'Permit & Compliance', href: '/services/permit-compliance' },
+    { name: 'Material Procurement', href: '/services/material-procurement' },
+    { name: 'Cleanup Coordination', href: '/services/cleanup-coordination' },
+    { name: 'Warranty & Maintenance Plans', href: '/services/warranty-maintenance' },
+    { name: 'Clean Truck Check (CA)', href: '/services/clean-truck-check' },
   ];
 
   useEffect(() => {
