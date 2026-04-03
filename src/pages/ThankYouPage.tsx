@@ -164,7 +164,7 @@ const ThankYouPage: React.FC = () => {
               <h3 className="font-semibold text-white mb-2">Call Us</h3>
               <p className="text-slate-400 text-sm mb-3">Speak with our concierge team</p>
               <button className="text-amber-400 hover:text-amber-300 font-semibold transition-colors">
-                (555) 123-BUILD
+                (844) 543-7419
               </button>
             </div>
             

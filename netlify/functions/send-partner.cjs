@@ -62,7 +62,7 @@ function buildApplicantHtml(d) {
         <p style="margin:4px 0 0;color:#64748b;font-size:14px">3. Once approved, you'll begin receiving qualified project leads</p>
       </div>
       <p style="color:#475569;line-height:1.7">
-        Questions? Call us at <strong>(661) 123-BUILD</strong> or reply to this email.
+        Questions? Call us at <strong>(844) 543-7419</strong> or reply to this email.
       </p>
       <p style="color:#475569">— The ProBuild Concierge Team</p>
     </div>
@@ -84,7 +84,7 @@ exports.handler = async (event) => {
     sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 
     const adminEmail = process.env.ADMIN_EMAIL || 'hello@probuildconcierge.com';
-    const fromEmail = process.env.FROM_EMAIL || 'noreply@probuildconcierge.com';
+    const fromEmail = process.env.FROM_EMAIL || adminEmail;
 
     const messages = [
       {

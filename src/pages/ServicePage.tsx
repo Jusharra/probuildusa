@@ -524,7 +524,7 @@ const ServicePage: React.FC = () => {
 
                 <button className="w-full border-2 border-slate-600 hover:border-amber-400 text-white px-6 py-3 rounded-lg font-semibold transition-all duration-300 flex items-center justify-center space-x-2">
                   <Phone className="w-5 h-5" />
-                  <span>Call (661) 123-BUILD</span>
+                  <span>Call (844) 543-7419</span>
                 </button>
 
                 <div className="mt-6 pt-6 border-t border-slate-700">

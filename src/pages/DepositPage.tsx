@@ -450,7 +450,7 @@ const DepositPage: React.FC = () => {
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <button className="flex items-center justify-center space-x-2 text-amber-400 hover:text-amber-300 transition-colors">
               <Phone className="w-4 h-4" />
-              <span>Call (555) 123-BUILD</span>
+              <span>Call (844) 543-7419</span>
             </button>
             <button className="flex items-center justify-center space-x-2 text-amber-400 hover:text-amber-300 transition-colors">
               <Mail className="w-4 h-4" />

@@ -246,7 +246,7 @@ const Header: React.FC = () => {
               <div className="pt-4 space-y-3 border-t border-slate-800">
                 <button className="flex items-center space-x-2 text-slate-300 hover:text-amber-400 transition-colors">
                   <Phone className="w-4 h-4" />
-                  <span>(661) 123-BUILD</span>
+                  <span>(844) 543-7419</span>
                 </button>
                 
                 {user && profile ? (
