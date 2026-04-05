@@ -1,11 +1,10 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { Link, useLocation } from 'react-router-dom';
-import { Menu, X, Phone, MessageSquare, User, LogOut, Settings, BarChart3, LogIn, CreditCard, ChevronDown } from 'lucide-react';
+import { Link } from 'react-router-dom';
+import { Menu, X, Phone, User, LogOut, BarChart3, LogIn, CreditCard, ChevronDown } from 'lucide-react';
 import { useAuth } from '../contexts/AuthContext';
 
 const Header: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const location = useLocation();
   const [isServicesDropdownOpen, setIsServicesDropdownOpen] = useState(false);
   const servicesDropdownRef = useRef<HTMLDivElement>(null);
   const { user, profile, signOut } = useAuth();
@@ -69,11 +68,22 @@ const Header: React.FC = () => {
         <div className="flex justify-between items-center h-16">
 
           {/* Logo */}
-          <Link to="/" className="flex items-center space-x-3 flex-shrink-0">
-            <div className="w-9 h-9 bg-gradient-to-br from-amber-400 to-amber-600 rounded-lg flex items-center justify-center">
-              <span className="text-slate-900 font-bold text-lg">P</span>
-            </div>
-            <span className="text-lg font-bold whitespace-nowrap">Goree & Associates Construction Services</span>
+          <Link to="/" className="flex items-center flex-shrink-0">
+            <svg viewBox="0 0 268 48" className="h-10 w-auto" fill="none" xmlns="http://www.w3.org/2000/svg">
+              {/* Gold bracket mark */}
+              <rect x="0" y="0"    width="24" height="3.5" rx="0.5" fill="#c9a84c" />
+              <rect x="0" y="0"    width="3.5" height="48" rx="0.5" fill="#c9a84c" />
+              <rect x="0" y="21"   width="16" height="2.5" rx="0.5" fill="#c9a84c" />
+              <rect x="0" y="44.5" width="24" height="3.5" rx="0.5" fill="#c9a84c" />
+              {/* GOREE */}
+              <text x="34" y="23" fontFamily="Georgia,'Times New Roman',serif" fontWeight="700" fontSize="21" fill="white">GOREE</text>
+              {/* & ASSOCIATES */}
+              <text x="35" y="36" fontFamily="Georgia,'Times New Roman',serif" fontWeight="400" fontSize="9.5" fill="#c9a84c" letterSpacing="2.5">& ASSOCIATES</text>
+              {/* Divider */}
+              <line x1="34" y1="40" x2="266" y2="40" stroke="#c9a84c" strokeWidth="0.6" opacity="0.55" />
+              {/* CONSTRUCTION SERVICES */}
+              <text x="35" y="48" fontFamily="'Trebuchet MS',Arial,sans-serif" fontWeight="400" fontSize="8" fill="#7a8fa0" letterSpacing="2.2">CONSTRUCTION SERVICES</text>
+            </svg>
           </Link>
 
           {/* Desktop Nav */}
