@@ -30,9 +30,21 @@ function buildAdminHtml(d) {
 <head><meta charset="utf-8"></head>
 <body style="background:#0f172a;color:#f1f5f9;font-family:sans-serif;margin:0;padding:24px">
   <div style="max-width:680px;margin:0 auto;background:#1e293b;border-radius:12px;overflow:hidden;border:1px solid #334155">
-    <div style="background:linear-gradient(90deg,#f59e0b,#d97706);padding:20px 28px">
-      <h1 style="margin:0;color:#0f172a;font-size:22px">New Project Quote — ${service}</h1>
-      <p style="margin:4px 0 0;color:#1e293b;font-size:14px">Submitted via Goree & Associates Construction Services</p>
+    <div style="background:#182840;padding:18px 28px">
+      <table cellpadding="0" cellspacing="0" border="0"><tr>
+        <td style="width:22px;height:52px;border-top:3px solid #c9a84c;border-left:3px solid #c9a84c;border-bottom:3px solid #c9a84c;vertical-align:middle;padding:0">
+          <div style="width:13px;height:2px;background:#c9a84c"></div>
+        </td>
+        <td style="padding-left:14px;vertical-align:top;padding-top:3px">
+          <div style="font-family:Georgia,'Times New Roman',serif;font-weight:700;font-size:24px;color:#ffffff;line-height:1.1">GOREE</div>
+          <div style="font-family:Georgia,'Times New Roman',serif;font-size:9px;color:#c9a84c;letter-spacing:3px;margin-top:2px">&amp; ASSOCIATES</div>
+          <div style="border-top:1px solid rgba(201,168,76,0.45);width:150px;margin:4px 0 3px"></div>
+          <div style="font-family:Arial,Helvetica,sans-serif;font-size:8px;color:#7a8fa0;letter-spacing:2px">CONSTRUCTION SERVICES</div>
+        </td>
+      </tr></table>
+    </div>
+    <div style="background:linear-gradient(90deg,#f59e0b,#d97706);padding:12px 28px">
+      <h1 style="margin:0;color:#0f172a;font-size:18px">New Project Quote — ${service}</h1>
     </div>
     <div style="padding:28px">
       <h2 style="color:#f59e0b;font-size:14px;text-transform:uppercase;letter-spacing:1px;margin:0 0 12px">Contact</h2>
@@ -97,7 +109,20 @@ function buildClientHtml(d) {
 <head><meta charset="utf-8"></head>
 <body style="background:#f8fafc;color:#1e293b;font-family:sans-serif;margin:0;padding:24px">
   <div style="max-width:600px;margin:0 auto;background:#fff;border-radius:12px;overflow:hidden;border:1px solid #e2e8f0">
-    <div style="background:linear-gradient(90deg,#f59e0b,#d97706);padding:24px 28px">
+    <div style="background:#182840;padding:18px 28px">
+      <table cellpadding="0" cellspacing="0" border="0"><tr>
+        <td style="width:22px;height:52px;border-top:3px solid #c9a84c;border-left:3px solid #c9a84c;border-bottom:3px solid #c9a84c;vertical-align:middle;padding:0">
+          <div style="width:13px;height:2px;background:#c9a84c"></div>
+        </td>
+        <td style="padding-left:14px;vertical-align:top;padding-top:3px">
+          <div style="font-family:Georgia,'Times New Roman',serif;font-weight:700;font-size:24px;color:#ffffff;line-height:1.1">GOREE</div>
+          <div style="font-family:Georgia,'Times New Roman',serif;font-size:9px;color:#c9a84c;letter-spacing:3px;margin-top:2px">&amp; ASSOCIATES</div>
+          <div style="border-top:1px solid rgba(201,168,76,0.45);width:150px;margin:4px 0 3px"></div>
+          <div style="font-family:Arial,Helvetica,sans-serif;font-size:8px;color:#7a8fa0;letter-spacing:2px">CONSTRUCTION SERVICES</div>
+        </td>
+      </tr></table>
+    </div>
+    <div style="background:linear-gradient(90deg,#f59e0b,#d97706);padding:12px 28px">
       <h1 style="margin:0;color:#0f172a;font-size:22px">We Received Your Request</h1>
     </div>
     <div style="padding:28px">
