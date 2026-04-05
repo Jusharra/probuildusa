@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowRight, Building2, Zap, ClipboardCheck, Flame, DollarSign, Calculator, FileCheck, Package, Trash2, RefreshCcw, Truck, Star, CalendarDays, Lightbulb, ShieldAlert, Wallet } from 'lucide-react';
+import { ArrowRight, Building2, Zap, ClipboardCheck, Flame, DollarSign, Calculator, FileCheck, Package, Trash2, RefreshCcw, Truck, Star, CalendarDays, Lightbulb, ShieldAlert, Wallet, Hammer } from 'lucide-react';
 
 const Services: React.FC = () => {
   const categories = [
@@ -13,6 +13,7 @@ const Services: React.FC = () => {
       image: 'https://images.pexels.com/photos/3806242/pexels-photo-3806242.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop',
       subServices: ['Line Striping', 'Asphalt Paving', 'Sealcoating', 'Crack Sealing', 'Parking Lot Repair'],
       idealFor: 'Businesses, warehouses, retail centers, property managers',
+      badge: 'Post-Construction',
     },
     {
       id: 'mechanical-electrical',
@@ -23,6 +24,7 @@ const Services: React.FC = () => {
       image: 'https://images.pexels.com/photos/257736/pexels-photo-257736.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop',
       subServices: ['Commercial Electrical', 'Panel Upgrades', 'Industrial Electrical', 'Commercial HVAC', 'Maintenance Contracts'],
       idealFor: 'Commercial facilities, industrial plants, office buildings',
+      badge: 'Post-Construction',
     },
     {
       id: 'inspections-compliance',
@@ -33,6 +35,7 @@ const Services: React.FC = () => {
       image: 'https://images.pexels.com/photos/5025639/pexels-photo-5025639.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop',
       subServices: ['Pre-Purchase Inspections', 'Code Compliance Reviews', 'ADA Audits', 'Safety Checks', 'Environmental Assessments'],
       idealFor: 'Property owners, developers, project managers, buyers',
+      badge: 'Pre-Construction',
     },
     {
       id: 'oil-gas-industrial',
@@ -43,6 +46,7 @@ const Services: React.FC = () => {
       image: 'https://images.pexels.com/photos/1108701/pexels-photo-1108701.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop',
       subServices: ['Site Cleanup', 'Equipment Maintenance', 'Safety Inspections', 'Environmental Compliance', 'Regulatory Reporting'],
       idealFor: 'Oil & gas operators, industrial sites, energy companies',
+      badge: 'Post-Construction',
     },
     {
       id: 'estimation-bidding',
@@ -53,6 +57,7 @@ const Services: React.FC = () => {
       image: 'https://images.pexels.com/photos/669619/pexels-photo-669619.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop',
       subServices: ['Quantity Take-Offs', 'Bid Package Prep', 'Cost Estimation', 'Bid Leveling', 'Value Engineering'],
       idealFor: 'General contractors, developers, project owners',
+      badge: 'Pre-Construction',
       featured: true,
       featuredSpecialty: 'Drywall',
       featuredTagline: 'Now Specializing in Drywall Estimation & Bidding',
@@ -80,6 +85,7 @@ const Services: React.FC = () => {
       image: 'https://images.pexels.com/photos/5668858/pexels-photo-5668858.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop',
       subServices: ['Permit Applications', 'Plan Check Coordination', 'Code Research', 'NOV Response', 'Inspection Scheduling'],
       idealFor: 'Contractors, property owners, developers, industrial operators',
+      badge: 'Pre-Construction',
     },
     {
       id: 'material-procurement',
@@ -90,6 +96,7 @@ const Services: React.FC = () => {
       image: 'https://images.pexels.com/photos/1797428/pexels-photo-1797428.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop',
       subServices: ['Material Sourcing', 'Vendor Management', 'Purchase Orders', 'Delivery Coordination', 'Specialty Procurement'],
       idealFor: 'GCs, project owners, industrial facilities, developers',
+      badge: 'Pre-Construction',
     },
     {
       id: 'cleanup-coordination',
@@ -100,6 +107,7 @@ const Services: React.FC = () => {
       image: 'https://images.pexels.com/photos/5691599/pexels-photo-5691599.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop',
       subServices: ['Rough Cleanup', 'Final Broom-Clean', 'Debris Hauling', 'Hazmat Disposal', 'Industrial Site Cleanup'],
       idealFor: 'GCs, property managers, industrial facilities, developers',
+      badge: 'Post-Construction',
     },
     {
       id: 'warranty-maintenance',
@@ -110,6 +118,7 @@ const Services: React.FC = () => {
       image: 'https://images.pexels.com/photos/1216589/pexels-photo-1216589.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop',
       subServices: ['Preventive Maintenance', 'Warranty Tracking', 'Emergency Dispatch', 'Annual Inspections', 'Budget Forecasting'],
       idealFor: 'Property managers, facility directors, commercial owners',
+      badge: 'Post-Construction',
     },
     {
       id: 'clean-truck-check',
@@ -131,6 +140,7 @@ const Services: React.FC = () => {
       image: 'https://images.pexels.com/photos/3243090/pexels-photo-3243090.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop',
       subServices: ['Master Schedule Build', 'Milestone Tracking', 'CPM Scheduling', 'Schedule Recovery', 'Lookahead Planning'],
       idealFor: 'GCs, project owners, developers, facility managers',
+      badge: 'Pre-Construction',
     },
     {
       id: 'project-feasibility',
@@ -141,6 +151,7 @@ const Services: React.FC = () => {
       image: 'https://images.pexels.com/photos/3184292/pexels-photo-3184292.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop',
       subServices: ['Site Feasibility Studies', 'Cost-Benefit Analysis', 'Market Analysis', 'Zoning & Code Review', 'Pro Forma Modeling'],
       idealFor: 'Developers, investors, property owners, municipalities',
+      badge: 'Pre-Construction',
     },
     {
       id: 'project-risk-management',
@@ -151,6 +162,7 @@ const Services: React.FC = () => {
       image: 'https://images.pexels.com/photos/5668858/pexels-photo-5668858.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop',
       subServices: ['Risk Register Development', 'Mitigation Planning', 'Contingency Analysis', 'Insurance Review', 'Change Order Management'],
       idealFor: 'Project owners, GCs, developers, industrial operators',
+      badge: 'Pre-Construction',
     },
     {
       id: 'project-budget-management',
@@ -161,6 +173,18 @@ const Services: React.FC = () => {
       image: 'https://images.pexels.com/photos/590016/pexels-photo-590016.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop',
       subServices: ['Budget Development', 'Cost Tracking', 'Cash Flow Forecasting', 'Financial Reporting', 'Variance Analysis'],
       idealFor: 'Owners, developers, GCs, project managers',
+      badge: 'Pre-Construction',
+    },
+    {
+      id: 'drywall-repair',
+      title: 'Drywall Repair',
+      description: 'Post-construction drywall repair, patching, and finishing for commercial and residential projects — ready for paint.',
+      priceRange: '$150 - $25K+',
+      icon: Hammer,
+      image: 'https://images.pexels.com/photos/8961251/pexels-photo-8961251.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop',
+      subServices: ['Patch & Repair', 'Texture Matching', 'Water Damage Repair', 'Finish & Sand', 'Paint-Ready Prep'],
+      idealFor: 'GCs, property managers, homeowners, renovation projects',
+      badge: 'Post-Construction',
     },
   ];
 
@@ -203,6 +227,9 @@ const Services: React.FC = () => {
                       <Star className="w-3 h-3" />
                       <span>Featured Service</span>
                     </span>
+                    {f.badge && (
+                      <span className="bg-amber-500 text-slate-900 text-xs font-semibold px-2 py-0.5 rounded-full">{f.badge}</span>
+                    )}
                   </div>
                 </div>
 
@@ -278,7 +305,13 @@ const Services: React.FC = () => {
                       <IconComponent className="w-4 h-4 text-slate-900" />
                     </div>
                     {(cat as any).badge && (
-                      <span className="bg-blue-500/90 text-white text-xs font-semibold px-2 py-0.5 rounded-full">{(cat as any).badge}</span>
+                      <span className={`text-xs font-semibold px-2 py-0.5 rounded-full ${
+                        (cat as any).badge === 'Pre-Construction'
+                          ? 'bg-amber-500 text-slate-900'
+                          : (cat as any).badge === 'Post-Construction'
+                          ? 'bg-green-500/90 text-white'
+                          : 'bg-blue-500/90 text-white'
+                      }`}>{(cat as any).badge}</span>
                     )}
                   </div>
                   <div className="absolute bottom-3 right-3">

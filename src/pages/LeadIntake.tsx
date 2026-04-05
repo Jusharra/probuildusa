@@ -1195,6 +1195,94 @@ const LeadIntake: React.FC = () => {
           </div>
         );
 
+      case 'drywall-repair':
+        return (
+          <div className="space-y-6">
+            <div className="text-center mb-8">
+              <h2 className="text-3xl font-bold mb-2">Drywall Repair Details</h2>
+              <p className="text-slate-400">Tell us about the repair scope so we can match the right crew</p>
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div>
+                <label className="block text-sm font-semibold text-slate-300 mb-2">Repair Type</label>
+                <select name="systemType" value={formData.systemType} onChange={handleInputChange}
+                  className="w-full bg-slate-700 border border-slate-600 rounded-lg px-4 py-3 text-white focus:ring-2 focus:ring-amber-400 focus:border-transparent">
+                  <option value="">Select repair type</option>
+                  <option value="patch-holes">Patch & fill (holes, dents, nail pops)</option>
+                  <option value="water-damage">Water / moisture damage repair</option>
+                  <option value="texture-match">Texture matching & refinish</option>
+                  <option value="panel-replace">Full panel replacement</option>
+                  <option value="corner-bead">Corner bead / joint repair</option>
+                  <option value="fire-impact">Fire or impact damage</option>
+                  <option value="punch-list">Post-construction punch list</option>
+                </select>
+              </div>
+              <div>
+                <label className="block text-sm font-semibold text-slate-300 mb-2">Property Type</label>
+                <select name="propertyType" value={formData.propertyType} onChange={handleInputChange}
+                  className="w-full bg-slate-700 border border-slate-600 rounded-lg px-4 py-3 text-white focus:ring-2 focus:ring-amber-400 focus:border-transparent">
+                  <option value="">Select type</option>
+                  <option value="commercial-office">Commercial office</option>
+                  <option value="retail">Retail / storefront</option>
+                  <option value="multifamily">Multifamily / apartment</option>
+                  <option value="single-family">Single-family home</option>
+                  <option value="industrial">Industrial / warehouse</option>
+                  <option value="hospitality">Hotel / hospitality</option>
+                </select>
+              </div>
+              <div>
+                <label className="block text-sm font-semibold text-slate-300 mb-2">Approximate Area (sq ft or # of rooms)</label>
+                <input type="text" name="sqFootage" value={formData.sqFootage} onChange={handleInputChange}
+                  className="w-full bg-slate-700 border border-slate-600 rounded-lg px-4 py-3 text-white placeholder-slate-400 focus:ring-2 focus:ring-amber-400 focus:border-transparent"
+                  placeholder="e.g. 400 sq ft, 3 rooms, 12 units" />
+              </div>
+              <div>
+                <label className="block text-sm font-semibold text-slate-300 mb-2">Existing Texture Style</label>
+                <select name="surfaceMaterial" value={formData.surfaceMaterial} onChange={handleInputChange}
+                  className="w-full bg-slate-700 border border-slate-600 rounded-lg px-4 py-3 text-white focus:ring-2 focus:ring-amber-400 focus:border-transparent">
+                  <option value="">Select texture</option>
+                  <option value="smooth">Smooth / skim coat</option>
+                  <option value="orange-peel">Orange peel</option>
+                  <option value="knockdown">Knockdown</option>
+                  <option value="popcorn">Popcorn / acoustic</option>
+                  <option value="santa-barbara">Santa Barbara / venetian</option>
+                  <option value="unknown">Unknown / needs matching</option>
+                </select>
+              </div>
+              <div>
+                <label className="block text-sm font-semibold text-slate-300 mb-2">Paint After Repair?</label>
+                <select name="adaCompliance" value={formData.adaCompliance} onChange={handleInputChange}
+                  className="w-full bg-slate-700 border border-slate-600 rounded-lg px-4 py-3 text-white focus:ring-2 focus:ring-amber-400 focus:border-transparent">
+                  <option value="">Select</option>
+                  <option value="paint-included">Yes — include painting in scope</option>
+                  <option value="prime-only">Prime only, we'll paint ourselves</option>
+                  <option value="no-paint">No — repair and texture only</option>
+                </select>
+              </div>
+              <div>
+                <label className="block text-sm font-semibold text-slate-300 mb-2">Cause of Damage</label>
+                <select name="surfaceCondition" value={formData.surfaceCondition} onChange={handleInputChange}
+                  className="w-full bg-slate-700 border border-slate-600 rounded-lg px-4 py-3 text-white focus:ring-2 focus:ring-amber-400 focus:border-transparent">
+                  <option value="">Select cause</option>
+                  <option value="post-construction">Post-construction / punch list</option>
+                  <option value="water-leak">Water leak or flood</option>
+                  <option value="impact">Physical impact</option>
+                  <option value="settlement">Settling / structural movement</option>
+                  <option value="renovation">Renovation / remodel damage</option>
+                  <option value="tenant">Tenant damage / turnover</option>
+                  <option value="other">Other</option>
+                </select>
+              </div>
+              <div className="md:col-span-2">
+                <label className="block text-sm font-semibold text-slate-300 mb-2">Repair Scope & Additional Notes</label>
+                <textarea name="projectDescription" value={formData.projectDescription} onChange={handleInputChange} rows={3}
+                  className="w-full bg-slate-700 border border-slate-600 rounded-lg px-4 py-3 text-white placeholder-slate-400 focus:ring-2 focus:ring-amber-400 focus:border-transparent"
+                  placeholder="Describe the damage location (ceiling, walls, specific rooms), number of patches or panels, any active moisture issues, accessibility constraints, occupied building considerations, photo availability, paint color match needed, insurance claim involved, etc." />
+              </div>
+            </div>
+          </div>
+        );
+
       default:
         return (
           <div className="space-y-6">

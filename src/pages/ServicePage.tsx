@@ -580,6 +580,47 @@ const ServicePage: React.FC = () => {
         'https://images.pexels.com/photos/1181675/pexels-photo-1181675.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop',
       ],
     },
+    'drywall-repair': {
+      title: 'Drywall Repair',
+      subtitle: 'Post-Construction Patching, Finishing & Texture Matching',
+      priceRange: '$150 - $25K+',
+      timeline: '1–5 business days',
+      description: 'After the trades are done, the walls tell the story. We coordinate commercial and residential drywall repair — from small punch-list patches to large-scale water damage restoration — delivering smooth, paint-ready results that match existing texture and finish.',
+      heroImage: 'https://images.pexels.com/photos/8961251/pexels-photo-8961251.jpeg?auto=compress&cs=tinysrgb&w=1920&h=800&fit=crop',
+      included: [
+        'Punch-list drywall patching',
+        'Texture matching (orange peel, knockdown, smooth)',
+        'Water and moisture damage repair',
+        'Screw pop and nail hole filling',
+        'Corner bead repair and replacement',
+        'Tape and mud joint repair',
+        'Sand and prime to paint-ready finish',
+        'Large-scale panel replacement',
+        'Fire and impact damage repair',
+        'Post-inspection closeout repairs',
+      ],
+      idealFor: [
+        'General contractors closing out commercial projects',
+        'Property managers after tenant turnover',
+        'Homeowners after renovation or water damage',
+        'Developers preparing units for sale or lease',
+        'Insurance restoration contractors',
+      ],
+      process: [
+        'Site walk and damage / scope assessment',
+        'Repair crew assignment and scheduling',
+        'Patching, taping, mudding and sanding',
+        'Texture matching and feathering',
+        'Prime coat and paint-ready inspection',
+        'Final walkthrough and punch-list sign-off',
+      ],
+      gallery: [
+        'https://images.pexels.com/photos/8961251/pexels-photo-8961251.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop',
+        'https://images.pexels.com/photos/1216589/pexels-photo-1216589.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop',
+        'https://images.pexels.com/photos/3184292/pexels-photo-3184292.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop',
+        'https://images.pexels.com/photos/590016/pexels-photo-590016.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop',
+      ],
+    },
   };
 
   const currentService = serviceData[service as keyof typeof serviceData] || serviceData['infrastructure-surface'];

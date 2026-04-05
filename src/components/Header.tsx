@@ -50,6 +50,7 @@ const Header: React.FC = () => {
     { name: 'Project Feasibility', href: '/services/project-feasibility' },
     { name: 'Project Risk Management', href: '/services/project-risk-management' },
     { name: 'Project Budget Management', href: '/services/project-budget-management' },
+    { name: 'Drywall Repair', href: '/services/drywall-repair' },
   ];
 
   useEffect(() => {

@@ -18,6 +18,7 @@ const Footer: React.FC = () => {
     { name: 'Project Feasibility', href: '/services/project-feasibility' },
     { name: 'Project Risk Management', href: '/services/project-risk-management' },
     { name: 'Project Budget Management', href: '/services/project-budget-management' },
+    { name: 'Drywall Repair', href: '/services/drywall-repair' },
   ];
 
   const quickLinks = [
@@ -104,7 +105,7 @@ const Footer: React.FC = () => {
               </div>
               <div className="flex items-center space-x-3 text-slate-400">
                 <Mail className="w-4 h-4 text-amber-400 flex-shrink-0" />
-                <span className="text-sm">hello@goreeassociates.com</span>
+                <span className="text-sm">GoreeAssociatesConstruction@proton.me</span>
               </div>
               <div className="flex items-start space-x-3 text-slate-400">
                 <MapPin className="w-4 h-4 text-amber-400 mt-0.5 flex-shrink-0" />
@@ -136,7 +137,7 @@ const Footer: React.FC = () => {
         <div className="border-t border-slate-800 mt-12 pt-8">
           <div className="flex flex-col md:flex-row justify-between items-center gap-4">
             <p className="text-slate-500 text-sm">
-              © 2025 Goree & Associates Construction Services. All rights reserved. Coordinating high-value projects nationwide.
+              © 2026 Goree & Associates Construction Services. All rights reserved. Coordinating high-value projects nationwide.
             </p>
             <div className="flex space-x-6">
               <a href="#" className="text-slate-500 hover:text-amber-400 transition-colors text-sm">
