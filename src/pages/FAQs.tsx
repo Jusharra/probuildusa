@@ -9,11 +9,11 @@ const FAQs: React.FC = () => {
       icon: HelpCircle,
       faqs: [
         {
-          question: 'What is ProBuild Concierge?',
-          answer: 'ProBuild Concierge is a platform that connects property owners with pre-vetted, high-ticket construction contractors for specialized services like line striping, power washing, and window cleaning. We streamline the process of finding reliable professionals for your projects.'
+          question: 'What is Goree & Associates Construction Services?',
+          answer: 'Goree & Associates Construction Services is a platform that connects property owners with pre-vetted, high-ticket construction contractors for specialized services like line striping, power washing, and window cleaning. We streamline the process of finding reliable professionals for your projects.'
         },
         {
-          question: 'How is ProBuild Concierge different from other service directories?',
+          question: 'How is Goree & Associates Construction Services different from other service directories?',
           answer: 'Unlike generic directories, we focus exclusively on high-ticket, specialized construction services. We rigorously vet our contractors for licensing, insurance, and proven experience, and we offer a dedicated concierge service to guide you through the process, ensuring quality and reducing your hassle.'
         },
         {
@@ -57,7 +57,7 @@ const FAQs: React.FC = () => {
           answer: 'Contractors can apply to join our exclusive network through the "Partner With Us" section of our website. We have strict vetting requirements including licensing, insurance, and a proven track record of high-quality work.'
         },
         {
-          question: 'What are the benefits of partnering with ProBuild Concierge?',
+          question: 'What are the benefits of partnering with Goree & Associates Construction Services?',
           answer: 'Partners gain access to pre-qualified, high-ticket leads, reduced competition (1-3 contractors per lead), dedicated concierge support, and advanced project management tools. We focus on quality over quantity, helping you grow your business with serious clients.'
         },
         {

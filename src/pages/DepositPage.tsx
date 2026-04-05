@@ -454,7 +454,7 @@ const DepositPage: React.FC = () => {
             </button>
             <button className="flex items-center justify-center space-x-2 text-amber-400 hover:text-amber-300 transition-colors">
               <Mail className="w-4 h-4" />
-              <span>support@probuildconcierge.com</span>
+              <span>support@goreeassociates.com</span>
             </button>
           </div>
         </div>

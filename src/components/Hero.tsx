@@ -31,34 +31,47 @@ const Hero: React.FC = () => {
           {/* Left — Hero Copy */}
           <div className="text-left">
             <p className="text-amber-400 font-semibold uppercase tracking-widest text-sm mb-5">
-              Specialized Operations Partner
+              Pre-Construction & Post-Construction Services
             </p>
 
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-6">
-              Infrastructure.{' '}
+              From First Plans{' '}
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-400 to-amber-600">
-                Compliance.
+                to Final Closeout
               </span>
               <br />
-              Execution—Handled.
+              — We've Got It.
             </h1>
 
-            <p className="text-lg md:text-xl text-slate-300 mb-10 leading-relaxed max-w-xl">
-              We connect property owners, developers, and operators with qualified professionals for high-value construction, mechanical systems, and compliance-driven projects—nationwide.
+            <p className="text-lg md:text-xl text-slate-300 mb-6 leading-relaxed max-w-xl">
+              Goree & Associates Construction Services is a pre- and post-construction services firm. We handle estimation, scheduling, permitting, feasibility, risk, and budget management — then coordinate the contractors and compliance work to see it through to completion.
             </p>
+
+            {/* Phase pills */}
+            <div className="flex flex-wrap gap-2 mb-10">
+              {[
+                { label: 'Pre-Construction', items: 'Feasibility · Estimation · Scheduling · Permitting' },
+                { label: 'Post-Construction', items: 'Cleanup · Warranty · Compliance · Maintenance' },
+              ].map((phase) => (
+                <div key={phase.label} className="bg-slate-800/70 border border-slate-600 rounded-lg px-4 py-2">
+                  <span className="text-amber-400 font-semibold text-xs uppercase tracking-wide">{phase.label}</span>
+                  <p className="text-slate-400 text-xs mt-0.5">{phase.items}</p>
+                </div>
+              ))}
+            </div>
 
             <div className="flex flex-col sm:flex-row gap-4 mb-14">
               <Link
                 to="/get-started"
                 className="group bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-600 hover:to-amber-700 text-slate-900 px-8 py-4 rounded-xl font-bold text-base transition-all duration-300 transform hover:scale-105 flex items-center justify-center space-x-2"
               >
-                <span>Get Matched With a Contractor</span>
+                <span>Start Your Project</span>
                 <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
               </Link>
 
               <button className="group flex items-center justify-center space-x-3 text-white border-2 border-slate-600 hover:border-amber-400 px-8 py-4 rounded-xl font-semibold text-base transition-all duration-300">
                 <Phone className="w-5 h-5 text-amber-400" />
-                <span>Speak With Our Operations Desk</span>
+                <span>Speak With Our Team</span>
               </button>
             </div>
 
@@ -93,7 +106,7 @@ const Hero: React.FC = () => {
             <div className="bg-slate-800/60 backdrop-blur-sm border border-slate-700 rounded-2xl p-8 shadow-2xl">
               <h3 className="text-2xl font-bold mb-1">Start Your Project</h3>
               <p className="text-slate-400 text-sm mb-6">
-                Tell us what you need — we'll match you with vetted professionals in 24 hours.
+                Pre-construction planning or post-construction closeout — tell us where you are and we'll handle the rest.
               </p>
 
               <div className="space-y-4">
@@ -116,6 +129,10 @@ const Hero: React.FC = () => {
                     <option value="cleanup-coordination">🧹 Cleanup Coordination</option>
                     <option value="warranty-maintenance">🔄 Warranty & Maintenance Plans</option>
                     <option value="clean-truck-check">🚛 Clean Truck Check (CA Only)</option>
+                    <option value="scheduling">📅 Project Scheduling</option>
+                    <option value="project-feasibility">💡 Project Feasibility</option>
+                    <option value="project-risk-management">🛡️ Project Risk Management</option>
+                    <option value="project-budget-management">💰 Project Budget Management</option>
                   </select>
                 </div>
 
@@ -143,15 +160,15 @@ const Hero: React.FC = () => {
               <div className="mt-6 pt-6 border-t border-slate-700 space-y-3">
                 <div className="flex items-center space-x-3 text-sm text-slate-400">
                   <div className="w-2 h-2 bg-green-400 rounded-full flex-shrink-0"></div>
-                  <span>Vetted, licensed, and compliance-ready contractors</span>
+                  <span>Pre-construction: estimation, scheduling, feasibility & permitting</span>
                 </div>
                 <div className="flex items-center space-x-3 text-sm text-slate-400">
                   <div className="w-2 h-2 bg-green-400 rounded-full flex-shrink-0"></div>
-                  <span>No commitment. No spam. Matched within 24 hours.</span>
+                  <span>Post-construction: cleanup, compliance, warranty & maintenance</span>
                 </div>
                 <div className="flex items-center space-x-3 text-sm text-slate-400">
                   <div className="w-2 h-2 bg-green-400 rounded-full flex-shrink-0"></div>
-                  <span>Commercial, industrial, and regulated projects welcome</span>
+                  <span>Matched with vetted professionals within 24 hours</span>
                 </div>
               </div>
             </div>

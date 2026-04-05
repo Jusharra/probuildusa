@@ -46,6 +46,10 @@ const Header: React.FC = () => {
     { name: 'Cleanup Coordination', href: '/services/cleanup-coordination' },
     { name: 'Warranty & Maintenance Plans', href: '/services/warranty-maintenance' },
     { name: 'Clean Truck Check (CA)', href: '/services/clean-truck-check' },
+    { name: 'Project Scheduling', href: '/services/scheduling' },
+    { name: 'Project Feasibility', href: '/services/project-feasibility' },
+    { name: 'Project Risk Management', href: '/services/project-risk-management' },
+    { name: 'Project Budget Management', href: '/services/project-budget-management' },
   ];
 
   useEffect(() => {
@@ -68,7 +72,7 @@ const Header: React.FC = () => {
             <div className="w-9 h-9 bg-gradient-to-br from-amber-400 to-amber-600 rounded-lg flex items-center justify-center">
               <span className="text-slate-900 font-bold text-lg">P</span>
             </div>
-            <span className="text-lg font-bold whitespace-nowrap">ProBuild Concierge</span>
+            <span className="text-lg font-bold whitespace-nowrap">Goree & Associates Construction Services</span>
           </Link>
 
           {/* Desktop Nav */}

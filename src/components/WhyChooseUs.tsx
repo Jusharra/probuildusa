@@ -4,7 +4,7 @@ import { Shield, Zap, Users, Award, Clock, DollarSign, Phone, Star } from 'lucid
 const WhyChooseUs: React.FC = () => {
   const competitors = [
     {
-      name: 'ProBuild Concierge',
+      name: 'Goree & Associates Construction Services',
       logo: 'P',
       isUs: true,
       features: {

@@ -192,7 +192,7 @@ const PartnerPortal: React.FC = () => {
             </div>
             <h1 className="text-2xl font-bold mb-2">Account Pending Review</h1>
             <p className="text-slate-300">
-              Thank you for registering as a contractor with ProBuild Concierge. Your account is currently under review by our admin team.
+              Thank you for registering as a contractor with Goree & Associates Construction Services. Your account is currently under review by our admin team.
             </p>
           </div>
           
@@ -257,7 +257,7 @@ const PartnerPortal: React.FC = () => {
           
           <div className="mt-6 text-center">
             <p className="text-sm text-slate-400">
-              Need help? Contact our support team at <a href="mailto:support@probuildconcierge.com" className="text-amber-400 hover:underline">support@probuildconcierge.com</a>
+              Need help? Contact our support team at <a href="mailto:support@goreeassociates.com" className="text-amber-400 hover:underline">support@goreeassociates.com</a>
             </p>
           </div>
         </div>

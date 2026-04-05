@@ -175,7 +175,7 @@ const ThankYouPage: React.FC = () => {
               <h3 className="font-semibold text-white mb-2">Email Support</h3>
               <p className="text-slate-400 text-sm mb-3">Get detailed project updates</p>
               <button className="text-blue-400 hover:text-blue-300 font-semibold transition-colors">
-                support@probuildconcierge.com
+                support@goreeassociates.com
               </button>
             </div>
             

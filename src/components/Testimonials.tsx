@@ -12,7 +12,7 @@ const Testimonials: React.FC = () => {
       amount: '$38,500',
       icon: Building2,
       rating: 5,
-      quote: 'We had three retail centers that needed full parking lot overhauls before our lease renewals. ProBuild matched us with a crew that handled everything — paving, sealcoating, ADA striping. Professional, on schedule, and compliant.',
+      quote: 'We had three retail centers that needed full parking lot overhauls before our lease renewals. Goree & Associates matched us with a crew that handled everything — paving, sealcoating, ADA striping. Professional, on schedule, and compliant.',
     },
     {
       id: 2,
@@ -34,7 +34,7 @@ const Testimonials: React.FC = () => {
       amount: '$24,000',
       icon: Flame,
       rating: 5,
-      quote: "Nobody in our area was doing compliance coordination at this level. ProBuild found us certified inspectors, handled the regulatory documentation, and kept us out of trouble. This service is irreplaceable.",
+      quote: "Nobody in our area was doing compliance coordination at this level. Goree & Associates found us certified inspectors, handled the regulatory documentation, and kept us out of trouble. This service is irreplaceable.",
     },
   ];
 

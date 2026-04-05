@@ -225,6 +225,10 @@ const LeadIntake: React.FC = () => {
     { id: 'cleanup-coordination', name: 'Cleanup Coordination', icon: '🧹', description: 'Post-construction cleanup, debris removal, site restoration' },
     { id: 'warranty-maintenance', name: 'Warranty & Maintenance Plans', icon: '🔄', description: 'Ongoing maintenance contracts and warranty management' },
     { id: 'clean-truck-check', name: 'Clean Truck Check (CA Only)', icon: '🚛', description: 'CARB compliance verification for California truck fleets' },
+    { id: 'scheduling', name: 'Project Scheduling', icon: '📅', description: 'Master schedules, milestone tracking, CPM, lookahead planning' },
+    { id: 'project-feasibility', name: 'Project Feasibility', icon: '💡', description: 'Feasibility studies, site analysis, pro forma, go/no-go reports' },
+    { id: 'project-risk-management', name: 'Project Risk Management', icon: '🛡️', description: 'Risk register, mitigation planning, contingency management' },
+    { id: 'project-budget-management', name: 'Project Budget Management', icon: '💰', description: 'Budget development, cost tracking, cash flow, financial reporting' },
   ];
 
   const renderServiceSpecificStep = () => {
@@ -934,6 +938,263 @@ const LeadIntake: React.FC = () => {
           </div>
         );
 
+      case 'scheduling':
+        return (
+          <div className="space-y-6">
+            <div className="text-center mb-8">
+              <h2 className="text-3xl font-bold mb-2">Project Scheduling Details</h2>
+              <p className="text-slate-400">Tell us about your scheduling needs</p>
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div>
+                <label className="block text-sm font-semibold text-slate-300 mb-2">Schedule Type Needed</label>
+                <select name="systemType" value={formData.systemType} onChange={handleInputChange}
+                  className="w-full bg-slate-700 border border-slate-600 rounded-lg px-4 py-3 text-white focus:ring-2 focus:ring-amber-400 focus:border-transparent">
+                  <option value="">Select type</option>
+                  <option value="master-schedule">Master schedule (full project)</option>
+                  <option value="lookahead">3–6 week lookahead</option>
+                  <option value="cpm">CPM / critical path schedule</option>
+                  <option value="recovery">Schedule recovery plan</option>
+                  <option value="baseline">Baseline schedule only</option>
+                  <option value="update">Update to existing schedule</option>
+                </select>
+              </div>
+              <div>
+                <label className="block text-sm font-semibold text-slate-300 mb-2">Project Type</label>
+                <select name="propertyType" value={formData.propertyType} onChange={handleInputChange}
+                  className="w-full bg-slate-700 border border-slate-600 rounded-lg px-4 py-3 text-white focus:ring-2 focus:ring-amber-400 focus:border-transparent">
+                  <option value="">Select project type</option>
+                  <option value="new-construction">New construction</option>
+                  <option value="tenant-improvement">Tenant improvement (TI)</option>
+                  <option value="renovation">Renovation / retrofit</option>
+                  <option value="infrastructure">Infrastructure / civil</option>
+                  <option value="industrial">Industrial / plant</option>
+                  <option value="multi-trade">Multi-trade commercial</option>
+                </select>
+              </div>
+              <div>
+                <label className="block text-sm font-semibold text-slate-300 mb-2">Project Duration (estimated)</label>
+                <select name="timeline" value={formData.timeline} onChange={handleInputChange}
+                  className="w-full bg-slate-700 border border-slate-600 rounded-lg px-4 py-3 text-white focus:ring-2 focus:ring-amber-400 focus:border-transparent">
+                  <option value="">Select duration</option>
+                  <option value="under-1-month">Under 1 month</option>
+                  <option value="1-3-months">1–3 months</option>
+                  <option value="3-6-months">3–6 months</option>
+                  <option value="6-12-months">6–12 months</option>
+                  <option value="over-1-year">Over 1 year</option>
+                </select>
+              </div>
+              <div>
+                <label className="block text-sm font-semibold text-slate-300 mb-2">Scheduling Software Preference</label>
+                <select name="surfaceMaterial" value={formData.surfaceMaterial} onChange={handleInputChange}
+                  className="w-full bg-slate-700 border border-slate-600 rounded-lg px-4 py-3 text-white focus:ring-2 focus:ring-amber-400 focus:border-transparent">
+                  <option value="">Select or no preference</option>
+                  <option value="ms-project">Microsoft Project</option>
+                  <option value="primavera-p6">Primavera P6</option>
+                  <option value="procore">Procore Scheduling</option>
+                  <option value="smartsheet">Smartsheet</option>
+                  <option value="excel">Excel / Google Sheets</option>
+                  <option value="no-preference">No preference</option>
+                </select>
+              </div>
+              <div className="md:col-span-2">
+                <label className="block text-sm font-semibold text-slate-300 mb-2">Project Scope & Notes</label>
+                <textarea name="projectDescription" value={formData.projectDescription} onChange={handleInputChange} rows={3}
+                  className="w-full bg-slate-700 border border-slate-600 rounded-lg px-4 py-3 text-white placeholder-slate-400 focus:ring-2 focus:ring-amber-400 focus:border-transparent"
+                  placeholder="Describe the project, number of trades involved, any existing schedule documents, milestones or fixed deadlines, current delay status if recovery is needed, etc." />
+              </div>
+            </div>
+          </div>
+        );
+
+      case 'project-feasibility':
+        return (
+          <div className="space-y-6">
+            <div className="text-center mb-8">
+              <h2 className="text-3xl font-bold mb-2">Project Feasibility Details</h2>
+              <p className="text-slate-400">Help us scope your feasibility study</p>
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div>
+                <label className="block text-sm font-semibold text-slate-300 mb-2">Study Type</label>
+                <select name="systemType" value={formData.systemType} onChange={handleInputChange}
+                  className="w-full bg-slate-700 border border-slate-600 rounded-lg px-4 py-3 text-white focus:ring-2 focus:ring-amber-400 focus:border-transparent">
+                  <option value="">Select type</option>
+                  <option value="site-feasibility">Site feasibility study</option>
+                  <option value="pre-development">Pre-development analysis</option>
+                  <option value="cost-benefit">Cost-benefit analysis</option>
+                  <option value="pro-forma">Pro forma / financial modeling</option>
+                  <option value="zoning-entitlement">Zoning & entitlement review</option>
+                  <option value="full-feasibility">Full feasibility report</option>
+                </select>
+              </div>
+              <div>
+                <label className="block text-sm font-semibold text-slate-300 mb-2">Project / Property Type</label>
+                <select name="propertyType" value={formData.propertyType} onChange={handleInputChange}
+                  className="w-full bg-slate-700 border border-slate-600 rounded-lg px-4 py-3 text-white focus:ring-2 focus:ring-amber-400 focus:border-transparent">
+                  <option value="">Select type</option>
+                  <option value="commercial">Commercial development</option>
+                  <option value="industrial">Industrial / warehouse</option>
+                  <option value="multifamily">Multifamily / mixed-use</option>
+                  <option value="infrastructure">Infrastructure / public works</option>
+                  <option value="redevelopment">Redevelopment / adaptive reuse</option>
+                  <option value="land">Raw land / greenfield</option>
+                </select>
+              </div>
+              <div>
+                <label className="block text-sm font-semibold text-slate-300 mb-2">Site / Parcel Size</label>
+                <input type="text" name="sqFootage" value={formData.sqFootage} onChange={handleInputChange}
+                  className="w-full bg-slate-700 border border-slate-600 rounded-lg px-4 py-3 text-white placeholder-slate-400 focus:ring-2 focus:ring-amber-400 focus:border-transparent"
+                  placeholder="e.g. 2 acres, 40,000 sq ft" />
+              </div>
+              <div>
+                <label className="block text-sm font-semibold text-slate-300 mb-2">Current Project Stage</label>
+                <select name="surfaceCondition" value={formData.surfaceCondition} onChange={handleInputChange}
+                  className="w-full bg-slate-700 border border-slate-600 rounded-lg px-4 py-3 text-white focus:ring-2 focus:ring-amber-400 focus:border-transparent">
+                  <option value="">Select stage</option>
+                  <option value="site-identified">Site identified — evaluating viability</option>
+                  <option value="under-contract">Site under contract / due diligence</option>
+                  <option value="pre-design">Pre-design / programming phase</option>
+                  <option value="concept">Concept design available</option>
+                  <option value="re-evaluation">Re-evaluating existing project</option>
+                </select>
+              </div>
+              <div className="md:col-span-2">
+                <label className="block text-sm font-semibold text-slate-300 mb-2">Project Vision & Key Questions</label>
+                <textarea name="projectDescription" value={formData.projectDescription} onChange={handleInputChange} rows={3}
+                  className="w-full bg-slate-700 border border-slate-600 rounded-lg px-4 py-3 text-white placeholder-slate-400 focus:ring-2 focus:ring-amber-400 focus:border-transparent"
+                  placeholder="Describe the intended project use, investment goals, specific questions you need answered (zoning, cost, ROI, utilities, environmental), any known constraints, lender or investor requirements, timeline for decision, etc." />
+              </div>
+            </div>
+          </div>
+        );
+
+      case 'project-risk-management':
+        return (
+          <div className="space-y-6">
+            <div className="text-center mb-8">
+              <h2 className="text-3xl font-bold mb-2">Project Risk Management Details</h2>
+              <p className="text-slate-400">Help us understand your project's risk profile</p>
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div>
+                <label className="block text-sm font-semibold text-slate-300 mb-2">Risk Management Scope</label>
+                <select name="systemType" value={formData.systemType} onChange={handleInputChange}
+                  className="w-full bg-slate-700 border border-slate-600 rounded-lg px-4 py-3 text-white focus:ring-2 focus:ring-amber-400 focus:border-transparent">
+                  <option value="">Select scope</option>
+                  <option value="risk-register">Risk register development</option>
+                  <option value="mitigation-plan">Mitigation planning only</option>
+                  <option value="contingency">Contingency analysis</option>
+                  <option value="full-program">Full risk management program</option>
+                  <option value="change-order">Change order risk review</option>
+                  <option value="ongoing">Ongoing monitoring & reporting</option>
+                </select>
+              </div>
+              <div>
+                <label className="block text-sm font-semibold text-slate-300 mb-2">Project Type</label>
+                <select name="propertyType" value={formData.propertyType} onChange={handleInputChange}
+                  className="w-full bg-slate-700 border border-slate-600 rounded-lg px-4 py-3 text-white focus:ring-2 focus:ring-amber-400 focus:border-transparent">
+                  <option value="">Select type</option>
+                  <option value="new-construction">New construction</option>
+                  <option value="renovation">Renovation / retrofit</option>
+                  <option value="industrial-capital">Industrial capital project</option>
+                  <option value="infrastructure">Infrastructure / civil</option>
+                  <option value="multi-site">Multi-site program</option>
+                  <option value="tenant-improvement">Tenant improvement</option>
+                </select>
+              </div>
+              <div>
+                <label className="block text-sm font-semibold text-slate-300 mb-2">Estimated Project Value</label>
+                <input type="text" name="budget" value={formData.budget} onChange={handleInputChange}
+                  className="w-full bg-slate-700 border border-slate-600 rounded-lg px-4 py-3 text-white placeholder-slate-400 focus:ring-2 focus:ring-amber-400 focus:border-transparent"
+                  placeholder="e.g. $2.5M, $500K" />
+              </div>
+              <div>
+                <label className="block text-sm font-semibold text-slate-300 mb-2">Primary Risk Concerns</label>
+                <select name="complianceConcern" value={formData.complianceConcern} onChange={handleInputChange}
+                  className="w-full bg-slate-700 border border-slate-600 rounded-lg px-4 py-3 text-white focus:ring-2 focus:ring-amber-400 focus:border-transparent">
+                  <option value="">Select primary concern</option>
+                  <option value="cost-overrun">Cost overruns</option>
+                  <option value="schedule-delay">Schedule delays</option>
+                  <option value="contractor-failure">Contractor default / failure</option>
+                  <option value="regulatory">Regulatory / permitting</option>
+                  <option value="scope-creep">Scope creep</option>
+                  <option value="site-conditions">Unknown site conditions</option>
+                </select>
+              </div>
+              <div className="md:col-span-2">
+                <label className="block text-sm font-semibold text-slate-300 mb-2">Project Context & Known Risks</label>
+                <textarea name="projectDescription" value={formData.projectDescription} onChange={handleInputChange} rows={3}
+                  className="w-full bg-slate-700 border border-slate-600 rounded-lg px-4 py-3 text-white placeholder-slate-400 focus:ring-2 focus:ring-amber-400 focus:border-transparent"
+                  placeholder="Describe the project, any risks already identified, past issues on similar projects, contract structure (GMP, lump sum, T&M), number of subcontractors, insurance/bonding status, lender or investor risk reporting requirements, etc." />
+              </div>
+            </div>
+          </div>
+        );
+
+      case 'project-budget-management':
+        return (
+          <div className="space-y-6">
+            <div className="text-center mb-8">
+              <h2 className="text-3xl font-bold mb-2">Project Budget Management Details</h2>
+              <p className="text-slate-400">Tell us about your budget oversight needs</p>
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div>
+                <label className="block text-sm font-semibold text-slate-300 mb-2">Budget Service Needed</label>
+                <select name="systemType" value={formData.systemType} onChange={handleInputChange}
+                  className="w-full bg-slate-700 border border-slate-600 rounded-lg px-4 py-3 text-white focus:ring-2 focus:ring-amber-400 focus:border-transparent">
+                  <option value="">Select service</option>
+                  <option value="budget-development">Budget development from estimate</option>
+                  <option value="cost-tracking">Ongoing cost tracking only</option>
+                  <option value="cash-flow">Cash flow forecasting & draw schedule</option>
+                  <option value="lender-reporting">Lender / investor reporting</option>
+                  <option value="variance-reporting">Variance analysis & reporting</option>
+                  <option value="full-program">Full budget management program</option>
+                </select>
+              </div>
+              <div>
+                <label className="block text-sm font-semibold text-slate-300 mb-2">Project Type</label>
+                <select name="propertyType" value={formData.propertyType} onChange={handleInputChange}
+                  className="w-full bg-slate-700 border border-slate-600 rounded-lg px-4 py-3 text-white focus:ring-2 focus:ring-amber-400 focus:border-transparent">
+                  <option value="">Select type</option>
+                  <option value="new-construction">New construction</option>
+                  <option value="renovation">Renovation / retrofit</option>
+                  <option value="tenant-improvement">Tenant improvement</option>
+                  <option value="capital-program">Capital improvement program</option>
+                  <option value="industrial">Industrial / plant project</option>
+                  <option value="infrastructure">Infrastructure / civil</option>
+                </select>
+              </div>
+              <div>
+                <label className="block text-sm font-semibold text-slate-300 mb-2">Total Project Budget</label>
+                <input type="text" name="budget" value={formData.budget} onChange={handleInputChange}
+                  className="w-full bg-slate-700 border border-slate-600 rounded-lg px-4 py-3 text-white placeholder-slate-400 focus:ring-2 focus:ring-amber-400 focus:border-transparent"
+                  placeholder="e.g. $1.2M, $8M" />
+              </div>
+              <div>
+                <label className="block text-sm font-semibold text-slate-300 mb-2">Contract Structure</label>
+                <select name="surfaceMaterial" value={formData.surfaceMaterial} onChange={handleInputChange}
+                  className="w-full bg-slate-700 border border-slate-600 rounded-lg px-4 py-3 text-white focus:ring-2 focus:ring-amber-400 focus:border-transparent">
+                  <option value="">Select contract type</option>
+                  <option value="lump-sum">Lump sum / fixed price</option>
+                  <option value="gmp">GMP (Guaranteed Maximum Price)</option>
+                  <option value="cost-plus">Cost-plus / time & materials</option>
+                  <option value="design-build">Design-build</option>
+                  <option value="multiple-primes">Multiple prime contracts</option>
+                  <option value="unknown">Not yet determined</option>
+                </select>
+              </div>
+              <div className="md:col-span-2">
+                <label className="block text-sm font-semibold text-slate-300 mb-2">Budget Context & Reporting Needs</label>
+                <textarea name="projectDescription" value={formData.projectDescription} onChange={handleInputChange} rows={3}
+                  className="w-full bg-slate-700 border border-slate-600 rounded-lg px-4 py-3 text-white placeholder-slate-400 focus:ring-2 focus:ring-amber-400 focus:border-transparent"
+                  placeholder="Describe the project stage, who needs financial reports (owner, lender, board), reporting frequency, existing budget documents, any current overruns or concerns, accounting software in use (Sage, QuickBooks, Procore, etc.), number of subcontracts, etc." />
+              </div>
+            </div>
+          </div>
+        );
+
       default:
         return (
           <div className="space-y-6">
@@ -1426,7 +1687,7 @@ const LeadIntake: React.FC = () => {
             </button>
             <button className="flex items-center justify-center space-x-2 text-amber-400 hover:text-amber-300 transition-colors">
               <Mail className="w-4 h-4" />
-              <span>hello@probuildconcierge.com</span>
+              <span>hello@goreeassociates.com</span>
             </button>
           </div>
         </div>

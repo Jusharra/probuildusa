@@ -14,6 +14,10 @@ const Footer: React.FC = () => {
     { name: 'Cleanup Coordination', href: '/services/cleanup-coordination' },
     { name: 'Warranty & Maintenance', href: '/services/warranty-maintenance' },
     { name: 'Clean Truck Check (CA)', href: '/services/clean-truck-check' },
+    { name: 'Project Scheduling', href: '/services/scheduling' },
+    { name: 'Project Feasibility', href: '/services/project-feasibility' },
+    { name: 'Project Risk Management', href: '/services/project-risk-management' },
+    { name: 'Project Budget Management', href: '/services/project-budget-management' },
   ];
 
   const quickLinks = [
@@ -36,7 +40,7 @@ const Footer: React.FC = () => {
               <div className="w-8 h-8 bg-gradient-to-br from-amber-400 to-amber-600 rounded-lg flex items-center justify-center">
                 <span className="text-slate-900 font-bold">P</span>
               </div>
-              <span className="text-xl font-bold">ProBuild Concierge</span>
+              <span className="text-xl font-bold">Goree & Associates Construction Services</span>
             </Link>
             <p className="text-slate-400 mb-4 leading-relaxed text-sm">
               Your specialized operations partner for infrastructure, mechanical systems, and compliance-driven projects — nationwide.
@@ -100,7 +104,7 @@ const Footer: React.FC = () => {
               </div>
               <div className="flex items-center space-x-3 text-slate-400">
                 <Mail className="w-4 h-4 text-amber-400 flex-shrink-0" />
-                <span className="text-sm">hello@probuildconcierge.com</span>
+                <span className="text-sm">hello@goreeassociates.com</span>
               </div>
               <div className="flex items-start space-x-3 text-slate-400">
                 <MapPin className="w-4 h-4 text-amber-400 mt-0.5 flex-shrink-0" />
@@ -132,7 +136,7 @@ const Footer: React.FC = () => {
         <div className="border-t border-slate-800 mt-12 pt-8">
           <div className="flex flex-col md:flex-row justify-between items-center gap-4">
             <p className="text-slate-500 text-sm">
-              © 2025 ProBuild Concierge. All rights reserved. Coordinating high-value projects nationwide.
+              © 2025 Goree & Associates Construction Services. All rights reserved. Coordinating high-value projects nationwide.
             </p>
             <div className="flex space-x-6">
               <a href="#" className="text-slate-500 hover:text-amber-400 transition-colors text-sm">

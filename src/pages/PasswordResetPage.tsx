@@ -125,7 +125,7 @@ const PasswordResetPage: React.FC = () => {
               <div className="w-12 h-12 bg-gradient-to-br from-amber-400 to-amber-600 rounded-xl flex items-center justify-center">
                 <span className="text-slate-900 font-bold text-xl">P</span>
               </div>
-              <span className="text-2xl font-bold">ProBuild Concierge</span>
+              <span className="text-2xl font-bold">Goree & Associates Construction Services</span>
             </Link>
           </div>
 
@@ -166,7 +166,7 @@ const PasswordResetPage: React.FC = () => {
             <div className="w-12 h-12 bg-gradient-to-br from-amber-400 to-amber-600 rounded-xl flex items-center justify-center">
               <span className="text-slate-900 font-bold text-xl">P</span>
             </div>
-            <span className="text-2xl font-bold">ProBuild Concierge</span>
+            <span className="text-2xl font-bold">Goree & Associates Construction Services</span>
           </Link>
           
           <div className="mb-6">

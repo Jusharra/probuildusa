@@ -124,7 +124,7 @@ const WhyPartner: React.FC = () => {
       name: 'David Chen',
       company: 'Elite Custom Homes',
       location: 'San Francisco, CA',
-      quote: 'ProBuild has transformed my business. The leads are genuine, the clients have real budgets, and I\'m not competing with 20 other contractors.',
+      quote: 'Goree & Associates has transformed my business. The leads are genuine, the clients have real budgets, and I\'m not competing with 20 other contractors.',
       revenue: '$180K in 6 months',
       projects: 8
     },
@@ -342,7 +342,7 @@ const WhyPartner: React.FC = () => {
               How We <span className="text-amber-400">Compare</span>
             </h2>
             <p className="text-xl text-slate-300 max-w-3xl mx-auto">
-              See why contractors are switching from other platforms to ProBuild Concierge
+              See why contractors are switching from other platforms to Goree & Associates Construction Services
             </p>
           </div>
 
@@ -357,7 +357,7 @@ const WhyPartner: React.FC = () => {
                         <div className="w-8 h-8 bg-gradient-to-r from-amber-500 to-amber-600 rounded-lg flex items-center justify-center font-bold text-slate-900 mb-2">
                           P
                         </div>
-                        <span className="text-amber-400 font-semibold">ProBuild</span>
+                        <span className="text-amber-400 font-semibold">Goree & Associates</span>
                       </div>
                     </th>
                     <th className="text-center py-4 px-6 text-slate-400">Thumbtack</th>
@@ -514,7 +514,7 @@ const WhyPartner: React.FC = () => {
           <div className="text-center mb-16">
             <h2 className="text-3xl font-bold mb-6">What Our Partners Say</h2>
             <p className="text-xl text-slate-300 max-w-3xl mx-auto">
-              Real contractors sharing their success stories with ProBuild Concierge
+              Real contractors sharing their success stories with Goree & Associates Construction Services
             </p>
           </div>
 

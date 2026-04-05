@@ -32,7 +32,7 @@ function buildAdminHtml(d) {
   <div style="max-width:680px;margin:0 auto;background:#1e293b;border-radius:12px;overflow:hidden;border:1px solid #334155">
     <div style="background:linear-gradient(90deg,#f59e0b,#d97706);padding:20px 28px">
       <h1 style="margin:0;color:#0f172a;font-size:22px">New Project Quote — ${service}</h1>
-      <p style="margin:4px 0 0;color:#1e293b;font-size:14px">Submitted via ProBuild Concierge</p>
+      <p style="margin:4px 0 0;color:#1e293b;font-size:14px">Submitted via Goree & Associates Construction Services</p>
     </div>
     <div style="padding:28px">
       <h2 style="color:#f59e0b;font-size:14px;text-transform:uppercase;letter-spacing:1px;margin:0 0 12px">Contact</h2>
@@ -103,7 +103,7 @@ function buildClientHtml(d) {
     <div style="padding:28px">
       <p style="font-size:16px;color:#334155">Hi ${d.firstName || 'there'},</p>
       <p style="color:#475569;line-height:1.7">
-        Thank you for reaching out to <strong>ProBuild Concierge</strong>. We've received your project inquiry for <strong>${service}</strong> and our operations team will review your submission and follow up within <strong>1 business day</strong>.
+        Thank you for reaching out to <strong>Goree & Associates Construction Services</strong>. We've received your project inquiry for <strong>${service}</strong> and our operations team will review your submission and follow up within <strong>1 business day</strong>.
       </p>
       <div style="background:#f8fafc;border-left:4px solid #f59e0b;border-radius:4px;padding:16px;margin:24px 0">
         <p style="margin:0;font-weight:600;color:#1e293b">Your Request Summary</p>
@@ -114,10 +114,10 @@ function buildClientHtml(d) {
       <p style="color:#475569;line-height:1.7">
         If you have any questions in the meantime, feel free to call us at <strong>(844) 543-7419</strong> or reply to this email.
       </p>
-      <p style="color:#475569">— The ProBuild Concierge Team</p>
+      <p style="color:#475569">— The Goree & Associates Construction Services Team</p>
     </div>
     <div style="background:#f1f5f9;padding:16px 28px;text-align:center">
-      <p style="margin:0;color:#94a3b8;font-size:12px">ProBuild Concierge · Infrastructure. Compliance. Execution.</p>
+      <p style="margin:0;color:#94a3b8;font-size:12px">Goree & Associates Construction Services · Infrastructure. Compliance. Execution.</p>
     </div>
   </div>
 </body>
@@ -133,7 +133,7 @@ exports.handler = async (event) => {
     const data = JSON.parse(event.body);
     sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 
-    const adminEmail = process.env.ADMIN_EMAIL || 'hello@probuildconcierge.com';
+    const adminEmail = process.env.ADMIN_EMAIL || 'hello@goreeassociates.com';
     const fromEmail = process.env.FROM_EMAIL || adminEmail;
 
     const messages = [
@@ -149,7 +149,7 @@ exports.handler = async (event) => {
       messages.push({
         to: data.email,
         from: fromEmail,
-        subject: 'Your Project Request — ProBuild Concierge',
+        subject: 'Your Project Request — Goree & Associates Construction Services',
         html: buildClientHtml(data),
       });
     }
